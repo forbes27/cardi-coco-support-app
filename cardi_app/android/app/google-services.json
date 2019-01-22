@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "402836333594",
+    "firebase_url": "https://cardi-coco-support-app.firebaseio.com",
+    "project_id": "cardi-coco-support-app",
+    "storage_bucket": "cardi-coco-support-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402836333594:android:1e98f9d1671779f8",
+        "android_client_info": {
+          "package_name": "com.csm.cardiapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402836333594-e55mkkijgr1ko4u8q7olr1b8gisqe0sp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtMmORcj76KlFFKmsoGzEwdsKeiSFj3Tk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
