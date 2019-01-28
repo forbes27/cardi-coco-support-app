@@ -31,48 +31,61 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Login'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FlatButton(
-                child: new Text("Google Sign-in"),
-                onPressed: () => _googleSignin(),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FlatButton(
-                child: Text("Signin with Email"),
-                onPressed: () {},
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FlatButton(
-                child: new Text("Create Account"),
-                onPressed: () {},
-              ),
-            ),
-
-
-          ]
+        appBar: new AppBar(
+          title: new Text('Login'),
+          centerTitle: true,
         ),
-      )
+        body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FlatButton(
+                    color: Colors.greenAccent,
+                    child: new Text("Google Sign-in"),
+                    onPressed: () => _googleSignin(),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FlatButton(
+                    color: Colors.greenAccent,
+                    child: Text("Signin with Email"),
+                    onPressed: () {},
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FlatButton(
+                    color: Colors.greenAccent,
+                    child: new Text("Create Account"),
+                    onPressed: () => _createUser(),
+                  ),
+                ),
+
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FlatButton(
+                    color: Colors.greenAccent,
+                    child: new Text("Signout"),
+                    onPressed: () => _logout(),
+                  ),
+                ),
+
+
+              ]
+          ),
+        )
     );
   }
 
   Future<FirebaseUser> _googleSignin() async {
     GoogleSignInAccount googleSignInAccount = await _gSignIn.signIn();
     GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+    await googleSignInAccount.authentication;
 
     FirebaseUser user = await _auth.signInWithGoogle(
         idToken: googleSignInAuthentication.idToken,
@@ -82,5 +95,19 @@ class _LoginPageState extends State<LoginPage> {
     return user;
   }
 
+  Future _createUser() async {
+    FirebaseUser user = await _auth.createUserWithEmailAndPassword(
+        email: "calida@gmail.com", password: "test123")
+        .then((user) {
+      print("User Created ${user.displayName}");
+      print("Email: ${user.email}");
+    });
+  }
+
+  _logout() {
+    setState(() {
+      _gSignIn.signOut();
+    });
+  }
 }
 
