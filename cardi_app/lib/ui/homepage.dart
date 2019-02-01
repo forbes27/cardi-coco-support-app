@@ -8,7 +8,9 @@ import './contact-us.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new RootScaffold(body: new Center(
+    return new RootScaffold(body: new Image.asset(
+        'images/home.jpg'
+      /*
       child: new SingleChildScrollView(
           child: new Column(
               children: <Widget>[
@@ -23,8 +25,10 @@ class HomePage extends StatelessWidget {
                       fontSize: 40),
                 ),
                 */
-              ])
+              ]),
+
       ),
+      */
     ));
   }
 }
@@ -45,8 +49,9 @@ class RootDrawer extends StatelessWidget {
               ),
 
               ListTile(
+                leading: Icon(Icons.home),
                   title: Text('Home', textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.center,),
+                    textAlign: TextAlign.left,),
                   onTap: (){
                     Navigator.push(
                       context,
@@ -54,8 +59,9 @@ class RootDrawer extends StatelessWidget {
                     );
                   }),
               ListTile(
+                  leading: Icon(Icons.info_outline),
                   title: Text('About Us', textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.center,),
+                    textAlign: TextAlign.left,),
                   onTap: (){
                     Navigator.push(
                       context,
@@ -63,8 +69,9 @@ class RootDrawer extends StatelessWidget {
                     );
                   }),
               ListTile(
+                  leading: Icon(Icons.bug_report),
                   title: Text('Pests', textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.center,),
+                    textAlign: TextAlign.left,),
                   onTap: (){
                     Navigator.push(
                       context,
@@ -72,8 +79,9 @@ class RootDrawer extends StatelessWidget {
                     );
                   }),
               ListTile(
+                  leading: Icon(Icons.home),
                   title: Text('Diseases', textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.center,),
+                    textAlign: TextAlign.left,),
                   onTap: (){
                     Navigator.push(
                       context,
@@ -81,8 +89,9 @@ class RootDrawer extends StatelessWidget {
                     );
                   }),
               ListTile(
+                  leading: Icon(Icons.message),
                   title: Text('Chat', textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.center,),
+                    textAlign: TextAlign.left,),
                   onTap: (){
                     Navigator.push(
                       context,
@@ -90,8 +99,9 @@ class RootDrawer extends StatelessWidget {
                     );
                   }),
               ListTile(
+                  leading: Icon(Icons.phone),
                   title: Text('Contact Us', textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.center,),
+                    textAlign: TextAlign.left,),
                   onTap: (){
                     Navigator.push(
                       context,

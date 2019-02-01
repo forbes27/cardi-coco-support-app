@@ -18,7 +18,7 @@ class _SearchListExampleState extends State<SearchListExample> {
     Icons.search,
     color: Colors.white,
   );
-  final globalKey = new GlobalKey<ScaffoldState>();
+  final globalKey = new GlobalKey <ScaffoldState>();
   final TextEditingController _controller = new TextEditingController();
   List<dynamic> _list;
   bool _isSearching;
