@@ -12,15 +12,17 @@ class HomePage extends StatelessWidget {
       child: new SingleChildScrollView(
           child: new Column(
               children: <Widget>[
+                 new Image.asset('images/home.jpg', fit: BoxFit.cover ,)
+                /*
                 new Text(
-                  "Welcome to the Coconut Support Center!",
+                  Welcome to the CARDI Coconut Support Centre,
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,
                   style: new TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 40),
                 ),
-                new Image.asset('images/cardi-01.png', height: 205.0, width: 175.0,)
+                */
               ])
       ),
     ));
@@ -35,13 +37,22 @@ class RootDrawer extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                child: Text('Home',textDirection: TextDirection.ltr,
+                child: Text('CARDI Coconut Support Centre',textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,),
                 decoration: BoxDecoration(
-                  color: Colors.deepOrange,
+                  color: Colors.greenAccent,
                 ),
               ),
 
+              ListTile(
+                  title: Text('Home', textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.center,),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  }),
               ListTile(
                   title: Text('About Us', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.center,),
@@ -111,4 +122,5 @@ class RootScaffold extends StatelessWidget{
     );
   }
 }
+
 

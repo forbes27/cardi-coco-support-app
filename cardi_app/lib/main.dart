@@ -14,10 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CARDI Coconut Support Center',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.green,
       ),
 
-      home: new SearchListExample()
+      home: new HomePage()
+      /*home: new SearchListExample()*/
     );
   }
 }
