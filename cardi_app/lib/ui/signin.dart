@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../root_page.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _gSignIn = new GoogleSignIn();
+
 
 void main() => runApp(MyApp());
 
@@ -108,6 +110,11 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _gSignIn.signOut();
     });
+  }
+
+  Future<String> currentUser() async{ //Asynchronously gets current user or null if there is none //https://www.youtube.com/watch?v=aaKef60iuy8
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();//returns user if they have successfully signed in or registered
+    return user.uid; //Returns null if unsuccessful or if app is closed and restarted
   }
 }
 
