@@ -13,14 +13,14 @@ class HomePage extends StatelessWidget {
           child: new Column(
               children: <Widget>[
                 new Text(
-                  "Welcome to the Coconut Support Center!",
+                  "CARDI Coconut Support Center!",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,
                   style: new TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 40),
                 ),
-                new Image.asset('images/cardi-01.png', height: 205.0, width: 175.0,)
+                new Image.asset('images/home.jpg', height: 400.0  , width: 600.0,)
               ])
       ),
     ));
@@ -35,13 +35,21 @@ class RootDrawer extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                child: Text('Home',textDirection: TextDirection.ltr,
+                child: Text('CARDI Coconut Support Centre',textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,),
                 decoration: BoxDecoration(
-                  color: Colors.deepOrange,
+                  color: Colors.greenAccent,
                 ),
               ),
-
+              ListTile(
+                  title: Text('Home', textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.center,),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  }),
               ListTile(
                   title: Text('About Us', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.center,),
@@ -113,4 +121,15 @@ class RootScaffold extends StatelessWidget{
     );
   }
 }
+
+class HomeImage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    AssetImage assetImage = AssetImage('images/home.jpg');
+    Image image = Image(
+        image: assetImage, width: 250.0, height: 250.0, fit: BoxFit.cover);
+  }
+}
+
 

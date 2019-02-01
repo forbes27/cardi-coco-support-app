@@ -64,8 +64,6 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () => _createUser(),
                   ),
                 ),
-
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FlatButton(
