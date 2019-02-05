@@ -8,6 +8,7 @@ import './contact-us.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     //place more multiple widgets into a parent called Container
     Widget titleSection = new Container(
       decoration: new BoxDecoration(
@@ -76,6 +77,7 @@ class HomePage extends StatelessWidget {
       )
       );
   }//end build method
+
 }
 
 class RootDrawer extends StatelessWidget {
@@ -124,7 +126,9 @@ class RootDrawer extends StatelessWidget {
                     );
                   }),
               ListTile(
+
                   leading: Icon(Icons.bug_report),
+
                   title: Text('Diseases', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
