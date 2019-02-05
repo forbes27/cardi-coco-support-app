@@ -23,6 +23,7 @@ dependencies:
   firebase_core: any
   firebase_database: "^1.0.5"
   google_sign_in: "^3.3.0"
+  cloud_firestore: "0.6.0"
 
 
 dev_dependencies:
@@ -48,6 +49,7 @@ flutter:
 
   assets:
     - images/cardi-01.png
+    - images/home.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

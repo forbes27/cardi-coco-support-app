@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import './ui/splash.dart';
 import './ui/login.dart';
+//import './ui/signin.dart';
 import './ui/homepage.dart';
+import 'root_page.dart';
+import './ui/search.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,10 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CARDI Coconut Support Center',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.green,
       ),
 
-      home: new HomePage()
+      home: new SplashPage()
     );
   }
 }

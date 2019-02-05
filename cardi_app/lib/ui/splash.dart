@@ -1,30 +1,81 @@
 import 'package:flutter/material.dart';
-class SplashPage extends StatelessWidget {
+import 'homepage.dart';
+
+class SplashPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new _SplashPageState();
+  }
+
+}
+
+class _SplashPageState extends State<SplashPage>{
+  @override
+
+  void initState(){
+    super.initState();
+    new Future.delayed(
+      const Duration(seconds: 4),
+    () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context)=>HomePage()))
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text ('CARDI'),
-          centerTitle: true,
-        backgroundColor: Colors.greenAccent,
-        ),
-        body: new Center(
-          child: new SingleChildScrollView(
-            child: new Column(
-              children: <Widget>[
-                new Text(
-                  "Welcome to the Coconut Support Center!",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 40),
-            ),
-                new Image.asset('images/cardi-01.png', height: 205.0, width: 175.0,)
-          ])
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(color: Colors. greenAccent),
           ),
-        ));
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 80.0,
+                        child: new Image.asset(
+                            'images/cardi-01.png'
+                        ),
+                      ),
+                      Padding(
+                        padding:EdgeInsets.only(top: 10.0),
+                      ),
+                      Text(
+                         "CARDI Coconut Support Centre", textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                        CircularProgressIndicator(),
+                        Padding(padding: EdgeInsets.only(top: 20.0),
+                        ),
+                      Text("Online Information \n An effective partnership between CARDI and ITC",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.black,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+              )
+          ],
+          )
+        ]
+      )
+    );
   }
-
-
 }
