@@ -44,7 +44,7 @@ class _SplashPageState extends State<SplashPage>{
                         backgroundColor: Colors.white,
                         radius: 80.0,
                         child: new Image.asset(
-                            'images/cardi-01.png'
+                            'images/cardilogo.png'
                         ),
                       ),
                       Padding(

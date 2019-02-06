@@ -48,7 +48,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
 
   assets:
-    - images/cardi-01.png
+    - images/cardilogo.png
     - images/home.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
