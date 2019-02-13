@@ -5,7 +5,9 @@ class Diseases extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return RootScaffold(body: new Center(
+    return RootScaffold(
+        title: "Diseases",
+        body: new Center(
       child: new SingleChildScrollView(
           child: new Column(
               children: <Widget>[

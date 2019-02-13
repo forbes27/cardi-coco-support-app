@@ -4,6 +4,7 @@ import './pests.dart';
 import './diseases.dart';
 import './chat.dart';
 import './contact-us.dart';
+import 'package:cardi_app/models/pest.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -65,6 +66,7 @@ class HomePage extends StatelessWidget {
       ),
     );
     return new RootScaffold(
+      title: "Home",
       body: new ListView(
         children: <Widget>[
           new Image.asset(
@@ -122,7 +124,7 @@ class RootDrawer extends StatelessWidget {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Pests()),
+                      MaterialPageRoute(builder: (context) => PestsPage()),
                     );
                   }),
               ListTile(
@@ -162,17 +164,38 @@ class RootDrawer extends StatelessWidget {
   }
 }
 
+//class RootScaffold extends StatelessWidget{
+//
+//  final Widget body;
+//
+//  RootScaffold({this.body});
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return new Scaffold(
+//      appBar: new AppBar(
+//        title: new Text ('CARDI'),
+//        centerTitle: true,
+//        backgroundColor: Colors.greenAccent,
+//      ),
+//      drawer: new RootDrawer(),
+//      body: body,
+//    );
+//  }
+//}
+
 class RootScaffold extends StatelessWidget{
 
   final Widget body;
+  final String title;
 
-  RootScaffold({this.body});
+  RootScaffold({this.body,this.title});
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text ('CARDI'),
+        title: new Text (title),
         centerTitle: true,
         backgroundColor: Colors.greenAccent,
       ),
