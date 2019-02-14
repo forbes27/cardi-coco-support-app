@@ -92,7 +92,7 @@ class _PestsPageState extends State<PestsPage> {
                         return new Card(
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: Colors.greenAccent,
+                              backgroundColor: Colors.lightGreen,
                             ),
                             title: Text(pestList[index].key),
                             //subtitle: Text(boardMessages[index].body),

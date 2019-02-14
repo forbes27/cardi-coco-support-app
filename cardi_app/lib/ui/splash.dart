@@ -29,8 +29,11 @@ class _SplashPageState extends State<SplashPage>{
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: Colors. greenAccent),
-          ),
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill),
+                ),
+              ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -48,7 +51,7 @@ class _SplashPageState extends State<SplashPage>{
                         ),
                       ),
                       Padding(
-                        padding:EdgeInsets.only(top: 10.0),
+                        padding:EdgeInsets.only(top: 15.0),
                       ),
                       Text(
                          "CARDI Coconut Support Centre", textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
@@ -64,19 +67,18 @@ class _SplashPageState extends State<SplashPage>{
                         CircularProgressIndicator(),
                         Padding(padding: EdgeInsets.only(top: 20.0),
                         ),
-                      Text("Online Information \n An effective partnership between CARDI and ITC",
+                      Text("Online Information \n An effective partnership between CARDI & ITC",
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black,
-                              fontSize: 18.0,
+                              fontSize: 16.0,
                               fontWeight: FontWeight.bold)),
                     ],
                   ),
               )
           ],
-          )
-        ]
-      )
+          ),
+        ],
+      ),
     );
   }
-
 }

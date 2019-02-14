@@ -13,14 +13,14 @@ class HomePage extends StatelessWidget {
     //place more multiple widgets into a parent called Container
     Widget titleSection = new Container(
       decoration: new BoxDecoration(
-        gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF69F0AE) ],
+        gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
             begin: FractionalOffset.topLeft,
             end: FractionalOffset.bottomRight,
-            stops: [0.1,1.0],
+            stops: [0.2,1.1],
             tileMode: TileMode.clamp
         ),
       ),
-      padding: const EdgeInsets.all(20.0),//top, bottom, left, right
+      padding: const EdgeInsets.all(10.0),//top, bottom, left, right
       child: new Row(
         children: <Widget>[
           new Expanded(
@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Container(
-                    padding: const EdgeInsets.only(bottom: 30.0),
+                    padding: const EdgeInsets.only(bottom: 15.0),
                     child:  new Text("CARDI Coconut Support Centre",
                         textAlign: TextAlign.center,
                         style: new TextStyle(
@@ -37,29 +37,35 @@ class HomePage extends StatelessWidget {
                             fontSize: 25.0)
                     ),
                   ),
-                          new Text("This application is to help small-farmer producers and stakeholders to have access to any information concerning the differnt types of pests and diseases risk mitigation control methods used in the Coconut Industry.",
-                              textAlign: TextAlign.center,
-                              style: new TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.grey[850])
+
+                  new Container(
+                      padding: const EdgeInsets.only(bottom: 15.0),
+                        child:  new Text("This application is to help small-farmer producers and stakeholders to have access to any information concerning the different types of coconut pests and diseases risk mitigation control methods used in the Coconut Industry.",
+                            textAlign: TextAlign.center,
+                            style: new TextStyle(
+                            color:Colors.grey[750],
+                            fontSize: 20.0)
+                            ),
                   ),
+
+                        /*
                         new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                                 new Container(
-                                  padding: const EdgeInsets.all(50.0),
-                                    child: new Text("Visit our websites at xyz",
+                                  padding: const EdgeInsets.all(10.0),
+                                    child: new Text("Hello",
                                         textAlign: TextAlign.center,
                                       style: new TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                         fontSize: 15.0
-                                      )
+                                      ),
                                     ),
                                 ),
                           ],
-                        )
-                ]
+                        ),
+                  */
+                ],
               ),
           ),
         ]
@@ -70,7 +76,7 @@ class HomePage extends StatelessWidget {
       body: new ListView(
         children: <Widget>[
           new Image.asset(
-              'images/home.jpg',
+              'images/coconutFarm.jpg',
             fit: BoxFit.cover
           ),
           //We can add more widgets below
@@ -93,7 +99,7 @@ class RootDrawer extends StatelessWidget {
                 child: Text('CARDI Coconut Support Centre',textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,),
                 decoration: BoxDecoration(
-                  color: Colors.greenAccent,
+                  color: Colors.green,
                 ),
               ),
 
@@ -197,7 +203,7 @@ class RootScaffold extends StatelessWidget{
       appBar: new AppBar(
         title: new Text (title),
         centerTitle: true,
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.green,
       ),
       drawer: new RootDrawer(),
       body: body,
