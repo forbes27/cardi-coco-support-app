@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../root_page.dart';
+import './homepage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _gSignIn = new GoogleSignIn();
@@ -94,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
         accessToken: googleSignInAuthentication.accessToken);
 
     print("User is ${user.displayName}");
+
     return user;
   }
 

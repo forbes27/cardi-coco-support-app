@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'homepage.dart';
+import './signin.dart';
 
 class SplashPage extends StatefulWidget {
   @override
