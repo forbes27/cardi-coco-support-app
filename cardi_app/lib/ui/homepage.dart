@@ -6,12 +6,14 @@ import './chat.dart';
 import './contact-us.dart';
 import 'package:cardi_app/models/pest.dart';
 
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
     //place more multiple widgets into a parent called Container
     Widget titleSection = new Container(
+
       decoration: new BoxDecoration(
         gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
             begin: FractionalOffset.topLeft,
@@ -20,7 +22,7 @@ class HomePage extends StatelessWidget {
             tileMode: TileMode.clamp
         ),
       ),
-      padding: const EdgeInsets.all(10.0),//top, bottom, left, right
+      padding: const EdgeInsets.all(15.0),//top, bottom, left, right
       child: new Row(
         children: <Widget>[
           new Expanded(
@@ -48,36 +50,40 @@ class HomePage extends StatelessWidget {
                             ),
                   ),
 
-                        /*
-                        new Column(
-                            children: <Widget>[
-                                new Container(
-                                  padding: const EdgeInsets.all(10.0),
-                                    child: new Text("Hello",
-                                        textAlign: TextAlign.center,
-                                      style: new TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                        fontSize: 15.0
-                                      ),
-                                    ),
-                                ),
-                          ],
-                        ),
-                  */
+                  new ListTile(
+                      title: Text ('Pests & Diseases of Coconuts'),
+                      subtitle: Text('Visit this article at '),
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PestsPage()),
+                        );
+                      }
+                    ),
+
+                  new ListTile(
+                    title: Text ('Challenges in the Coconut Industry and Srategies to Overcome Them'),
+                    subtitle: Text('Visit this article at '),
+                  ),
+
+                  new ListTile(
+                    title: Text ('CARDI and Teleios Code Jam 2018'),
+                    subtitle: Text('Visit this article at '),
+                  ),
                 ],
               ),
           ),
         ]
       ),
     );
+
     return new RootScaffold(
       title: "Home",
       body: new ListView(
         children: <Widget>[
           new Image.asset(
               'images/coconutFarm.jpg',
-            fit: BoxFit.cover
+            fit: BoxFit.fill
           ),
           //We can add more widgets below
           titleSection,
@@ -210,5 +216,3 @@ class RootScaffold extends StatelessWidget{
     );
   }
 }
-
-

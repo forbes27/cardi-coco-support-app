@@ -33,7 +33,10 @@ class LoginPageState extends State<LoginPage>{
         fit: StackFit.expand,
         children: <Widget>[
           new Container(
-            decoration: BoxDecoration(color: Colors.greenAccent),
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                  image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill),
+            ),
           ),
           new Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,36 +44,56 @@ class LoginPageState extends State<LoginPage>{
               Expanded(
                 flex: 2,
                 child: Container(
-                  padding: EdgeInsets.only(bottom: 240.0),
+                  padding: EdgeInsets.only(bottom: 300.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
                         backgroundColor: Colors.white,
-                        radius: 60.0,
+                        radius: 80.0,
                         child: new Image.asset(
                           'images/cardilogo.png',
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 20.0),
+                        padding: EdgeInsets.only(top: 10.0),
                       ),
                       Text(
                         "CARDI Coconut Support Centre",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 15.0,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
             ],
           ),
-          //here we place the text fields for username and passwords
+
+          //Row for login button
+          new Container(
+            padding: new EdgeInsets.only(top: 650.0),
+            margin: new EdgeInsets.all(50.0),
+            child: new Row(
+              children: <Widget>[
+                new MaterialButton(
+                  height: 40.0,
+                  minWidth: 300.0,
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  child: new Text("Login/Register",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  onPressed: ()=>{},
+                  splashColor: Colors.green,
+                ),
+                /*
           new Form(
             child: new Theme(
               data: new ThemeData(
@@ -131,6 +154,10 @@ class LoginPageState extends State<LoginPage>{
                   ],
                 ),
               ),
+            ),
+          ),
+          */
+              ],
             ),
           ),
         ],

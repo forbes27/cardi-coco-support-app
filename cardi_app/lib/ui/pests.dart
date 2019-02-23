@@ -1,29 +1,3 @@
-//import 'package:flutter/material.dart';
-//import './homepage.dart';
-//
-//class Pests extends StatelessWidget {
-//  // This widget is the root of your application.
-//  @override
-//  Widget build(BuildContext context) {
-//    return RootScaffold(body: new Center(
-//      child: new SingleChildScrollView(
-//          child: new Column(
-//              children: <Widget>[
-//                new Text(
-//                  "Pests!",
-//                  textDirection: TextDirection.ltr,
-//                  textAlign: TextAlign.center,
-//                  style: new TextStyle(
-//                      fontWeight: FontWeight.w500,
-//                      fontSize: 40),
-//                ),
-//                new Image.asset('images/cardi-01.png', height: 205.0, width: 175.0,)
-//              ])
-//      ),
-//    ));
-//  }
-//}
-
 import 'package:flutter/material.dart';
 import './homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -81,32 +55,7 @@ class _PestsPageState extends State<PestsPage> {
   Widget build(BuildContext context) {
     return new RootScaffold(
         title: "Pests",
-// Listview code
-// body: Column(
-//            children: <Widget>[
-//              Flexible(
-//                  child: FirebaseAnimatedList(
-//                      query: databaseReference,
-//                      itemBuilder: (_, DataSnapshot snapshot,
-//                          Animation<double> animation, int index) {
-//
-//                        return new Card(
-//                          child: ListTile(
-//                            leading: CircleAvatar(
-//                              backgroundColor: Colors.lightGreen,
-//                            ),
-//                            title: Text(pestList[index].key),
-//                            //subtitle: Text(boardMessages[index].body),
-//                          ),
-//                        );
-//                      }
-//                  )
-//
-//              )
-//            ]
-//        )
-//    );
-//  }
+
 
     body: StreamBuilder(
     stream: FirebaseDatabase.instance
@@ -122,18 +71,34 @@ class _PestsPageState extends State<PestsPage> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
           itemCount: map.values.toList().length,
-          padding: EdgeInsets.all(2.0),
+          padding: EdgeInsets.all(4.0),
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: <Widget>[
-                Container(
-                  child: Image.network(
-                    map.values.toList()[index]["pic"],
-                    fit: BoxFit.cover,
+                Card(
+                  clipBehavior: Clip.antiAlias,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      AspectRatio(
+                        aspectRatio: 18.0 / 11.0,
+                        child: Image.network(
+                            pestList[index].pic, fit: BoxFit.fitWidth,
+                      ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(pestList[index].key, style: TextStyle(fontWeight: FontWeight.bold)),
+                            SizedBox(height: 8.0),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  padding: EdgeInsets.all(2.0),
-                ),
-                Text(pestList[index].key)
+                )
               ],
             );
           },
@@ -144,15 +109,6 @@ class _PestsPageState extends State<PestsPage> {
     })
     );
   }
-
-//  return new RootScaffold(
-//  body: new ListView(
-//  children: <Widget>[
-//  //We can add more widgets below
-//  // titleSection,
-//  ]
-//  )
-//  );
 
   void _onEntryAdded(Event event) {
     setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
