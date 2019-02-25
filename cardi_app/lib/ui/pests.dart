@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_database/firebase_database.dart';
 //import 'package:cardi_app/model/board.dart';
 import 'package:cardi_app/models/pest.dart';
+import 'homepage.dart';
 
 class Pests extends StatelessWidget {
   // This widget is the root of your application.
@@ -28,7 +29,31 @@ class Pests extends StatelessWidget {
   }
 }
 
+class PestDetail extends StatelessWidget{
 
+  final String title;
+  final String description;
+
+  PestDetail({this.title, this.description});
+
+  @override
+  Widget build(BuildContext context) {
+    return new RootScaffold(
+      title: title,
+      body: new ListView(
+        children: <Widget>[
+          new Text(description,
+                            textAlign: TextAlign.center,
+                            style: new TextStyle(
+                            color:Colors.grey[750],
+                            fontSize: 20.0)
+                            ),
+          //We can add more widgets below
+        ]
+      )
+      );
+  }
+}
 
 class PestsPage extends StatefulWidget {
 
@@ -75,7 +100,14 @@ class _PestsPageState extends State<PestsPage> {
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: <Widget>[
-                Card(
+                InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PestDetail(title: pestList[index].key, description: pestList[index].description)),
+                    );
+            },
+                child: Card(
                   clipBehavior: Clip.antiAlias,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +130,8 @@ class _PestsPageState extends State<PestsPage> {
                       ),
                     ],
                   ),
-                )
+                ),
+            ),
               ],
             );
           },
@@ -131,18 +164,19 @@ class _PestsPageState extends State<PestsPage> {
 
 
 //Not working yet
-class PestDetail extends StatefulWidget {
-  var value;
-  PestDetail({Key key, this.value}) : super(key: key);
-  @override
-  _PestDetailState createState() => new _PestDetailState();
-}
-class _PestDetailState extends State<PestDetail> {
-  @override
-  Widget build(BuildContext context) {
-    return new RootScaffold(
-      title: "${widget.value.key}",
-      body: new Text("${widget.value.key}"),
-    );
-  }
-}
+//class PestDetail extends StatefulWidget {
+//  var value;
+//  PestDetail({Key key, this.value}) : super(key: key);
+//  @override
+//  _PestDetailState createState() => new _PestDetailState();
+//}
+//class _PestDetailState extends State<PestDetail> {
+//  @override
+//  Widget build(BuildContext context) {
+//    return new RootScaffold(
+//      title: "${widget.value.key}",
+//      body: new Text("${widget.value.key}"),
+//    );
+//  }
+//}
+

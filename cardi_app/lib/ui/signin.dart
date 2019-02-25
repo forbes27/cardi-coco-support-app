@@ -18,19 +18,19 @@ class MyApp extends StatelessWidget{
       theme: new ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: new LoginPage(),
+      home: new SigninPage(),
     );
   }
 
 }
 
-class LoginPage extends StatefulWidget {
+class SigninPage extends StatefulWidget {
   // This widget is the root of your application.
   @override
- _LoginPageState createState() => new _LoginPageState();
+ _SigninPageState createState() => new _SigninPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

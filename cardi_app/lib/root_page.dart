@@ -31,11 +31,11 @@ class _RootPageState extends State<RootPage>{
   @override
   Widget build(BuildContext context) {
     if(authStatus==AuthStatus.notSignedIn)
-        return new LoginPage();
+        return new SigninPage();
     else if(authStatus==AuthStatus.signedIn)
       return new HomePage();
 
-    return new LoginPage();
+    return new SigninPage();
   }
 
 }
