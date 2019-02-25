@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MaterialApp(
-  home: new SearchListExample(),
+  home: new Search(),
 ));
 
-class SearchListExample extends StatefulWidget {
+class Search extends StatefulWidget {
   @override
-  _SearchListExampleState createState() => new _SearchListExampleState();
+  _SearchState createState() => new _SearchState();
 }
 
-class _SearchListExampleState extends State<SearchListExample> {
+class _SearchState extends State<Search> {
   Widget appBarTitle = new Text(
     "Search",
     style: new TextStyle(color: Colors.white),
@@ -18,24 +18,24 @@ class _SearchListExampleState extends State<SearchListExample> {
     Icons.search,
     color: Colors.white,
   );
-  final globalKey = new GlobalKey <ScaffoldState>();
+  final globalKey = new GlobalKey<ScaffoldState>();
   final TextEditingController _controller = new TextEditingController();
   List<dynamic> _list;
-  bool _isSearching;
-  String _searchText = "";
-  List searchresult = new List();
+  bool _searchFor;
+  String _searchForText = "";
+  List searchRes = new List();
 
-  _SearchListExampleState() {
-    _controller.addListener(() { //the listener detects when the user is typing text in the AppBar
+  _SearchState() {
+    _controller.addListener(() {
       if (_controller.text.isEmpty) {
         setState(() {
-          _isSearching = false;
-          _searchText = "";
+          _searchFor = false;
+          _searchForText = "";
         });
       } else {
         setState(() {
-          _isSearching = true;
-          _searchText = _controller.text;
+          _searchFor = true;
+          _searchForText = _controller.text;
         });
       }
     });
@@ -44,11 +44,11 @@ class _SearchListExampleState extends State<SearchListExample> {
   @override
   void initState() {
     super.initState();
-    _isSearching = false;
+    _searchFor = false;
     values();
   }
 
-  void values() { //this part can be abstracted out so if the list is updated it can easily be added to the list
+  void values() {
     _list = List();
     _list.add("South American Palm Weevil");
     _list.add("Red Palm Mite");
@@ -67,18 +67,18 @@ class _SearchListExampleState extends State<SearchListExample> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               new Flexible(
-                  child: searchresult.length != 0 || _controller.text.isNotEmpty // ? -> then operator
+                  child: searchRes.length != 0 || _controller.text.isNotEmpty
                       ? new ListView.builder(
                     shrinkWrap: true,
-                    itemCount: searchresult.length,
+                    itemCount: searchRes.length,
                     itemBuilder: (BuildContext context, int index) {
-                      String listData = searchresult[index];
+                      String listData = searchRes[index];
                       return new ListTile(
                         title: new Text(listData.toString()),
                       );
                     },
                   )
-                      : new ListView.builder( //: else operator
+                      : new ListView.builder(
                     shrinkWrap: true,
                     itemCount: _list.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -131,23 +131,23 @@ class _SearchListExampleState extends State<SearchListExample> {
 //this method is used to start a search in the textfield provided
   void _handleSearchStart() {
     setState(() {
-      _isSearching = true;
+      _searchFor = true;
     });
   }
 
 
 //this method is used to design the search button icon onto the appbar
-  void _handleSearchEnd() { //this brings an end to the search and brings the search icon back onto the screen
+  void _handleSearchEnd() {
     setState(() {
       this.icon = new Icon(
         Icons.search,
         color: Colors.white,
       );
       this.appBarTitle = new Text(
-        "Search Sample",
+        "Search",
         style: new TextStyle(color: Colors.white),
       );
-      _isSearching = false;
+      _searchFor = false;
       _controller.clear();
     });
   }
@@ -155,13 +155,13 @@ class _SearchListExampleState extends State<SearchListExample> {
 
 //this method is used to determine the performance of the search operation which continously changes
 //whenever the text changes, which enables the search result to be seen instantly
-  void searchOperation(String searchText) {
-    searchresult.clear();
-    if (_isSearching != null) {
+  void searchOperation(String searchForText) {
+    searchRes.clear();
+    if (_searchFor != null) {
       for (int i = 0; i < _list.length; i++) {
         String data = _list[i];
-        if (data.toLowerCase().contains(searchText.toLowerCase())) {
-          searchresult.add(data);
+        if (data.toLowerCase().contains(searchForText.toLowerCase())) {
+          searchRes.add(data);
         }
       }
     }

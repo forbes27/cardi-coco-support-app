@@ -4,6 +4,7 @@ import './pests.dart';
 import './diseases.dart';
 import './chat.dart';
 import './contact-us.dart';
+import './search.dart';
 import 'package:cardi_app/models/pest.dart';
 
 
@@ -210,6 +211,17 @@ class RootScaffold extends StatelessWidget{
         title: new Text (title),
         centerTitle: true,
         backgroundColor: Colors.green,
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Search()),
+                );
+              }
+           ),
+        ],
       ),
       drawer: new RootDrawer(),
       body: body,
