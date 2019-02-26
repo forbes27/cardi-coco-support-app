@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
       ),
 
       home: new SplashPage()
-      /*home: new PestsPage()*/
     );
   }
 }

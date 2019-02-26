@@ -14,12 +14,11 @@ class HomePage extends StatelessWidget {
 
     //place more multiple widgets into a parent called Container
     Widget titleSection = new Container(
-
       decoration: new BoxDecoration(
         gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
             begin: FractionalOffset.topLeft,
             end: FractionalOffset.bottomRight,
-            stops: [0.2,1.1],
+            stops: [0.3,1.1],
             tileMode: TileMode.clamp
         ),
       ),
@@ -54,12 +53,6 @@ class HomePage extends StatelessWidget {
                   new ListTile(
                       title: Text ('Pests & Diseases of Coconuts'),
                       subtitle: Text('Visit this article at '),
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PestsPage()),
-                        );
-                      }
                     ),
 
                   new ListTile(
@@ -82,9 +75,11 @@ class HomePage extends StatelessWidget {
       title: "Home",
       body: new ListView(
         children: <Widget>[
-          new Image.asset(
-              'images/coconutFarm.jpg',
-            fit: BoxFit.fill
+          new Container(
+            child: new Image.asset(
+                'images/coconutFarm.jpg',
+                fit: BoxFit.fill
+            ),
           ),
           //We can add more widgets below
           titleSection,
@@ -141,9 +136,7 @@ class RootDrawer extends StatelessWidget {
                     );
                   }),
               ListTile(
-
                   leading: Icon(Icons.bug_report),
-
                   title: Text('Diseases', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
@@ -177,32 +170,14 @@ class RootDrawer extends StatelessWidget {
   }
 }
 
-//class RootScaffold extends StatelessWidget{
-//
-//  final Widget body;
-//
-//  RootScaffold({this.body});
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return new Scaffold(
-//      appBar: new AppBar(
-//        title: new Text ('CARDI'),
-//        centerTitle: true,
-//        backgroundColor: Colors.greenAccent,
-//      ),
-//      drawer: new RootDrawer(),
-//      body: body,
-//    );
-//  }
-//}
 
 class RootScaffold extends StatelessWidget{
 
   final Widget body;
   final String title;
+  final Widget search;
 
-  RootScaffold({this.body,this.title});
+  RootScaffold({this.body,this.title, this.search});
 
   @override
   Widget build(BuildContext context) {

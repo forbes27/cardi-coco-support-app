@@ -1,40 +1,19 @@
 import 'package:flutter/material.dart';
 import './homepage.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_database/firebase_database.dart';
-//import 'package:cardi_app/model/board.dart';
 import 'package:cardi_app/models/pest.dart';
 import 'homepage.dart';
-
-class Pests extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return RootScaffold(body: new Center(
-      child: new SingleChildScrollView(
-          child: new Column(
-              children: <Widget>[
-                new Text(
-                  "Pests!",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 40),
-                ),
-                new Image.asset('images/cardi-01.png', height: 205.0, width: 175.0,)
-              ])
-      ),
-    ));
-  }
-}
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+//import 'package:cardi_app/model/board.dart';
 
 class PestDetail extends StatelessWidget{
 
   final String title;
   final String description;
+  final String pic;
+  final String mitigation;
 
-  PestDetail({this.title, this.description});
+  PestDetail({this.title, this.description, this.mitigation, this.pic});
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +21,43 @@ class PestDetail extends StatelessWidget{
       title: title,
       body: new ListView(
         children: <Widget>[
-          new Text(description,
-                            textAlign: TextAlign.center,
-                            style: new TextStyle(
-                            color:Colors.grey[750],
-                            fontSize: 20.0)
-                            ),
           //We can add more widgets below
-        ]
-      )
+          //design part for the picture of the pests
+          ClipRRect(
+            borderRadius: new BorderRadius.circular(10.0),
+            child: new Image.network(
+              pic,
+              height: 300,
+              width: 100,
+              fit: BoxFit.fill,
+            ),
+          ),
+
+          //design part for the description of the pests
+          new Container(
+            margin: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),//top, bottom, left, right
+            child: new Text(description,
+                textAlign: TextAlign.start,
+                style: new TextStyle(
+                    color:Colors.grey[800],
+                    fontSize: 20.0)
+            ),
+          ),
+
+          //design part for the mitigation controls of the pests
+          new Container(
+            margin: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),//top, bottom, left, right
+            child: new Text(mitigation,
+              textAlign: TextAlign.start,
+              style: new TextStyle(
+                  color:Colors.grey[800],
+                  fontSize: 20.0),
+                ),
+              ),
+           ],
+         ),
       );
   }
 }
@@ -81,7 +88,6 @@ class _PestsPageState extends State<PestsPage> {
     return new RootScaffold(
         title: "Pests",
 
-
     body: StreamBuilder(
     stream: FirebaseDatabase.instance
         .reference()
@@ -104,7 +110,7 @@ class _PestsPageState extends State<PestsPage> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PestDetail(title: pestList[index].key, description: pestList[index].description)),
+                      MaterialPageRoute(builder: (context) => PestDetail(title: pestList[index].key, pic: pestList[index].pic, description: pestList[index].description, mitigation: pestList[index].mitigation)),
                     );
             },
                 child: Card(
@@ -115,7 +121,7 @@ class _PestsPageState extends State<PestsPage> {
                       AspectRatio(
                         aspectRatio: 18.0 / 11.0,
                         child: Image.network(
-                            pestList[index].pic, fit: BoxFit.fitWidth,
+                            pestList[index].pic, fit: BoxFit.fill,
                       ),
                       ),
                       Padding(
@@ -123,7 +129,8 @@ class _PestsPageState extends State<PestsPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(pestList[index].key, style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text(pestList[index].key, textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold)),
                             SizedBox(height: 8.0),
                           ],
                         ),
