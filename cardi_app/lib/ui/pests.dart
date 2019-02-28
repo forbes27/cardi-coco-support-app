@@ -6,6 +6,7 @@ import 'homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 //import 'package:cardi_app/model/board.dart';
 
+
 class PestDetail extends StatelessWidget{
 
   final String title;

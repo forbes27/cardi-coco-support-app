@@ -142,7 +142,7 @@ class RootDrawer extends StatelessWidget {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Diseases()),
+                      MaterialPageRoute(builder: (context) => DiseasesPage()),
                     );
                   }),
               ListTile(
