@@ -12,8 +12,9 @@ class DiseaseDetail extends StatelessWidget{
   final String description;
   final String pic;
   final String mitigation;
+  final String symptom;
 
-  DiseaseDetail({this.title, this.description, this.mitigation, this.pic});
+  DiseaseDetail({this.title, this.description, this.mitigation, this.pic, this.symptom});
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,17 @@ class DiseaseDetail extends StatelessWidget{
                   fontSize: 20.0),
             ),
           ),
+
+          new Container(
+            margin: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),//top, bottom, left, right
+            child: new Text(symptom,
+              textAlign: TextAlign.start,
+              style: new TextStyle(
+                  color:Colors.grey[800],
+                  fontSize: 20.0),
+            ),
+          )
         ],
       ),
     );
@@ -110,7 +122,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
                           onTap: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DiseaseDetail(title: diseaseList[index].key, pic: diseaseList[index].pic, description: diseaseList[index].description, mitigation: diseaseList[index].mitigation)),
+                              MaterialPageRoute(builder: (context) => DiseaseDetail(title: diseaseList[index].key, pic: diseaseList[index].pic, description: diseaseList[index].description, mitigation: diseaseList[index].mitigation, symptom: diseaseList[index].symptom,)),
                             );
                           },
                           child: Card(

@@ -5,14 +5,16 @@ class Pest {
   String description;
   String mitigation;
   String pic;
+  String symptom;
 
 
-  Pest(this.description, this.mitigation, this.pic);
+  Pest(this.description, this.mitigation, this.pic, this.symptom);
 
   Pest.fromSnapshot(DataSnapshot snapshot) :
         key = snapshot.key,
         description = snapshot.value["description"],
         pic = snapshot.value["pic"],
-        mitigation = snapshot.value["mitigation"];
+        mitigation = snapshot.value["mitigation"],
+        symptom = snapshot.value["symptom"];
 
 }

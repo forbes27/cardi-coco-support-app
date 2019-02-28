@@ -13,8 +13,9 @@ class PestDetail extends StatelessWidget{
   final String description;
   final String pic;
   final String mitigation;
+  final String symptom;
 
-  PestDetail({this.title, this.description, this.mitigation, this.pic});
+  PestDetail({this.title, this.description, this.mitigation, this.pic, this.symptom});
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,17 @@ class PestDetail extends StatelessWidget{
                   fontSize: 20.0),
                 ),
               ),
+
+          new Container(
+            margin: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),//top, bottom, left, right
+            child: new Text(symptom,
+              textAlign: TextAlign.start,
+              style: new TextStyle(
+                  color:Colors.grey[800],
+                  fontSize: 20.0),
+            ),
+          ),
            ],
          ),
       );
@@ -111,7 +123,7 @@ class _PestsPageState extends State<PestsPage> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PestDetail(title: pestList[index].key, pic: pestList[index].pic, description: pestList[index].description, mitigation: pestList[index].mitigation)),
+                      MaterialPageRoute(builder: (context) => PestDetail(title: pestList[index].key, pic: pestList[index].pic, description: pestList[index].description, mitigation: pestList[index].mitigation, symptom: pestList[index].symptom)),
                     );
             },
                 child: Card(
