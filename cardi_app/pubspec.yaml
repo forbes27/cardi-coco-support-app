@@ -24,6 +24,8 @@ dependencies:
   firebase_database: "^1.0.5"
   google_sign_in: "^3.3.0"
   cloud_firestore: "0.6.0"
+  google_maps_flutter: ^0.0.3
+
 
 
 dev_dependencies:

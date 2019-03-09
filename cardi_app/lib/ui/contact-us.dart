@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
 import './homepage.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:async';
 
-class ContactUs extends StatelessWidget {
+class ContactUs extends StatefulWidget {
+
+  @override
+   State<ContactUs> createState() => _ContactUsState();
+
+}
+
+class _ContactUsState extends State<ContactUs> {
   // This widget is the root of your application.
+
+  GoogleMapController myController;
+
+    static final CameraPosition _cardiLocation = CameraPosition(
+    target: LatLng(10.6435963, -61.4044734),
+    zoom: 14.4746,
+  );
+
+
+
   @override
   Widget build(BuildContext context) {
     return RootScaffold(
@@ -10,18 +29,36 @@ class ContactUs extends StatelessWidget {
         body: new Center(
       child: new SingleChildScrollView(
           child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text(
-                  "Contact Us!",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 40),
-                ),
-                new Image.asset('images/cardi-01.png', height: 205.0, width: 175.0,)
+                Container(
+                  height: 400.0,
+                  width: double.infinity,
+                  child: GoogleMap(
+                    onMapCreated: (controller){
+                      setState((){
+                        myController = controller;
+                        myController.addMarker(
+                          MarkerOptions(
+                            position: LatLng(10.6435963, -61.4044734),
+                          ),
+                        );
+                      });
+                    },
+                    options: GoogleMapOptions(
+                      compassEnabled: true,
+                      cameraPosition: CameraPosition(
+                        target: LatLng(10.6435963, -61.4044734),
+                        zoom: 15.0,
+                      ),
+                    ),
+                  )
+                )
               ])
       ),
     ));
   }
+
 }
+
+
