@@ -177,6 +177,13 @@
             </list>
           </value>
         </entry>
+        <entry key="url_launcher">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Documents/flutter_windows_v1.0.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-3.0.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="vector_math">
           <value>
             <list>
@@ -209,6 +216,7 @@
       <root url="file://$USER_HOME$/Documents/flutter_windows_v1.0.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.0.1/lib" />
       <root url="file://$USER_HOME$/Documents/flutter_windows_v1.0.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.1/lib" />
       <root url="file://$USER_HOME$/Documents/flutter_windows_v1.0.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.1.6/lib" />
+      <root url="file://$USER_HOME$/Documents/flutter_windows_v1.0.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-3.0.3/lib" />
       <root url="file://$USER_HOME$/Documents/flutter_windows_v1.0.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.0.8/lib" />
       <root url="file://$USER_HOME$/Documents/flutter_windows_v1.0.0-stable/flutter/bin/cache/pkg/sky_engine/lib" />
       <root url="file://$USER_HOME$/Documents/flutter_windows_v1.0.0-stable/flutter/packages/flutter/lib" />

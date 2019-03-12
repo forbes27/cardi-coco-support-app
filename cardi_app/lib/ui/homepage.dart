@@ -6,7 +6,7 @@ import './chat.dart';
 import './contact-us.dart';
 import './search.dart';
 import 'package:cardi_app/models/pest.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -52,18 +52,31 @@ class HomePage extends StatelessWidget {
 
                   new ListTile(
                       title: Text ('Pests & Diseases of Coconuts'),
-                      subtitle: Text('Visit this article at '),
+                      subtitle: Text('Visit this article at: '),
                     ),
-
+                  RaisedButton(
+                        onPressed: (){_launchURL("http://vikaspedia.in/agriculture/crop-production/integrated-pest-managment/ipm-strategies-for-coconut/diseases-and-symptoms");},
+                        child: new Text('Click Here'),
+                 ),
+                  //
                   new ListTile(
-                    title: Text ('Challenges in the Coconut Industry and Srategies to Overcome Them'),
-                    subtitle: Text('Visit this article at '),
+                    title: Text ('Challenges in the Coconut Industry and Strategies to Overcome Them'),
+                    subtitle: Text('Visit this article at: '),
                   ),
-
+                  RaisedButton(
+                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/08/02/challenges-in-the-coconut-industry-and-strategies-to-overcome-them/");},
+                        child: new Text('Click Here'),
+                 ),
+                  //
                   new ListTile(
                     title: Text ('CARDI and Teleios Code Jam 2018'),
-                    subtitle: Text('Visit this article at '),
+                    subtitle: Text('Visit this article at: '),
                   ),
+                  RaisedButton(
+                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/11/29/cardi-and-the-teleios-code-jam-2018");},
+                        child: new Text('Click Here'),
+                 ),
+                  //
                 ],
               ),
           ),
@@ -87,6 +100,16 @@ class HomePage extends StatelessWidget {
       )
       );
   }//end build method
+
+
+  _launchURL(url) async {
+  //String url;
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 }
 
