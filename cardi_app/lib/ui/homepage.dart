@@ -7,6 +7,8 @@ import './contact-us.dart';
 import './search.dart';
 import 'package:cardi_app/models/pest.dart';
 import 'package:url_launcher/url_launcher.dart';
+import './login.dart';
+
 
 class HomePage extends StatelessWidget {
   @override
@@ -42,7 +44,7 @@ class HomePage extends StatelessWidget {
 
                   new Container(
                       padding: const EdgeInsets.only(bottom: 15.0),
-                        child:  new Text("This application is to help small-farmer producers and stakeholders to have access to any information concerning the different types of coconut pests and diseases risk mitigation control methods used in the Coconut Industry.",
+                        child:  new Text("An application to help small-farmer producers and stakeholders to have access to any information concerning the different types of coconut pests and diseases risk mitigation control methods used in the Coconut Industry.",
                             textAlign: TextAlign.center,
                             style: new TextStyle(
                             color:Colors.grey[750],
@@ -51,28 +53,34 @@ class HomePage extends StatelessWidget {
                   ),
 
                   new ListTile(
-                      title: Text ('Pests & Diseases of Coconuts'),
-                      subtitle: Text('Visit this article at: '),
+                      title: Text ('Updating Regional Coconut Water Safety Standards'),
                     ),
                   RaisedButton(
-                        onPressed: (){_launchURL("http://vikaspedia.in/agriculture/crop-production/integrated-pest-managment/ipm-strategies-for-coconut/diseases-and-symptoms");},
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/07/09/updating-regional-coconut-water-safety-standards/");},
                         child: new Text('Click Here'),
                  ),
                   //
                   new ListTile(
                     title: Text ('Challenges in the Coconut Industry and Strategies to Overcome Them'),
-                    subtitle: Text('Visit this article at: '),
                   ),
                   RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
                         onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/08/02/challenges-in-the-coconut-industry-and-strategies-to-overcome-them/");},
                         child: new Text('Click Here'),
                  ),
                   //
                   new ListTile(
                     title: Text ('CARDI and Teleios Code Jam 2018'),
-                    subtitle: Text('Visit this article at: '),
                   ),
                   RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
                         onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/11/29/cardi-and-the-teleios-code-jam-2018");},
                         child: new Text('Click Here'),
                  ),
@@ -113,6 +121,9 @@ class HomePage extends StatelessWidget {
 
 }
 
+String mainProfilePicture = "url";
+
+
 class RootDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context){
@@ -120,11 +131,20 @@ class RootDrawer extends StatelessWidget {
         child: new ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              DrawerHeader(
-                child: Text('CARDI Coconut Support Centre',textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.center,),
-                decoration: BoxDecoration(
-                  color: Colors.green,
+              UserAccountsDrawerHeader(
+                //for this part, we have to use Google's authentication system
+                accountName: new Text("User"),
+                accountEmail: new Text("User1@gmail.com"),
+                currentAccountPicture: new GestureDetector(
+                  child: new CircleAvatar(
+                    backgroundImage: new NetworkImage("url"),
+                  )
+                ),
+                decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                    fit: BoxFit.fill,
+                    image: new NetworkImage("https://wallpapercave.com/wp/wp2557267.png")
+                  ),
                 ),
               ),
 
@@ -133,9 +153,10 @@ class RootDrawer extends StatelessWidget {
                   title: Text('Home', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
+                    Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (BuildContext context) => HomePage()),
                     );
                   }),
               ListTile(
@@ -143,19 +164,22 @@ class RootDrawer extends StatelessWidget {
                   title: Text('About Us', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
+                    Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AboutUs()),
+                      MaterialPageRoute(builder: (BuildContext context) => AboutUs()),
                     );
                   }),
+              new Divider(),
               ListTile(
                   leading: Icon(Icons.bug_report),
                   title: Text('Pests', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
+                    Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PestsPage()),
+                      MaterialPageRoute(builder: (BuildContext context) => PestsPage()),
                     );
                   }),
               ListTile(
@@ -163,19 +187,22 @@ class RootDrawer extends StatelessWidget {
                   title: Text('Diseases', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
+                    Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DiseasesPage()),
+                      MaterialPageRoute(builder: (BuildContext context) => DiseasesPage()),
                     );
                   }),
+              new Divider(),
               ListTile(
                   leading: Icon(Icons.message),
                   title: Text('Chat', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
+                    Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Chat()),
+                      MaterialPageRoute(builder: (BuildContext context) => Chat()),
                     );
                   }),
               ListTile(
@@ -183,9 +210,22 @@ class RootDrawer extends StatelessWidget {
                   title: Text('Contact Us', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
+                    Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ContactUs()),
+                      MaterialPageRoute(builder: (BuildContext context) => ContactUs()),
+                    );
+                  }),
+              new Divider(),
+              ListTile(
+                  leading: Icon(Icons.exit_to_app),
+                  title: Text('Sign out', textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,),
+                  onTap: (){
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
                     );
                   }),
             ])
@@ -215,7 +255,7 @@ class RootScaffold extends StatelessWidget{
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Search()),
+                  MaterialPageRoute(builder: (BuildContext context) => Search()),
                 );
               }
            ),
