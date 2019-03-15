@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './ui/splash.dart';
 import './ui/login.dart';
-//import './ui/signin.dart';
+import './ui/signin.dart';
 import './ui/homepage.dart';
 import 'root_page.dart';
 import './ui/search.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
 
-      home: new SplashPage()
+      home: new SigninPage()
     );
   }
 }

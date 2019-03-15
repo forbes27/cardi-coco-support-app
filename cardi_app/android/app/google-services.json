@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "402836333594-a7nkjbgpklm87aop6sq5p3v5t91mj4no.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.csm.cardiapp",
+            "certificate_hash": "e2f3740b34254732e486bbed722e5d8978fc3e34"
+          }
+        },
+        {
+          "client_id": "402836333594-09jrmm1lcoulooqsge4an21p28eq04v4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.csm.cardiapp",
+            "certificate_hash": "c8e17c1fc39718b86b4c33efd285859bf7a2d0e4"
+          }
+        },
+        {
           "client_id": "402836333594-e55mkkijgr1ko4u8q7olr1b8gisqe0sp.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402836333594-e55mkkijgr1ko4u8q7olr1b8gisqe0sp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

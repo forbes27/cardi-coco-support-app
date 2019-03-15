@@ -2,27 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../root_page.dart';
-import './homepage.dart';
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
-final GoogleSignIn _gSignIn = new GoogleSignIn();
-
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Login',
-      theme: new ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: new SigninPage(),
-    );
-  }
-
-}
+import 'splash.dart';
 
 class SigninPage extends StatefulWidget {
   // This widget is the root of your application.
@@ -31,6 +11,9 @@ class SigninPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SigninPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _gSignIn = new GoogleSignIn();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -49,43 +32,37 @@ class _SigninPageState extends State<SigninPage> {
                     onPressed: () => _googleSignin(),
                   ),
                 ),
-
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FlatButton(
-                    color: Colors.greenAccent,
-                    child: Text("Signin with Email"),
-                    onPressed: () {},
-                  ),
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FlatButton(
-                    color: Colors.greenAccent,
-                    child: new Text("Create Account"),
-                    onPressed: () => _createUser(),
-                  ),
-                ),
-
-
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FlatButton(
-                    color: Colors.greenAccent,
-                    child: new Text("Signout"),
-                    onPressed: () => _logout(),
-                  ),
-                ),
-
-
+//                Padding(
+//                  padding: const EdgeInsets.all(8.0),
+//                  child: FlatButton(
+//                    color: Colors.greenAccent,
+//                    child: Text("Signin with Email"),
+//                    onPressed: () {},
+//                  ),
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.all(8.0),
+//                  child: FlatButton(
+//                    color: Colors.greenAccent,
+//                    child: new Text("Create Account"),
+//                    onPressed: () => _createUser(),
+//                  ),
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.all(8.0),
+//                  child: FlatButton(
+//                    color: Colors.greenAccent,
+//                    child: new Text("Signout"),
+//                    onPressed: () => _logout(),
+//                  ),
+//                ),
               ]
           ),
         )
     );
   }
 
-  Future<FirebaseUser> _googleSignin() async {
+  Future<Null> _googleSignin() async {
     GoogleSignInAccount googleSignInAccount = await _gSignIn.signIn();
     GoogleSignInAuthentication googleSignInAuthentication =
     await googleSignInAccount.authentication;
@@ -94,9 +71,15 @@ class _SigninPageState extends State<SigninPage> {
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
 
-    print("User is ${user.displayName}");
+//    print("User is ${user.displayName}");
+//    return user;
 
-    return user;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SplashPage(
+                )),
+      );
   }
 
   Future _createUser() async {
