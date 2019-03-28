@@ -38,11 +38,20 @@ class DiseaseDetail extends StatelessWidget{
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
-            child: new Text(description,
-                textAlign: TextAlign.start,
-                style: new TextStyle(
+            child: Column(
+                children: <Widget>[ new Text(
+                    "Description:", style: new TextStyle(
                     color:Colors.grey[800],
-                    fontSize: 20.0)
+                    fontSize: 25.0,
+                fontWeight: FontWeight.bold)
+                ), new Text(description,
+                    textAlign: TextAlign.start,
+                    style: new TextStyle(
+                        color:Colors.grey[800],
+                        fontSize: 20.0)
+                ),
+
+                ]
             ),
           ),
 
@@ -50,24 +59,43 @@ class DiseaseDetail extends StatelessWidget{
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
-            child: new Text(mitigation,
-              textAlign: TextAlign.start,
-              style: new TextStyle(
-                  color:Colors.grey[800],
-                  fontSize: 20.0),
+            child: Column(
+                children: <Widget>[ new Text(
+                    "Symptoms:", style: new TextStyle(
+                    color:Colors.grey[800],
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold)
+                ), new Text(symptom,
+                    textAlign: TextAlign.start,
+                    style: new TextStyle(
+                        color:Colors.grey[800],
+                        fontSize: 20.0)
+                ),
+
+                ]
             ),
           ),
 
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
-            child: new Text(symptom,
-              textAlign: TextAlign.start,
-              style: new TextStyle(
-                  color:Colors.grey[800],
-                  fontSize: 20.0),
+            child: Column(
+                children: <Widget>[ new Text(
+                    "How to deal with this Disease:", style: new TextStyle(
+                    color:Colors.grey[800],
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold)
+                ), new Text(mitigation,
+                    textAlign: TextAlign.start,
+                    style: new TextStyle(
+                        color:Colors.grey[800],
+                        fontSize: 20.0,
+                    )
+                ),
+
+                ]
             ),
-          )
+          ),
         ],
       ),
     );

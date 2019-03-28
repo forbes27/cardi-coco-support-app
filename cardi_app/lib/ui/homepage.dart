@@ -33,12 +33,12 @@ class HomePage extends StatelessWidget {
                 children: <Widget>[
                   new Container(
                     padding: const EdgeInsets.only(bottom: 15.0),
-                    child:  new Text("CARDI Coconut Support Centre",
+                    child:  new Text("Coconuts Support Centre",
                         textAlign: TextAlign.center,
                         style: new TextStyle(
                             fontWeight: FontWeight.bold,
                             color:Colors.grey[800],
-                            fontSize: 25.0)
+                            fontSize: 30.0)
                     ),
                   ),
 
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                         onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/07/09/updating-regional-coconut-water-safety-standards/");},
                         child: new Text('Click Here'),
                  ),
-                  //
+
                   new ListTile(
                     title: Text ('Challenges in the Coconut Industry and Strategies to Overcome Them'),
                   ),
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                         onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/08/02/challenges-in-the-coconut-industry-and-strategies-to-overcome-them/");},
                         child: new Text('Click Here'),
                  ),
-                  //
+
                   new ListTile(
                     title: Text ('CARDI and Teleios Code Jam 2018'),
                   ),
@@ -84,7 +84,6 @@ class HomePage extends StatelessWidget {
                         onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/11/29/cardi-and-the-teleios-code-jam-2018");},
                         child: new Text('Click Here'),
                  ),
-                  //
                 ],
               ),
           ),
@@ -143,7 +142,7 @@ class RootDrawer extends StatelessWidget {
                 decoration: new BoxDecoration(
                   image: new DecorationImage(
                     fit: BoxFit.fill,
-                    image: new NetworkImage("https://wallpapercave.com/wp/wp2557267.png")
+                    image: new NetworkImage("https://ak0.picdn.net/shutterstock/videos/343000/thumb/1.jpg")
                   ),
                 ),
               ),

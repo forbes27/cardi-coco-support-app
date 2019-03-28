@@ -27,11 +27,18 @@ class _SigninPageState extends State<SigninPage> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: FlatButton(
-                    color: Colors.greenAccent,
-                    child: new Text("Google Sign-in"),
-                    onPressed: () => _googleSignin(),
-                  ),
+                  child: new MaterialButton(
+                    height: 40.0,
+                    minWidth: 300.0,
+                    color: Colors.white,
+                    textColor: Colors.black,
+                    child: new Text("Google Sign-in",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                    ),
+                      onPressed: () => _googleSignin(),
+                ),
                 ),
 //                Padding(
 //                  padding: const EdgeInsets.all(8.0),

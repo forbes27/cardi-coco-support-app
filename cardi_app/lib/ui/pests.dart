@@ -15,7 +15,7 @@ class PestDetail extends StatelessWidget{
   final String mitigation;
   final String symptom;
 
-  PestDetail({this.title, this.description, this.mitigation, this.pic, this.symptom});
+  PestDetail({this.title, this.description, this.symptom, this.mitigation, this.pic, });
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +39,41 @@ class PestDetail extends StatelessWidget{
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
-            child: new Text(description,
-                textAlign: TextAlign.start,
-                style: new TextStyle(
+            child: Column(
+              children: <Widget>[ new Text(
+                "Description:", style: new TextStyle(
+                  color:Colors.grey[800],
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold)
+              ), new Text(description,
+                  textAlign: TextAlign.start,
+                  style: new TextStyle(
+                      color:Colors.grey[800],
+                      fontSize: 20.0)
+              ),
+
+    ]
+            ),
+          ),
+
+          //design part for the symptoms of the pests
+          new Container(
+            margin: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),//top, bottom, left, right
+            child: Column(
+                children: <Widget>[ new Text(
+                    "Symptoms:", style: new TextStyle(
                     color:Colors.grey[800],
-                    fontSize: 20.0)
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold)
+                ), new Text(symptom,
+                    textAlign: TextAlign.start,
+                    style: new TextStyle(
+                        color:Colors.grey[800],
+                        fontSize: 20.0)
+                ),
+
+                ]
             ),
           ),
 
@@ -51,22 +81,20 @@ class PestDetail extends StatelessWidget{
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
-            child: new Text(mitigation,
-              textAlign: TextAlign.start,
-              style: new TextStyle(
+            child: Column(
+              children: <Widget>[ new Text(
+                "How to deal with this Pest:", style: new TextStyle(
                   color:Colors.grey[800],
-                  fontSize: 20.0),
-                ),
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold)
+              ), new Text(mitigation,
+                  textAlign: TextAlign.start,
+                  style: new TextStyle(
+                      color:Colors.grey[800],
+                      fontSize: 20.0)
               ),
 
-          new Container(
-            margin: const EdgeInsets.all(5.0),
-            padding: const EdgeInsets.all(10.0),//top, bottom, left, right
-            child: new Text(symptom,
-              textAlign: TextAlign.start,
-              style: new TextStyle(
-                  color:Colors.grey[800],
-                  fontSize: 20.0),
+    ]
             ),
           ),
            ],
@@ -135,8 +163,9 @@ class _PestsPageState extends State<PestsPage> {
                         aspectRatio: 18.0 / 11.0,
                         child: Image.network(
                             pestList[index].pic, fit: BoxFit.fill,
+                        ),
                       ),
-                      ),
+
                       Padding(
                         padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                         child: Column(

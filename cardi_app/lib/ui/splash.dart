@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage>{
           Container(
               decoration: new BoxDecoration(
                 image: new DecorationImage(
-                  image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill),
+                  image: AssetImage('images/coconuts1.jpg'), fit: BoxFit.fill),
                 ),
               ),
           Column(

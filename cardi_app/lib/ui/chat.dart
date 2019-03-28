@@ -67,7 +67,7 @@ class _ChatState extends State<Chat> {
 
                               FlatButton(
                                   child: Text("Post"),
-                                  color: Colors.greenAccent,
+                                  color: Colors.green,
                                   onPressed: () {
                                     handleSubmit();
                                   }
@@ -86,7 +86,7 @@ class _ChatState extends State<Chat> {
                         return new Card(
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: Colors.greenAccent,
+                              backgroundColor: Colors.green,
                             ),
                             title: Text(boardMessages[index].subject),
                             subtitle: Text(boardMessages[index].body),
