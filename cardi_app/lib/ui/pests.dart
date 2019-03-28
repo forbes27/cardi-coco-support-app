@@ -41,9 +41,9 @@ class PestDetail extends StatelessWidget{
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
               children: <Widget>[ new Text(
-                "Description:", style: new TextStyle(
+                "Description", style: new TextStyle(
                   color:Colors.grey[800],
-                  fontSize: 25.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold)
               ), new Text(description,
                   textAlign: TextAlign.start,
@@ -62,9 +62,9 @@ class PestDetail extends StatelessWidget{
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
                 children: <Widget>[ new Text(
-                    "Symptoms:", style: new TextStyle(
+                    "Symptoms", style: new TextStyle(
                     color:Colors.grey[800],
-                    fontSize: 25.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold)
                 ), new Text(symptom,
                     textAlign: TextAlign.start,
@@ -83,9 +83,9 @@ class PestDetail extends StatelessWidget{
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
               children: <Widget>[ new Text(
-                "How to deal with this Pest:", style: new TextStyle(
+                "How to deal with this Pest", style: new TextStyle(
                   color:Colors.grey[800],
-                  fontSize: 25.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold)
               ), new Text(mitigation,
                   textAlign: TextAlign.start,
