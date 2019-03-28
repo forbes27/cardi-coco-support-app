@@ -3,6 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../root_page.dart';
 import 'splash.dart';
+import 'homepage.dart';
 
 class SigninPage extends StatefulWidget {
   // This widget is the root of your application.
@@ -77,7 +78,7 @@ class _SigninPageState extends State<SigninPage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => SplashPage(
+            builder: (context) => HomePage(
                 )),
       );
   }

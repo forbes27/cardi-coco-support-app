@@ -26,6 +26,12 @@ dependencies:
   cloud_firestore: "0.6.0"
   google_maps_flutter: ^0.0.3
   url_launcher: ^3.0.2
+  flutter_launcher_icons: "^0.7.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "images/cardilogo.png"
 
 
 
