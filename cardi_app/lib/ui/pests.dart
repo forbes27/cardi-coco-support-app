@@ -119,6 +119,8 @@ class _PestsPageState extends State<PestsPage> {
   void initState() {
     super.initState();
     //pests = Pest("", "");
+    database.setPersistenceEnabled(true);
+    database.setPersistenceCacheSizeBytes(10000000); //allocating 10MB of storage in cache for pest Data
     databaseReference = database.reference().child("pests");
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);

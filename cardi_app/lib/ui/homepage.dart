@@ -7,10 +7,16 @@ import './contact-us.dart';
 import './search.dart';
 import 'package:cardi_app/models/pest.dart';
 import 'package:url_launcher/url_launcher.dart';
-import './login.dart';
+import './signin.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 class HomePage extends StatelessWidget {
+  final String username;
+  final String email;
+  final String photoUrl;
+
+  HomePage({Key key, this.email, this.username, this.photoUrl}) : super(key: key);
   @override
   Widget build(BuildContext context) {
 
@@ -104,7 +110,7 @@ class HomePage extends StatelessWidget {
           //We can add more widgets below
           titleSection,
         ]
-      )
+      ),email: email, username: username, photoUrl: photoUrl
       );
   }//end build method
 
@@ -124,6 +130,13 @@ String mainProfilePicture = "url";
 
 
 class RootDrawer extends StatelessWidget {
+  final GoogleSignIn _gSignIn = new GoogleSignIn();
+  final String username;
+  final String email;
+  final String photoUrl;
+
+ RootDrawer({Key key, this.email, this.username, this.photoUrl}) : super(key: key);
+
   @override
   Widget build(BuildContext context){
     return new Drawer(
@@ -132,11 +145,11 @@ class RootDrawer extends StatelessWidget {
             children: <Widget>[
               UserAccountsDrawerHeader(
                 //for this part, we have to use Google's authentication system
-                accountName: new Text("User"),
-                accountEmail: new Text("User1@gmail.com"),
+                accountName: new Text("${username}"),
+                accountEmail: new Text("${email}"),
                 currentAccountPicture: new GestureDetector(
                   child: new CircleAvatar(
-                    backgroundImage: new NetworkImage("url"),
+                    backgroundImage: new NetworkImage("${photoUrl}"),
                   )
                 ),
                 decoration: new BoxDecoration(
@@ -221,10 +234,11 @@ class RootDrawer extends StatelessWidget {
                   title: Text('Sign out', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
+                    _gSignIn.signOut();
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+                      MaterialPageRoute(builder: (BuildContext context) => SigninPage()),
                     );
                   }),
             ])
@@ -238,8 +252,11 @@ class RootScaffold extends StatelessWidget{
   final Widget body;
   final String title;
   final Widget search;
+  final String username;
+  final String email;
+  final String photoUrl;
 
-  RootScaffold({this.body,this.title, this.search});
+  RootScaffold({this.body,this.title, this.search, this.username, this.email, this.photoUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -260,7 +277,7 @@ class RootScaffold extends StatelessWidget{
            ),
         ],
       ),
-      drawer: new RootDrawer(),
+      drawer: new RootDrawer(email: email, username: username, photoUrl: photoUrl),
       body: body,
     );
   }
