@@ -13,38 +13,42 @@ class AboutUs extends StatelessWidget {
               children: <Widget>[
                 new Container(
                   child: new Image.asset(
-                      'images/10301.jpg',
-                      fit: BoxFit.fill
+                      'images/cardilogo.png',
+                      fit: BoxFit.fill,
                   ),
                 ),
+
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                  child: new Text(
-                    "       Since 1975, CARDI was established by the heads of Governments of CARICOM to improve the quality of lives of the people "
-                        "of the caribbean through perpetual agricultural research. With the use of technology it has become more effective to share or distribute critical "
-                        "information that is readily accessible to farmers and people of the caribbean.\n"
-                        "       CARDI Coconut Support Centre is a collaborative work between CARDI and ITC(International Trade Center)",
+                  padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                    child: new Text(
+                        "Since 1975, CARDI was established by the heads of Governments of CARICOM to improve the quality of lives of the people of the caribbean through perpetual agricultural research. "
+                        " \n\nWith the use of technology, it has become more effective to share or distribute critical "
+                        "information that is readily accessible to small-holder farmers and people of the Caribbean.\n\n"
+                        "Coconuts Support Centre is a collaborative work between CARDI and ITC (International Trade Center).",
                     textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.start,
                     style: new TextStyle(
-                        fontSize: 18),
+                        fontSize: 20),
                   ),
                 ),
+
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0.0, 10.0, 250.0, 8.0),
-                  child: new Text(
-                      "OBJECTIVES:", textAlign: TextAlign.left, style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold, decoration: TextDecoration.underline )),
-                ),
+                  padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                    child: new Text(
+                      "Objectives", textAlign: TextAlign.center, style: TextStyle(color: Colors.grey[800], fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 new Text(
-                  " - To access the need for mobile device application in the coconut industry for the caribbean \n"
-                      " - To increase access to coconut pest and disease control methods for farmers and stakeholders \n"
+                      " - To access the need for mobile device application in the Coconut Industry for the Caribbean \n\n"
+                      " - To increase access to coconut pest and disease control methods for small-holder farmers and stakeholders \n\n"
                       " - To assist with decision-making about coconut cultivation.",
                   textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
+                  textAlign: TextAlign.start,
                   style: new TextStyle(
-                      fontSize: 18),
+                      fontSize: 20),
                 ),
-              ])
+              ],
+        ),
       ),
     ));
   }

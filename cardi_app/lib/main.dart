@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CARDI Coconut Support Center',
+      title: 'Coconuts Support Center',
         debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,

@@ -103,7 +103,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           new Container(
             child: new Image.asset(
-                'images/coconutFarm.jpg',
+                'images/coconuts2.jpg',
                 fit: BoxFit.fill
             ),
           ),
