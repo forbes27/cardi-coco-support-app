@@ -212,22 +212,3 @@ class _PestsPageState extends State<PestsPage> {
     });
   }
 }
-
-
-//Not working yet
-//class PestDetail extends StatefulWidget {
-//  var value;
-//  PestDetail({Key key, this.value}) : super(key: key);
-//  @override
-//  _PestDetailState createState() => new _PestDetailState();
-//}
-//class _PestDetailState extends State<PestDetail> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return new RootScaffold(
-//      title: "${widget.value.key}",
-//      body: new Text("${widget.value.key}"),
-//    );
-//  }
-//}
-

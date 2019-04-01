@@ -33,66 +33,7 @@ class HomePage extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),//top, bottom, left, right
       child: new Row(
         children: <Widget>[
-          new Expanded(
-              child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  new Container(
-                    padding: const EdgeInsets.only(bottom: 15.0),
-                    child:  new Text("Coconuts Support Centre",
-                        textAlign: TextAlign.center,
-                        style: new TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color:Colors.grey[800],
-                            fontSize: 30.0)
-                    ),
-                  ),
 
-                  new Container(
-                      padding: const EdgeInsets.only(bottom: 15.0),
-                        child:  new Text("An application to help small-farmer producers and stakeholders to have access to any information concerning the different types of coconut pests and diseases risk mitigation control methods used in the Coconut Industry.",
-                            textAlign: TextAlign.center,
-                            style: new TextStyle(
-                            color:Colors.grey[750],
-                            fontSize: 20.0)
-                            ),
-                  ),
-
-                  new ListTile(
-                      title: Text ('Updating Regional Coconut Water Safety Standards'),
-                    ),
-                  RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/07/09/updating-regional-coconut-water-safety-standards/");},
-                        child: new Text('Click Here'),
-                 ),
-
-                  new ListTile(
-                    title: Text ('Challenges in the Coconut Industry and Strategies to Overcome Them'),
-                  ),
-                  RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/08/02/challenges-in-the-coconut-industry-and-strategies-to-overcome-them/");},
-                        child: new Text('Click Here'),
-                 ),
-
-                  new ListTile(
-                    title: Text ('CARDI and Teleios Code Jam 2018'),
-                  ),
-                  RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/11/29/cardi-and-the-teleios-code-jam-2018");},
-                        child: new Text('Click Here'),
-                 ),
-                ],
-              ),
-          ),
         ]
       ),
     );
@@ -101,12 +42,6 @@ class HomePage extends StatelessWidget {
       title: "Home",
       body: new ListView(
         children: <Widget>[
-          new Container(
-            child: new Image.asset(
-                'images/coconuts2.jpg',
-                fit: BoxFit.fill
-            ),
-          ),
           //We can add more widgets below
           titleSection,
         ]

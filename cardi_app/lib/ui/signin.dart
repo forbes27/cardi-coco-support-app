@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import '../root_page.dart';
 import 'splash.dart';
 import 'homepage.dart';
+import 'dart:collection';
 
 class SigninPage extends StatefulWidget {
   // This widget is the root of your application.
@@ -14,6 +16,8 @@ class SigninPage extends StatefulWidget {
 class _SigninPageState extends State<SigninPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _gSignIn = new GoogleSignIn();
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference databaseReference;
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +58,18 @@ class _SigninPageState extends State<SigninPage> {
     FirebaseUser user = await _auth.signInWithGoogle(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
+    databaseReference = database.reference().child("users");
 
+//an alternative option is to use push() which autogenerates a id in firebase and put google uid as a field in that nested list
+    databaseReference.child(user.uid);
+    databaseReference.child(user.uid).child("displayName").set(user.displayName);
+    databaseReference.child(user.uid).child("email").set(user.email);
+    databaseReference.child(user.uid).child("photoUrl").set(user.photoUrl);
+    String currentUserId = databaseReference.key;
+    print("User is ${user.uid}");
     print("User is ${user.displayName}");
     print("User is ${user.email}");
     print("User is ${user.photoUrl}");
-//    return user;
 
     Navigator.push(
         context,
