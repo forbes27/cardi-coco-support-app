@@ -13,7 +13,7 @@ class AboutUs extends StatelessWidget {
               children: <Widget>[
                 new Container(
                   child: new Image.asset(
-                      'images/cardilogo.png',
+                      'images/CARDI-ITC.jpg',
                       fit: BoxFit.fill,
                   ),
                 ),

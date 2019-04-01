@@ -18,6 +18,7 @@ class _SearchState extends State<Search> {
     Icons.search,
     color: Colors.white,
   );
+
   final globalKey = new GlobalKey<ScaffoldState>();
   final TextEditingController _controller = new TextEditingController();
   List<dynamic> _list;
@@ -50,10 +51,23 @@ class _SearchState extends State<Search> {
 
   void values() {
     _list = List();
-    _list.add("South American Palm Weevil");
-    _list.add("Red Palm Mite");
+    _list.add("Ambrosia Beetle");
+    _list.add("Red Ring Nematode");
     _list.add("Lethal Yellowing");
-    _list.add("Coconut mite");
+    _list.add("Scales");
+    _list.add("Rhinoceros Beetle");
+    _list.add("Leafspots(Pestalotia)");
+    _list.add("Damping Off");
+    _list.add("Red Palm Mite");
+    _list.add("Mealy Bug");
+    _list.add("Bud Rot");
+    _list.add("Leafspots(Drechslera)");
+    _list.add("Leafspots(Drechslera)");
+    _list.add("Army Worm");
+    _list.add("Coconut Caterpillar");
+    _list.add("Leafspots(Anthracnose)");
+    _list.add("Coconut Eriophyid Mite");
+    _list.add("Coconut Moth Borer");
   }
 
   @override
