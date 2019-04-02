@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
 
                   new Container(
                       padding: const EdgeInsets.only(bottom: 15.0),
-                        child:  new Text("An application to help small-farmer producers and stakeholders to have access to any information concerning the different types of coconut pests and diseases risk mitigation control methods used in the Coconut Industry.",
+                        child:  new Text("An application to help small-holder farmers and stakeholders to have access to any information concerning the different types of Coconut pests and diseases risk mitigation control methods used in the Coconut Industry.",
                             textAlign: TextAlign.center,
                             style: new TextStyle(
                             color:Colors.grey[750],
@@ -101,16 +101,20 @@ class HomePage extends StatelessWidget {
       title: "Home",
       body: new ListView(
         children: <Widget>[
-          new Container(
-            child: new Image.asset(
-                'images/coconuts2.jpg',
-                fit: BoxFit.fill
+          ClipRRect(
+            borderRadius: new BorderRadius.circular(10.0),
+            child: new Image.asset('images/coconuts2.jpg',
+              height: 300,
+              width: 100,
+              fit: BoxFit.fill,
             ),
           ),
+
           //We can add more widgets below
           titleSection,
-        ]
-      ),email: email, username: username, photoUrl: photoUrl
+          ],
+        ),
+        email: email, username: username, photoUrl: photoUrl
       );
   }//end build method
 

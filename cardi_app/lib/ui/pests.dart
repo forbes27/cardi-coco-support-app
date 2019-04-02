@@ -155,7 +155,8 @@ class _PestsPageState extends State<PestsPage> {
                       context,
                       MaterialPageRoute(builder: (context) => PestDetail(title: pestList[index].key, pic: pestList[index].pic, description: pestList[index].description, mitigation: pestList[index].mitigation, symptom: pestList[index].symptom)),
                     );
-            },
+                },
+
                 child: Card(
                   clipBehavior: Clip.antiAlias,
                   child: Column(
@@ -182,7 +183,7 @@ class _PestsPageState extends State<PestsPage> {
                     ],
                   ),
                 ),
-            ),
+                ),
               ],
             );
           },

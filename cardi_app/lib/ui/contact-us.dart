@@ -53,7 +53,7 @@ class _ContactUsState extends State<ContactUs> {
                     ),
                   )
                 ),
-                
+
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 20.0, 140.0, 0.0),
                   child: new Text(
