@@ -6,6 +6,7 @@ import '../root_page.dart';
 import 'splash.dart';
 import 'homepage.dart';
 import 'dart:collection';
+import 'package:cardi_app/models/user.dart';
 
 class SigninPage extends StatefulWidget {
   // This widget is the root of your application.
@@ -65,7 +66,9 @@ class _SigninPageState extends State<SigninPage> {
     databaseReference.child(user.uid).child("displayName").set(user.displayName);
     databaseReference.child(user.uid).child("email").set(user.email);
     databaseReference.child(user.uid).child("photoUrl").set(user.photoUrl);
-    String currentUserId = databaseReference.key;
+
+    User currentUser = User(user.uid, user.displayName, user.email, user.photoUrl);
+
     print("User is ${user.uid}");
     print("User is ${user.displayName}");
     print("User is ${user.email}");
@@ -74,7 +77,7 @@ class _SigninPageState extends State<SigninPage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => HomePage(email: user.email, username: user.displayName, photoUrl: user.photoUrl,
+            builder: (context) => HomePage(currentUser: currentUser,
                 )),
       );
   }

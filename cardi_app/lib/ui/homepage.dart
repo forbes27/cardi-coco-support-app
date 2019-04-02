@@ -9,14 +9,13 @@ import 'package:cardi_app/models/pest.dart';
 import 'package:url_launcher/url_launcher.dart';
 import './signin.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cardi_app/models/user.dart';
 
 
 class HomePage extends StatelessWidget {
-  final String username;
-  final String email;
-  final String photoUrl;
+  final User currentUser;
 
-  HomePage({Key key, this.email, this.username, this.photoUrl}) : super(key: key);
+  HomePage({Key key, this.currentUser}) : super(key: key);
   @override
   Widget build(BuildContext context) {
 
@@ -45,7 +44,7 @@ class HomePage extends StatelessWidget {
           //We can add more widgets below
           titleSection,
         ]
-      ),email: email, username: username, photoUrl: photoUrl
+      ),currentUser: currentUser,
       );
   }//end build method
 
@@ -66,11 +65,9 @@ String mainProfilePicture = "url";
 
 class RootDrawer extends StatelessWidget {
   final GoogleSignIn _gSignIn = new GoogleSignIn();
-  final String username;
-  final String email;
-  final String photoUrl;
+  final User currentUser;
 
- RootDrawer({Key key, this.email, this.username, this.photoUrl}) : super(key: key);
+ RootDrawer({Key key, this.currentUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -80,11 +77,11 @@ class RootDrawer extends StatelessWidget {
             children: <Widget>[
               UserAccountsDrawerHeader(
                 //for this part, we have to use Google's authentication system
-                accountName: new Text("${username}"),
-                accountEmail: new Text("${email}"),
+                accountName: new Text("${currentUser.displayName}"),
+                accountEmail: new Text("${currentUser.email}"),
                 currentAccountPicture: new GestureDetector(
                   child: new CircleAvatar(
-                    backgroundImage: new NetworkImage("${photoUrl}"),
+                    backgroundImage: new NetworkImage("${currentUser.photoUrl}"),
                   )
                 ),
                 decoration: new BoxDecoration(
@@ -149,7 +146,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => Chat()),
+                      MaterialPageRoute(builder: (BuildContext context) => Chat(currentUser: currentUser)),
                     );
                   }),
               ListTile(
@@ -187,11 +184,9 @@ class RootScaffold extends StatelessWidget{
   final Widget body;
   final String title;
   final Widget search;
-  final String username;
-  final String email;
-  final String photoUrl;
+  final User currentUser;
 
-  RootScaffold({this.body,this.title, this.search, this.username, this.email, this.photoUrl});
+  RootScaffold({this.body,this.title, this.search, this.currentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +207,7 @@ class RootScaffold extends StatelessWidget{
            ),
         ],
       ),
-      drawer: new RootDrawer(email: email, username: username, photoUrl: photoUrl),
+      drawer: new RootDrawer(currentUser: currentUser),
       body: body,
     );
   }

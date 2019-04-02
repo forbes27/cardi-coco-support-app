@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aa57272-58e9-44f2-9c1d-bf1f4ec32496" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/cardi_app/lib/main.dart" afterPath="$PROJECT_DIR$/cardi_app/lib/main.dart" />
-      <change beforePath="$PROJECT_DIR$/cardi_app/lib/ui/aboutus.dart" afterPath="$PROJECT_DIR$/cardi_app/lib/ui/aboutus.dart" />
-      <change beforePath="$PROJECT_DIR$/cardi_app/lib/ui/contact-us.dart" afterPath="$PROJECT_DIR$/cardi_app/lib/ui/contact-us.dart" />
+      <change beforePath="$PROJECT_DIR$/cardi_app/lib/ui/chat.dart" afterPath="$PROJECT_DIR$/cardi_app/lib/ui/chat.dart" />
       <change beforePath="$PROJECT_DIR$/cardi_app/lib/ui/homepage.dart" afterPath="$PROJECT_DIR$/cardi_app/lib/ui/homepage.dart" />
-      <change beforePath="$PROJECT_DIR$/cardi_app/lib/ui/login.dart" afterPath="$PROJECT_DIR$/cardi_app/lib/ui/login.dart" />
-      <change beforePath="$PROJECT_DIR$/cardi_app/lib/ui/pests.dart" afterPath="$PROJECT_DIR$/cardi_app/lib/ui/pests.dart" />
       <change beforePath="$PROJECT_DIR$/cardi_app/lib/ui/signin.dart" afterPath="$PROJECT_DIR$/cardi_app/lib/ui/signin.dart" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -123,22 +117,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cardi_app/lib/main.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="login.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/login.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
+            <state relative-caret-position="1751">
               <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding />
             </state>
@@ -158,8 +140,32 @@
       <file leaf-file-name="pests.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/pests.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="44" />
+            <state relative-caret-position="2057">
+              <caret line="195" column="0" lean-forward="false" selection-start-line="195" selection-start-column="0" selection-end-line="212" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chat.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/chat.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-56">
+              <caret line="136" column="46" lean-forward="false" selection-start-line="136" selection-start-column="46" selection-end-line="136" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#66#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="message.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/message.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="58" lean-forward="false" selection-start-line="0" selection-start-column="58" selection-end-line="0" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -175,16 +181,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="board.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/board.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="2" lean-forward="false" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="user.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/user.dart">
           <provider selected="true" editor-type-id="text-editor">
@@ -195,31 +191,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="signin.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/signin.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-56">
+              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="homepage.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/homepage.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="145" column="71" lean-forward="false" selection-start-line="145" selection-start-column="71" selection-end-line="145" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contact-us.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/contact-us.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signin.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/signin.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="62" column="127" lean-forward="false" selection-start-line="62" selection-start-column="127" selection-end-line="62" selection-end-column="127" />
+            <state relative-caret-position="323">
+              <caret line="148" column="104" lean-forward="false" selection-start-line="148" selection-start-column="104" selection-end-line="148" selection-end-column="104" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -273,17 +261,18 @@
         <option value="$PROJECT_DIR$/cardi_app/lib/ui/logout.dart" />
         <option value="$PROJECT_DIR$/cardi_app/lib/models/board.dart" />
         <option value="$PROJECT_DIR$/cardi_app/lib/ui/splash.dart" />
-        <option value="$PROJECT_DIR$/cardi_app/lib/ui/chat.dart" />
         <option value="$PROJECT_DIR$/cardi_app/lib/ui/diseases.dart" />
         <option value="$PROJECT_DIR$/cardi_app/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/cardi_app/lib/models/user.dart" />
         <option value="$PROJECT_DIR$/cardi_app/lib/ui/login.dart" />
         <option value="$PROJECT_DIR$/cardi_app/lib/ui/contact-us.dart" />
         <option value="$PROJECT_DIR$/cardi_app/lib/ui/aboutus.dart" />
-        <option value="$PROJECT_DIR$/cardi_app/lib/ui/pests.dart" />
-        <option value="$PROJECT_DIR$/cardi_app/lib/ui/homepage.dart" />
         <option value="$PROJECT_DIR$/cardi_app/lib/main.dart" />
         <option value="$PROJECT_DIR$/cardi_app/lib/ui/signin.dart" />
+        <option value="$PROJECT_DIR$/cardi_app/lib/models/user.dart" />
+        <option value="$PROJECT_DIR$/cardi_app/lib/ui/pests.dart" />
+        <option value="$PROJECT_DIR$/cardi_app/lib/ui/homepage.dart" />
+        <option value="$PROJECT_DIR$/cardi_app/lib/models/message.dart" />
+        <option value="$PROJECT_DIR$/cardi_app/lib/ui/chat.dart" />
       </list>
     </option>
   </component>
@@ -308,8 +297,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -346,8 +334,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -415,7 +404,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -461,10 +450,96 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/cardi_app/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/login.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/aboutus.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/pests.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/pest.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/board.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="2" lean-forward="false" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/user.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="52" lean-forward="false" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/homepage.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2295">
+          <caret line="145" column="71" lean-forward="false" selection-start-line="145" selection-start-column="71" selection-end-line="145" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/contact-us.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/signin.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="127" lean-forward="false" selection-start-line="62" selection-start-column="127" selection-end-line="62" selection-end-column="127" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -490,7 +565,7 @@
         <state relative-caret-position="323">
           <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -516,7 +591,7 @@
         <state relative-caret-position="323">
           <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -573,13 +648,6 @@
     <entry file="file://$PROJECT_DIR$/cardi_app/images/farmer.jpg" />
     <entry file="file://$PROJECT_DIR$/cardi_app/images/homeImage.jpg" />
     <entry file="file://$PROJECT_DIR$/cardi_app/images/coconut1 .jpg" />
-    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/chat.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="88" column="59" lean-forward="false" selection-start-line="88" selection-start-column="59" selection-end-line="88" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/diseases.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -601,19 +669,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/board.dart">
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/contact-us.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="2" lean-forward="false" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="33" />
+        <state relative-caret-position="442">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/contact-us.dart">
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -625,29 +695,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/homepage.dart">
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/login.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="145" column="71" lean-forward="false" selection-start-line="145" selection-start-column="71" selection-end-line="145" selection-end-column="71" />
+        <state relative-caret-position="1751">
+          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cardi_app/lib/main.dart">
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/signin.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        <state relative-caret-position="-56">
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/login.dart">
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/board.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="19" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/homepage.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="148" column="104" lean-forward="false" selection-start-line="148" selection-start-column="104" selection-end-line="148" selection-end-column="104" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -655,14 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/pests.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -675,12 +747,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/signin.dart">
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/pests.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="62" column="127" lean-forward="false" selection-start-line="62" selection-start-column="127" selection-end-line="62" selection-end-column="127" />
+        <state relative-caret-position="2057">
+          <caret line="195" column="0" lean-forward="false" selection-start-line="195" selection-start-column="0" selection-end-line="212" selection-end-column="3" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/models/message.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="58" lean-forward="false" selection-start-line="0" selection-start-column="58" selection-end-line="0" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cardi_app/lib/ui/chat.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-56">
+          <caret line="136" column="46" lean-forward="false" selection-start-line="136" selection-start-column="46" selection-end-line="136" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
           </folding>
         </state>
       </provider>
