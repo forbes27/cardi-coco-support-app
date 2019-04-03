@@ -6,6 +6,8 @@ import 'package:cardi_app/models/user.dart';
 import 'package:cardi_app/models/message.dart';
 import 'package:url_launcher/url_launcher.dart';
 import './homepage.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Chat extends StatefulWidget {
 
@@ -21,7 +23,6 @@ class _ChatState extends State<Chat> {
   List<User> users= List();
   User user;
   final FirebaseDatabase database = FirebaseDatabase.instance;
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DatabaseReference databaseReference;
 
   void initState() {
@@ -37,6 +38,7 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return new RootScaffold(
       title: "Users",
+        currentUser: widget.currentUser,
         body: Column(
             children: <Widget>[
               Flexible(
@@ -103,19 +105,24 @@ class _ChatScreenState extends State<ChatScreen> {
   final FirebaseDatabase database = FirebaseDatabase.instance;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DatabaseReference databaseReference;
+  String hash;
 
   void initState() {
     super.initState();
     message = Message(widget.currentUser.id,widget.target.id,"");
     databaseReference = database.reference().child("messages");
+    hash = (widget.currentUser.id.hashCode+widget.target.id.hashCode).toString();
+    databaseReference = databaseReference.child(hash);
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
+
   }
 
   @override
   Widget build(BuildContext context) {
     return new RootScaffold(
       title: "${widget.target.displayName}",
+        currentUser: widget.currentUser,
         body: Column(
              children: <Widget>[
               Form(
@@ -133,23 +140,35 @@ class _ChatScreenState extends State<ChatScreen> {
                   handleSubmit();
                   }),
               Flexible(
-                  child: FirebaseAnimatedList(
-                      query: databaseReference,
+                child: FirebaseAnimatedList(
+                      query: database.reference().child("messages").child(hash),
                       itemBuilder: (_, DataSnapshot snapshot,
                           Animation<double> animation, int index) {
-                        return new Card(
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.green,
+                        if (messageList[index].sender ==
+                            widget.currentUser.id) {
+                          return new Card(
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                  backgroundImage: new NetworkImage(
+                                      "${widget.currentUser.photoUrl}")
+                              ),
+                              title: Text(messageList[index].message),
                             ),
-                            title: Text(messageList[index].message),
-                          ),
-                        );
+                          );
+                        } else {
+                          return new Card(
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                  backgroundImage: new NetworkImage(
+                                      "${widget.target.photoUrl}")
+                              ),
+                              title: Text(messageList[index].message),
+                            ),
+                          );
+                        }
                       }
                   )
-
-              ),
-            ]
+              )]
         )
     );
   }
@@ -160,7 +179,6 @@ class _ChatScreenState extends State<ChatScreen> {
       messageList.add(Message.fromSnapshot(event.snapshot));
     });
   }
-
 
   void _onEntryChanged(Event event) {
     var oldEntry = messageList.singleWhere((entry) { //get old key (firebase key for a post)
@@ -185,4 +203,44 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+//    Future<List<Message>> _getMessages() async{
+//      var data = await http.get("https://cardi-coco-support-app.firebaseio.com/messages.json");
+//      var jsonData = json.decode(data.body);
+//      print(jsonData);
+//      List<Message> messages = [];
+//
+//      for (var u in jsonData){
+//        Message msg = Message.ver2(u["id"], u["hash"], u["message"], u["receiver"], u["sender"]);
+//        messages.add(msg);
+//      }
+//      print(messages.length);
+//      return messages;
+//
+//    }
 }
+
+
+
+
+//
+//FutureBuilder(
+//                  future: _getMessages(),
+//                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+//                    if (snapshot.data == null) {
+//                      return Container(
+//                          child: Center(
+//                              child: Text("Loading...")
+//                          )
+//                      );
+//                    } else {
+//                      return ListView.builder(itemCount: snapshot.data.length,
+//                        itemBuilder: (BuildContext context, int index) {
+//                          return ListTile(
+//                            title: Text(snapshot.data[index].message),
+//                          );
+//                        },
+//                      );
+//                    }
+//                  }
+//
+//              ),

@@ -5,6 +5,7 @@ import 'package:cardi_app/models/pest.dart';
 import 'homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 //import 'package:cardi_app/model/board.dart';
+import 'package:cardi_app/models/user.dart';
 
 
 class PestDetail extends StatelessWidget{
@@ -104,6 +105,8 @@ class PestDetail extends StatelessWidget{
 }
 
 class PestsPage extends StatefulWidget {
+  final User currentUser;
+  PestsPage({Key key, this.currentUser}): super(key: key);
 
   @override
   _PestsPageState createState() => new _PestsPageState();
@@ -130,6 +133,7 @@ class _PestsPageState extends State<PestsPage> {
   Widget build(BuildContext context) {
     return new RootScaffold(
         title: "Pests",
+    currentUser: widget.currentUser,
 
     body: StreamBuilder(
     stream: FirebaseDatabase.instance

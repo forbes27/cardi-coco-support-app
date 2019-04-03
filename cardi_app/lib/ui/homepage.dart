@@ -100,7 +100,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+                      MaterialPageRoute(builder: (BuildContext context) => HomePage(currentUser: currentUser)),
                     );
                   }),
               ListTile(
@@ -111,7 +111,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => AboutUs()),
+                      MaterialPageRoute(builder: (BuildContext context) => AboutUs(currentUser: currentUser)),
                     );
                   }),
               new Divider(),
@@ -123,7 +123,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => PestsPage()),
+                      MaterialPageRoute(builder: (BuildContext context) => PestsPage(currentUser: currentUser)),
                     );
                   }),
               ListTile(
@@ -134,7 +134,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => DiseasesPage()),
+                      MaterialPageRoute(builder: (BuildContext context) => DiseasesPage(currentUser: currentUser)),
                     );
                   }),
               new Divider(),
@@ -157,7 +157,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => ContactUs()),
+                      MaterialPageRoute(builder: (BuildContext context) => ContactUs(currentUser: currentUser)),
                     );
                   }),
               new Divider(),

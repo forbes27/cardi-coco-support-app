@@ -3,7 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:cardi_app/models/disease.dart';
 import 'homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-//import 'package:cardi_app/model/board.dart';
+import 'package:cardi_app/models/user.dart';
 
 
 class DiseaseDetail extends StatelessWidget{
@@ -103,6 +103,8 @@ class DiseaseDetail extends StatelessWidget{
 }
 
 class DiseasesPage extends StatefulWidget {
+  final User currentUser;
+  DiseasesPage({Key key, this.currentUser}): super(key: key);
 
   @override
   _DiseasesPageState createState() => new _DiseasesPageState();
@@ -127,6 +129,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
   Widget build(BuildContext context) {
     return new RootScaffold(
         title: "Diseases",
+        currentUser: widget.currentUser,
 
         body: StreamBuilder(
             stream: FirebaseDatabase.instance
