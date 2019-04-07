@@ -7,19 +7,16 @@ import 'package:cardi_app/models/user.dart';
 
 
 class DiseaseDetail extends StatelessWidget{
+  final Disease disease;
+  final User currentUser;
 
-  final String title;
-  final String description;
-  final String pic;
-  final String mitigation;
-  final String symptom;
-
-  DiseaseDetail({this.title, this.description, this.mitigation, this.pic, this.symptom});
+  DiseaseDetail({this.disease, this.currentUser});
 
   @override
   Widget build(BuildContext context) {
     return new RootScaffold(
-      title: title,
+      title: disease.key,
+      currentUser: currentUser,
       body: new ListView(
         children: <Widget>[
           //We can add more widgets below
@@ -27,7 +24,7 @@ class DiseaseDetail extends StatelessWidget{
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
             child: new Image.network(
-              pic,
+              disease.pic,
               height: 300,
               width: 100,
               fit: BoxFit.fill,
@@ -44,7 +41,7 @@ class DiseaseDetail extends StatelessWidget{
                     color:Colors.grey[800],
                     fontSize: 25.0,
                 fontWeight: FontWeight.bold)
-                ), new Text(description,
+                ), new Text(disease.description,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -65,7 +62,7 @@ class DiseaseDetail extends StatelessWidget{
                     color:Colors.grey[800],
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(symptom,
+                ), new Text(disease.symptom,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -85,7 +82,7 @@ class DiseaseDetail extends StatelessWidget{
                     color:Colors.grey[800],
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(mitigation,
+                ), new Text(disease.mitigation,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -153,7 +150,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
                           onTap: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DiseaseDetail(title: diseaseList[index].key, pic: diseaseList[index].pic, description: diseaseList[index].description, mitigation: diseaseList[index].mitigation, symptom: diseaseList[index].symptom,)),
+                              MaterialPageRoute(builder: (context) => DiseaseDetail(disease: diseaseList[index], currentUser: widget.currentUser)),
                             );
                           },
                           child: Card(

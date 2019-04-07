@@ -9,19 +9,16 @@ import 'package:cardi_app/models/user.dart';
 
 
 class PestDetail extends StatelessWidget{
+  final Pest pest;
+  final User currentUser;
 
-  final String title;
-  final String description;
-  final String pic;
-  final String mitigation;
-  final String symptom;
-
-  PestDetail({this.title, this.description, this.symptom, this.mitigation, this.pic, });
+  PestDetail({this.pest, this.currentUser});
 
   @override
   Widget build(BuildContext context) {
     return new RootScaffold(
-      title: title,
+      title: pest.key,
+      currentUser: currentUser,
       body: new ListView(
         children: <Widget>[
           //We can add more widgets below
@@ -29,7 +26,7 @@ class PestDetail extends StatelessWidget{
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
             child: new Image.network(
-              pic,
+              pest.pic,
               height: 300,
               width: 100,
               fit: BoxFit.fill,
@@ -46,7 +43,7 @@ class PestDetail extends StatelessWidget{
                   color:Colors.grey[800],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)
-              ), new Text(description,
+              ), new Text(pest.description,
                   textAlign: TextAlign.start,
                   style: new TextStyle(
                       color:Colors.grey[800],
@@ -67,7 +64,7 @@ class PestDetail extends StatelessWidget{
                     color:Colors.grey[800],
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(symptom,
+                ), new Text(pest.symptom,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -88,7 +85,7 @@ class PestDetail extends StatelessWidget{
                   color:Colors.grey[800],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)
-              ), new Text(mitigation,
+              ), new Text(pest.mitigation,
                   textAlign: TextAlign.start,
                   style: new TextStyle(
                       color:Colors.grey[800],
@@ -157,7 +154,7 @@ class _PestsPageState extends State<PestsPage> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PestDetail(title: pestList[index].key, pic: pestList[index].pic, description: pestList[index].description, mitigation: pestList[index].mitigation, symptom: pestList[index].symptom)),
+                      MaterialPageRoute(builder: (context) => PestDetail(pest: pestList[index], currentUser: widget.currentUser)),
                     );
             },
                 child: Card(

@@ -134,7 +134,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
               FlatButton(
-                child: Text("Post"),
+                child: Text("Send"),
                 color: Colors.green,
                 onPressed: () {
                   handleSubmit();
