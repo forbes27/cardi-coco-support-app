@@ -7,7 +7,7 @@ class Message {
   int hash;
 
   Message(this.sender, this.receiver, this.message);
-  Message.ver2(this.id,this.hash, this.message, this.receiver, this.sender);
+  Message.ver2(this.id,this.hash, this.message, this.receiver, this.sender); //Construction overloading
 
    Message.fromSnapshot(DataSnapshot snapshot) :
         id = snapshot.key,

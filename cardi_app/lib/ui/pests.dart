@@ -6,11 +6,13 @@ import 'homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 //import 'package:cardi_app/model/board.dart';
 import 'package:cardi_app/models/user.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 
 class PestDetail extends StatelessWidget{
   final Pest pest;
   final User currentUser;
+  FlutterTts fluttertts = new FlutterTts();
 
   PestDetail({this.pest, this.currentUser});
 
@@ -38,12 +40,20 @@ class PestDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-              children: <Widget>[ new Text(
+              children: <Widget>[
+                new Text(
                 "Description", style: new TextStyle(
                   color:Colors.grey[800],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)
-              ), new Text(pest.description,
+              ),RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${pest.description}");},
+                        child: new Text('Click Here'),
+                 )
+                , new Text(pest.description,
                   textAlign: TextAlign.start,
                   style: new TextStyle(
                       color:Colors.grey[800],
@@ -59,12 +69,20 @@ class PestDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[ new Text(
+                children: <Widget>[
+                  new Text(
                     "Symptoms", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(pest.symptom,
+                ),RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${pest.symptom}");},
+                        child: new Text('Click Here'),
+                 ),
+                  new Text(pest.symptom,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -80,12 +98,20 @@ class PestDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-              children: <Widget>[ new Text(
+              children: <Widget>[
+                new Text(
                 "How to deal with this Pest", style: new TextStyle(
                   color:Colors.grey[800],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)
-              ), new Text(pest.mitigation,
+              ),RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${pest.mitigation}");},
+                        child: new Text('Click Here'),
+                 ),
+                new Text(pest.mitigation,
                   textAlign: TextAlign.start,
                   style: new TextStyle(
                       color:Colors.grey[800],
@@ -98,6 +124,10 @@ class PestDetail extends StatelessWidget{
            ],
          ),
       );
+  }
+
+  Future _speak(str) async{
+    var result = await fluttertts.speak("${str}");
   }
 }
 

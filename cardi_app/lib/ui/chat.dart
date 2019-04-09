@@ -7,7 +7,6 @@ import 'package:cardi_app/models/message.dart';
 import 'package:url_launcher/url_launcher.dart';
 import './homepage.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class Chat extends StatefulWidget {
 
@@ -146,23 +145,31 @@ class _ChatScreenState extends State<ChatScreen> {
                           Animation<double> animation, int index) {
                         if (messageList[index].sender ==
                             widget.currentUser.id) {
-                          return new Card(
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                  backgroundImage: new NetworkImage(
-                                      "${widget.currentUser.photoUrl}")
+                          return Padding(
+                            padding: EdgeInsets.fromLTRB(5.0, 2.0, 40.0, 8.0),
+                            child: new Card(
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                    backgroundImage: new NetworkImage(
+                                        "${widget.currentUser.photoUrl}")
+                                ),
+                                title: Text(messageList[index].message),
                               ),
-                              title: Text(messageList[index].message),
+                              color: Colors.greenAccent,
                             ),
                           );
                         } else {
-                          return new Card(
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                  backgroundImage: new NetworkImage(
-                                      "${widget.target.photoUrl}")
+                          return Padding(
+                            padding: EdgeInsets.fromLTRB(66.0, 12.0, 16.0, 0.0),
+                            child: new Card(
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                    backgroundImage: new NetworkImage(
+                                        "${widget.target.photoUrl}")
+                                ),
+                                title: Text(messageList[index].message),
                               ),
-                              title: Text(messageList[index].message),
+                              color: Colors.grey,
                             ),
                           );
                         }

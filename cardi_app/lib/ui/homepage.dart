@@ -10,12 +10,35 @@ import 'package:url_launcher/url_launcher.dart';
 import './signin.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cardi_app/models/user.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cardi_app/models/article.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final User currentUser;
 
-  HomePage({Key key, this.currentUser}) : super(key: key);
+  HomePage({Key key, this.currentUser}): super(key: key);
+
+  @override
+  _HomePageState createState() => new _HomePageState();
+
+}
+
+class _HomePageState extends State<HomePage>  {
+  Article articles;
+  List<Article> articleList = List();
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference databaseReference;
+
+  void initState() {
+    super.initState();
+    //diseases = Disease("", "");
+    databaseReference = database.reference().child("articles");
+    databaseReference.onChildAdded.listen(_onEntryAdded);
+    databaseReference.onChildChanged.listen(_onEntryChanged);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -31,7 +54,8 @@ class HomePage extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(15.0),//top, bottom, left, right
       child: new Row(
-        children: <Widget>[new Expanded(
+        children: <Widget>[
+          new Expanded(
               child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -55,6 +79,23 @@ class HomePage extends StatelessWidget {
                             fontSize: 20.0)
                             ),
                   ),
+//                  new Flexible(
+//                child: FirebaseAnimatedList(
+//                      query: database.reference().child("articles"),
+//                      itemBuilder: (_, DataSnapshot snapshot,
+//                          Animation<double> animation, int index) {
+//                          return  new Card(
+//                                child: ListTile(
+//                                  title: Text(articleList[index].title),
+//                                  onTap: (){_launchURL("${articleList[index].url}");},
+//                                ),
+//                                color: Colors.greenAccent,
+//
+//                              );
+//                        }
+//
+//                  )
+//              ),
 
                   new ListTile(
                       title: Text ('Updating Regional Coconut Water Safety Standards'),
@@ -102,7 +143,7 @@ class HomePage extends StatelessWidget {
           //We can add more widgets below
           titleSection,
         ]
-      ),currentUser: currentUser,
+      ),currentUser: widget.currentUser,
       );
   }//end build method
 
@@ -115,6 +156,24 @@ class HomePage extends StatelessWidget {
     throw 'Could not launch $url';
   }
 }
+
+void _onEntryAdded(Event event) {
+    setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
+      articleList.add(Article.fromSnapshot(event.snapshot));
+    });
+  }
+
+
+  void _onEntryChanged(Event event) {
+    var oldEntry = articleList.singleWhere((entry) { //get old key (firebase key for a post)
+      return entry.id== event.snapshot.key;
+    });
+
+    setState(() {
+      articleList[articleList.indexOf(oldEntry)] =
+          Article.fromSnapshot(event.snapshot);
+    });
+  }
 
 }
 

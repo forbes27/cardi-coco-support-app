@@ -23,31 +23,77 @@ class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Login'),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new MaterialButton(
-                    height: 40.0,
-                    minWidth: 300.0,
-                    color: Colors.white,
-                    textColor: Colors.black,
-                    child: new Text("Google Sign-in",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
-                      onPressed: () => _googleSignin(),
-                ),
-                ),
-              ]
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomPadding: false,
+      body: new Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          new Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                  image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill,),
+            ),
           ),
-        )
+          new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Container(
+                  padding: EdgeInsets.only(bottom: 300.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 80.0,
+                        child: new Image.asset(
+                          'images/cardilogo.png',
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                      ),
+                      Text(
+                        "CARDI Coconut Support Centre",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          //Row for login button
+          new Container(
+            padding: new EdgeInsets.only(top: 250.0),
+            margin: new EdgeInsets.all(20.0),
+            child: new Row(
+              children: <Widget>[
+                new MaterialButton(
+                  height: 40.0,
+                  minWidth: 320.0,
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  child: new Text("Google Sign-in",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  onPressed: ()=>_googleSignin(),
+                  splashColor: Colors.green,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 

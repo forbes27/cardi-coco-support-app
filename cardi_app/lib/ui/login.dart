@@ -35,7 +35,7 @@ class LoginPageState extends State<LoginPage>{
           new Container(
             decoration: new BoxDecoration(
               image: new DecorationImage(
-                  image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill),
+                  image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill,),
             ),
           ),
           new Column(
@@ -76,13 +76,13 @@ class LoginPageState extends State<LoginPage>{
 
           //Row for login button
           new Container(
-            padding: new EdgeInsets.only(top: 650.0),
-            margin: new EdgeInsets.all(50.0),
+            padding: new EdgeInsets.only(top: 250.0),
+            margin: new EdgeInsets.all(20.0),
             child: new Row(
               children: <Widget>[
                 new MaterialButton(
                   height: 40.0,
-                  minWidth: 300.0,
+                  minWidth: 320.0,
                   color: Colors.white,
                   textColor: Colors.black,
                   child: new Text("Login/Register",

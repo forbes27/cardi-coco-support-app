@@ -4,11 +4,13 @@ import 'package:cardi_app/models/disease.dart';
 import 'homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:cardi_app/models/user.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 
 class DiseaseDetail extends StatelessWidget{
   final Disease disease;
   final User currentUser;
+  FlutterTts fluttertts = new FlutterTts();
 
   DiseaseDetail({this.disease, this.currentUser});
 
@@ -36,12 +38,20 @@ class DiseaseDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[ new Text(
+                children: <Widget>[
+                  new Text(
                     "Description:", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 25.0,
                 fontWeight: FontWeight.bold)
-                ), new Text(disease.description,
+                ), RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${disease.description}");},
+                        child: new Text('Click Here'),
+                 ),
+                  new Text(disease.description,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -57,12 +67,19 @@ class DiseaseDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[ new Text(
+                children: <Widget>[
+                  new Text(
                     "Symptoms:", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(disease.symptom,
+                ), RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${disease.symptom}");},
+                        child: new Text('Click Here'),
+                 ), new Text(disease.symptom,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -77,12 +94,20 @@ class DiseaseDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[ new Text(
+                children: <Widget>[
+                  new Text(
                     "How to deal with this Disease:", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(disease.mitigation,
+                ), RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${disease.mitigation}");},
+                        child: new Text('Click Here'),
+                 ),
+                  new Text(disease.mitigation,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -96,6 +121,9 @@ class DiseaseDetail extends StatelessWidget{
         ],
       ),
     );
+  }
+  Future _speak(str) async{
+    var result = await fluttertts.speak("${str}");
   }
 }
 
