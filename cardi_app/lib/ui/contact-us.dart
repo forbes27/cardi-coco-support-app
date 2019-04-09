@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import './homepage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
+import 'package:cardi_app/models/user.dart';
 
 class ContactUs extends StatefulWidget {
+  final User currentUser;
+  ContactUs({Key key, this.currentUser}): super(key: key);
 
   @override
    State<ContactUs> createState() => _ContactUsState();
@@ -26,8 +29,8 @@ class _ContactUsState extends State<ContactUs> {
   Widget build(BuildContext context) {
     return RootScaffold(
         title: "Contact Us",
-        body: new SingleChildScrollView(
-          child: new Column(
+        currentUser: widget.currentUser,
+        body: new SingleChildScrollView(child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(

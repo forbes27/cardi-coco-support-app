@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import './homepage.dart';
+import 'package:cardi_app/models/user.dart';
 
 class AboutUs extends StatelessWidget {
-  // This widget is the root of your application.
+
+  final User currentUser;
+  AboutUs({Key key, this.currentUser}): super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return RootScaffold(
         title: "About Us",
+        currentUser: currentUser,
         body: new Center(
-      child: new SingleChildScrollView(
-          child: new Column(
+      child: new SingleChildScrollView(child: new Column(
               children: <Widget>[
                 ClipRRect(
                   borderRadius: new BorderRadius.circular(10.0),
@@ -52,3 +56,4 @@ class AboutUs extends StatelessWidget {
     ));
   }
 }
+

@@ -5,22 +5,22 @@ import 'package:cardi_app/models/pest.dart';
 import 'homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 //import 'package:cardi_app/model/board.dart';
+import 'package:cardi_app/models/user.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 
 class PestDetail extends StatelessWidget{
+  final Pest pest;
+  final User currentUser;
+  FlutterTts fluttertts = new FlutterTts();
 
-  final String title;
-  final String description;
-  final String pic;
-  final String mitigation;
-  final String symptom;
-
-  PestDetail({this.title, this.description, this.symptom, this.mitigation, this.pic, });
+  PestDetail({this.pest, this.currentUser});
 
   @override
   Widget build(BuildContext context) {
     return new RootScaffold(
-      title: title,
+      title: pest.key,
+      currentUser: currentUser,
       body: new ListView(
         children: <Widget>[
           //We can add more widgets below
@@ -28,7 +28,7 @@ class PestDetail extends StatelessWidget{
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
             child: new Image.network(
-              pic,
+              pest.pic,
               height: 300,
               width: 100,
               fit: BoxFit.fill,
@@ -40,12 +40,20 @@ class PestDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-              children: <Widget>[ new Text(
+              children: <Widget>[
+                new Text(
                 "Description", style: new TextStyle(
                   color:Colors.grey[800],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)
-              ), new Text(description,
+              ),RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${pest.description}");},
+                        child: new Text('Click Here'),
+                 )
+                , new Text(pest.description,
                   textAlign: TextAlign.start,
                   style: new TextStyle(
                       color:Colors.grey[800],
@@ -61,12 +69,20 @@ class PestDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[ new Text(
+                children: <Widget>[
+                  new Text(
                     "Symptoms", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(symptom,
+                ),RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${pest.symptom}");},
+                        child: new Text('Click Here'),
+                 ),
+                  new Text(pest.symptom,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -82,12 +98,20 @@ class PestDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-              children: <Widget>[ new Text(
+              children: <Widget>[
+                new Text(
                 "How to deal with this Pest", style: new TextStyle(
                   color:Colors.grey[800],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)
-              ), new Text(mitigation,
+              ),RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${pest.mitigation}");},
+                        child: new Text('Click Here'),
+                 ),
+                new Text(pest.mitigation,
                   textAlign: TextAlign.start,
                   style: new TextStyle(
                       color:Colors.grey[800],
@@ -101,9 +125,15 @@ class PestDetail extends StatelessWidget{
          ),
       );
   }
+
+  Future _speak(str) async{
+    var result = await fluttertts.speak("${str}");
+  }
 }
 
 class PestsPage extends StatefulWidget {
+  final User currentUser;
+  PestsPage({Key key, this.currentUser}): super(key: key);
 
   @override
   _PestsPageState createState() => new _PestsPageState();
@@ -130,6 +160,7 @@ class _PestsPageState extends State<PestsPage> {
   Widget build(BuildContext context) {
     return new RootScaffold(
         title: "Pests",
+    currentUser: widget.currentUser,
 
     body: StreamBuilder(
     stream: FirebaseDatabase.instance
@@ -153,7 +184,7 @@ class _PestsPageState extends State<PestsPage> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PestDetail(title: pestList[index].key, pic: pestList[index].pic, description: pestList[index].description, mitigation: pestList[index].mitigation, symptom: pestList[index].symptom)),
+                      MaterialPageRoute(builder: (context) => PestDetail(pest: pestList[index], currentUser: widget.currentUser)),
                     );
                 },
 
@@ -213,22 +244,3 @@ class _PestsPageState extends State<PestsPage> {
     });
   }
 }
-
-
-//Not working yet
-//class PestDetail extends StatefulWidget {
-//  var value;
-//  PestDetail({Key key, this.value}) : super(key: key);
-//  @override
-//  _PestDetailState createState() => new _PestDetailState();
-//}
-//class _PestDetailState extends State<PestDetail> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return new RootScaffold(
-//      title: "${widget.value.key}",
-//      body: new Text("${widget.value.key}"),
-//    );
-//  }
-//}
-

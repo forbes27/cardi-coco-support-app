@@ -9,14 +9,36 @@ import 'package:cardi_app/models/pest.dart';
 import 'package:url_launcher/url_launcher.dart';
 import './signin.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cardi_app/models/user.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cardi_app/models/article.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 
-class HomePage extends StatelessWidget {
-  final String username;
-  final String email;
-  final String photoUrl;
+class HomePage extends StatefulWidget {
+  final User currentUser;
 
-  HomePage({Key key, this.email, this.username, this.photoUrl}) : super(key: key);
+  HomePage({Key key, this.currentUser}): super(key: key);
+
+  @override
+  _HomePageState createState() => new _HomePageState();
+
+}
+
+class _HomePageState extends State<HomePage>  {
+  Article articles;
+  List<Article> articleList = List();
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference databaseReference;
+
+  void initState() {
+    super.initState();
+    //diseases = Disease("", "");
+    databaseReference = database.reference().child("articles");
+    databaseReference.onChildAdded.listen(_onEntryAdded);
+    databaseReference.onChildChanged.listen(_onEntryChanged);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -57,6 +79,23 @@ class HomePage extends StatelessWidget {
                             fontSize: 20.0)
                             ),
                   ),
+//                  new Flexible(
+//                child: FirebaseAnimatedList(
+//                      query: database.reference().child("articles"),
+//                      itemBuilder: (_, DataSnapshot snapshot,
+//                          Animation<double> animation, int index) {
+//                          return  new Card(
+//                                child: ListTile(
+//                                  title: Text(articleList[index].title),
+//                                  onTap: (){_launchURL("${articleList[index].url}");},
+//                                ),
+//                                color: Colors.greenAccent,
+//
+//                              );
+//                        }
+//
+//                  )
+//              ),
 
                   new ListTile(
                       title: Text ('Updating Regional Coconut Water Safety Standards'),
@@ -109,12 +148,10 @@ class HomePage extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-
           //We can add more widgets below
           titleSection,
-          ],
-        ),
-        email: email, username: username, photoUrl: photoUrl
+        ]
+      ),currentUser: widget.currentUser,
       );
   }//end build method
 
@@ -128,6 +165,24 @@ class HomePage extends StatelessWidget {
   }
 }
 
+void _onEntryAdded(Event event) {
+    setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
+      articleList.add(Article.fromSnapshot(event.snapshot));
+    });
+  }
+
+
+  void _onEntryChanged(Event event) {
+    var oldEntry = articleList.singleWhere((entry) { //get old key (firebase key for a post)
+      return entry.id== event.snapshot.key;
+    });
+
+    setState(() {
+      articleList[articleList.indexOf(oldEntry)] =
+          Article.fromSnapshot(event.snapshot);
+    });
+  }
+
 }
 
 String mainProfilePicture = "url";
@@ -135,11 +190,9 @@ String mainProfilePicture = "url";
 
 class RootDrawer extends StatelessWidget {
   final GoogleSignIn _gSignIn = new GoogleSignIn();
-  final String username;
-  final String email;
-  final String photoUrl;
+  final User currentUser;
 
- RootDrawer({Key key, this.email, this.username, this.photoUrl}) : super(key: key);
+ RootDrawer({Key key, this.currentUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -149,11 +202,11 @@ class RootDrawer extends StatelessWidget {
             children: <Widget>[
               UserAccountsDrawerHeader(
                 //for this part, we have to use Google's authentication system
-                accountName: new Text("${username}"),
-                accountEmail: new Text("${email}"),
+                accountName: new Text("${currentUser.displayName}"),
+                accountEmail: new Text("${currentUser.email}"),
                 currentAccountPicture: new GestureDetector(
                   child: new CircleAvatar(
-                    backgroundImage: new NetworkImage("${photoUrl}"),
+                    backgroundImage: new NetworkImage("${currentUser.photoUrl}"),
                   )
                 ),
                 decoration: new BoxDecoration(
@@ -172,7 +225,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+                      MaterialPageRoute(builder: (BuildContext context) => HomePage(currentUser: currentUser)),
                     );
                   }),
               ListTile(
@@ -183,7 +236,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => AboutUs()),
+                      MaterialPageRoute(builder: (BuildContext context) => AboutUs(currentUser: currentUser)),
                     );
                   }),
               new Divider(),
@@ -195,7 +248,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => PestsPage()),
+                      MaterialPageRoute(builder: (BuildContext context) => PestsPage(currentUser: currentUser)),
                     );
                   }),
               ListTile(
@@ -206,7 +259,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => DiseasesPage()),
+                      MaterialPageRoute(builder: (BuildContext context) => DiseasesPage(currentUser: currentUser)),
                     );
                   }),
               new Divider(),
@@ -218,7 +271,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => Chat()),
+                      MaterialPageRoute(builder: (BuildContext context) => Chat(currentUser: currentUser)),
                     );
                   }),
               ListTile(
@@ -229,7 +282,7 @@ class RootDrawer extends StatelessWidget {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (BuildContext context) => ContactUs()),
+                      MaterialPageRoute(builder: (BuildContext context) => ContactUs(currentUser: currentUser)),
                     );
                   }),
               new Divider(),
@@ -256,11 +309,9 @@ class RootScaffold extends StatelessWidget{
   final Widget body;
   final String title;
   final Widget search;
-  final String username;
-  final String email;
-  final String photoUrl;
+  final User currentUser;
 
-  RootScaffold({this.body,this.title, this.search, this.username, this.email, this.photoUrl});
+  RootScaffold({this.body,this.title, this.search, this.currentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -281,7 +332,7 @@ class RootScaffold extends StatelessWidget{
            ),
         ],
       ),
-      drawer: new RootDrawer(email: email, username: username, photoUrl: photoUrl),
+      drawer: new RootDrawer(currentUser: currentUser),
       body: body,
     );
   }

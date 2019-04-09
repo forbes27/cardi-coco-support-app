@@ -3,23 +3,22 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:cardi_app/models/disease.dart';
 import 'homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-//import 'package:cardi_app/model/board.dart';
+import 'package:cardi_app/models/user.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 
 class DiseaseDetail extends StatelessWidget{
+  final Disease disease;
+  final User currentUser;
+  FlutterTts fluttertts = new FlutterTts();
 
-  final String title;
-  final String description;
-  final String pic;
-  final String mitigation;
-  final String symptom;
-
-  DiseaseDetail({this.title, this.description, this.mitigation, this.pic, this.symptom});
+  DiseaseDetail({this.disease, this.currentUser});
 
   @override
   Widget build(BuildContext context) {
     return new RootScaffold(
-      title: title,
+      title: disease.key,
+      currentUser: currentUser,
       body: new ListView(
         children: <Widget>[
           //We can add more widgets below
@@ -27,7 +26,7 @@ class DiseaseDetail extends StatelessWidget{
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
             child: new Image.network(
-              pic,
+              disease.pic,
               height: 300,
               width: 100,
               fit: BoxFit.fill,
@@ -39,12 +38,20 @@ class DiseaseDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[ new Text(
+                children: <Widget>[
+                  new Text(
                     "Description:", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 25.0,
                 fontWeight: FontWeight.bold)
-                ), new Text(description,
+                ), RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${disease.description}");},
+                        child: new Text('Click Here'),
+                 ),
+                  new Text(disease.description,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -60,12 +67,19 @@ class DiseaseDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[ new Text(
+                children: <Widget>[
+                  new Text(
                     "Symptoms:", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(symptom,
+                ), RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${disease.symptom}");},
+                        child: new Text('Click Here'),
+                 ), new Text(disease.symptom,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -80,12 +94,20 @@ class DiseaseDetail extends StatelessWidget{
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[ new Text(
+                children: <Widget>[
+                  new Text(
                     "How to deal with this Disease:", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold)
-                ), new Text(mitigation,
+                ), RaisedButton(
+                        padding: const EdgeInsets.all(10.0),
+                        textColor: Colors.black,
+                        splashColor: Colors.green,
+                        onPressed: (){_speak("${disease.mitigation}");},
+                        child: new Text('Click Here'),
+                 ),
+                  new Text(disease.mitigation,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
@@ -100,9 +122,14 @@ class DiseaseDetail extends StatelessWidget{
       ),
     );
   }
+  Future _speak(str) async{
+    var result = await fluttertts.speak("${str}");
+  }
 }
 
 class DiseasesPage extends StatefulWidget {
+  final User currentUser;
+  DiseasesPage({Key key, this.currentUser}): super(key: key);
 
   @override
   _DiseasesPageState createState() => new _DiseasesPageState();
@@ -127,6 +154,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
   Widget build(BuildContext context) {
     return new RootScaffold(
         title: "Diseases",
+        currentUser: widget.currentUser,
 
         body: StreamBuilder(
             stream: FirebaseDatabase.instance
@@ -150,7 +178,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
                           onTap: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DiseaseDetail(title: diseaseList[index].key, pic: diseaseList[index].pic, description: diseaseList[index].description, mitigation: diseaseList[index].mitigation, symptom: diseaseList[index].symptom,)),
+                              MaterialPageRoute(builder: (context) => DiseaseDetail(disease: diseaseList[index], currentUser: widget.currentUser)),
                             );
                           },
                           child: Card(

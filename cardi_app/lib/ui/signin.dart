@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import '../root_page.dart';
 import 'splash.dart';
 import 'homepage.dart';
+import 'dart:collection';
+import 'package:cardi_app/models/user.dart';
 
 class SigninPage extends StatefulWidget {
   // This widget is the root of your application.
@@ -14,35 +17,83 @@ class SigninPage extends StatefulWidget {
 class _SigninPageState extends State<SigninPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _gSignIn = new GoogleSignIn();
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference databaseReference;
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Login'),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new MaterialButton(
-                    height: 40.0,
-                    minWidth: 300.0,
-                    color: Colors.white,
-                    textColor: Colors.black,
-                    child: new Text("Google Sign-in",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
-                      onPressed: () => _googleSignin(),
-                ),
-                ),
-              ]
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomPadding: false,
+      body: new Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          new Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                  image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill,),
+            ),
           ),
-        )
+          new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Container(
+                  padding: EdgeInsets.only(bottom: 300.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 80.0,
+                        child: new Image.asset(
+                          'images/cardilogo.png',
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                      ),
+                      Text(
+                        "CARDI Coconut Support Centre",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          //Row for login button
+          new Container(
+            padding: new EdgeInsets.only(top: 250.0),
+            margin: new EdgeInsets.all(20.0),
+            child: new Row(
+              children: <Widget>[
+                new MaterialButton(
+                  height: 40.0,
+                  minWidth: 320.0,
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  child: new Text("Google Sign-in",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  onPressed: ()=>_googleSignin(),
+                  splashColor: Colors.green,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -54,16 +105,25 @@ class _SigninPageState extends State<SigninPage> {
     FirebaseUser user = await _auth.signInWithGoogle(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
+    databaseReference = database.reference().child("users");
 
+//an alternative option is to use push() which autogenerates a id in firebase and put google uid as a field in that nested list
+    databaseReference.child(user.uid);
+    databaseReference.child(user.uid).child("displayName").set(user.displayName);
+    databaseReference.child(user.uid).child("email").set(user.email);
+    databaseReference.child(user.uid).child("photoUrl").set(user.photoUrl);
+
+    User currentUser = User(user.uid, user.displayName, user.email, user.photoUrl);
+
+    print("User is ${user.uid}");
     print("User is ${user.displayName}");
     print("User is ${user.email}");
     print("User is ${user.photoUrl}");
-//    return user;
 
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => HomePage(email: user.email, username: user.displayName, photoUrl: user.photoUrl,
+            builder: (context) => HomePage(currentUser: currentUser,
                 )),
       );
   }
