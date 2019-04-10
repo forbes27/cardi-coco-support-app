@@ -56,12 +56,11 @@ class _ChatState extends State<Chat> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ChatScreen(target: users[index], currentUser: widget.currentUser)));
-            },
+                               },
                           ),
                         );
                       }
                   )
-
               ),
             ]
         )
@@ -89,6 +88,7 @@ class _ChatState extends State<Chat> {
 }
 
 class ChatScreen extends StatefulWidget {
+
   final User target;
   final User currentUser;
 
@@ -99,6 +99,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _textController = new TextEditingController();
   Message message;
   List<Message> messageList = List();
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -124,62 +125,106 @@ class _ChatScreenState extends State<ChatScreen> {
         currentUser: widget.currentUser,
         body: Column(
              children: <Widget>[
-              Form(
-        key: formKey,
-                child: TextFormField(
-                  onSaved: (val) => message.message = val,
-                                    //onSaved determines what form.save() does
-                                    validator: (val) => val == "" ? val : null,
-                ),
-              ),
-              FlatButton(
-                child: Text("Send"),
-                color: Colors.green,
-                onPressed: () {
-                  handleSubmit();
-                  }),
-              Flexible(
-                child: FirebaseAnimatedList(
-                      query: database.reference().child("messages").child(hash),
-                      itemBuilder: (_, DataSnapshot snapshot,
-                          Animation<double> animation, int index) {
-                        if (messageList[index].sender ==
-                            widget.currentUser.id) {
-                          return Padding(
-                            padding: EdgeInsets.fromLTRB(5.0, 2.0, 40.0, 8.0),
-                            child: new Card(
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                    backgroundImage: new NetworkImage(
-                                        "${widget.currentUser.photoUrl}")
-                                ),
-                                title: Text(messageList[index].message),
-                              ),
-                              color: Colors.greenAccent,
-                            ),
-                          );
-                        } else {
-                          return Padding(
-                            padding: EdgeInsets.fromLTRB(66.0, 12.0, 16.0, 0.0),
-                            child: new Card(
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                    backgroundImage: new NetworkImage(
-                                        "${widget.target.photoUrl}")
-                                ),
-                                title: Text(messageList[index].message),
-                              ),
-                              color: Colors.grey,
-                            ),
-                          );
-                        }
-                      }
-                  )
-              )]
+               new Flexible(
+                   child: FirebaseAnimatedList(
+                       query: database.reference().child("messages").child(hash),
+                       itemBuilder: (_, DataSnapshot snapshot,
+                           Animation<double> animation, int index) {
+                         if (messageList[index].sender ==
+                             widget.currentUser.id) {
+                           return Padding(
+                             padding: EdgeInsets.fromLTRB(5.0, 4.0, 40.0, 0.0),
+                             child: new Card(
+                               child: ListTile(
+                                 leading: CircleAvatar(
+                                     backgroundImage: new NetworkImage(
+                                         "${widget.currentUser.photoUrl}")
+                                 ),
+                                 title: Text(messageList[index].message),
+                               ),
+                               color: Colors.lightGreen,
+                             ),
+                           );
+                         } else {
+                           return Padding(
+                             padding: EdgeInsets.fromLTRB(66.0, 4.0, 16.0, 0.0),
+                             child: new Card(
+                               child: ListTile(
+                                 leading: CircleAvatar(
+                                     backgroundImage: new NetworkImage(
+                                         "${widget.target.photoUrl}")
+                                 ),
+                                 title: Text(messageList[index].message),
+                               ),
+                               color: Colors.greenAccent,
+                             ),
+                           );
+                         }
+                       }
+                   )
+               ),
+               Container(
+                 decoration: new BoxDecoration(
+                     border: new Border.all(width: 2, color: Colors.green),
+                   borderRadius: BorderRadius.all(Radius.circular(25.0))
+    ),
+    child: Row(
+                   children: <Widget>[
+                     new Container(
+                       margin: new EdgeInsets.symmetric(horizontal: 4.0),
+                       child: new IconButton(
+                           icon: new Icon(Icons.camera_enhance),
+                           onPressed: () => _handleSubmitted(_textController.text)),
+                     ),
+                     new Flexible(
+                       child: new TextField(
+                         controller: _textController,
+                         onSubmitted: _handleSubmitted,
+                         decoration: new InputDecoration.collapsed(
+                             hintText: "Send a message", ),
+                       ),
+                     ),
+                     new Container(
+                       margin: new EdgeInsets.symmetric(horizontal: 4.0),
+                       child: new IconButton(
+                           icon: new Icon(Icons.send),
+                           onPressed: () => _handleSubmitted(_textController.text)),
+                     ),
+                   ],
+                 ),
+               ),
+//              Form(
+//                  key: formKey,
+//                child: TextFormField(
+//                  onSaved: (val) => message.message = val,
+//                                    //onSaved determines what form.save() does
+//                                    validator: (val) => val == "" ? val : null,
+//                  ),
+//                ),
+
+//             new Container(
+//               child: new FlatButton(
+//                   //margin: new EdgeInsets.symmetric(horizontal: 4.0),
+//                   child: new IconButton(
+//                     icon: new Icon(Icons.send),
+//                   ),
+//                   onPressed: () {
+//                     _handleSubmitted(_textController.text);
+//                     }
+//                   ),
+//             ),
+
+
+             ]
         )
     );
   }
-
+  void _handleSubmitted(String text) {
+    message.message=_textController.text;
+    databaseReference.push().set(
+        message.toJson()); //push creates unique key for entry in firebase
+    _textController.clear();
+  }
 
   void _onEntryAdded(Event event) {
     setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
@@ -198,17 +243,17 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-    void handleSubmit() {
-    final FormState form = formKey
-        .currentState; //saves the current state of the form
-    if (form.validate()) { //validation checks if form has data
-      form.save();
-      form.reset();
-      //save form data to the database
-      databaseReference.push().set(
-          message.toJson()); //push creates unique key for entry in firebase
-    }
-  }
+//    void handleSubmit() {
+//    final FormState form = formKey
+//        .currentState; //saves the current state of the form
+//    if (form.validate()) { //validation checks if form has data
+//      form.save();
+//      form.reset();
+//      //save form data to the database
+//      databaseReference.push().set(
+//          message.toJson()); //push creates unique key for entry in firebase
+//    }
+//  }
 
 //    Future<List<Message>> _getMessages() async{
 //      var data = await http.get("https://cardi-coco-support-app.firebaseio.com/messages.json");

@@ -55,7 +55,7 @@ class _SplashPageState extends State<SplashPage>{
                         padding:EdgeInsets.only(top: 15.0),
                       ),
                       Text(
-                         "CARDI Coconut Support Centre", textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
+                         "Coconuts Support Centre", textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 30.0, fontWeight: FontWeight.bold),
                       )
                     ],
                   ),

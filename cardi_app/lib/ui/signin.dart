@@ -52,10 +52,10 @@ class _SigninPageState extends State<SigninPage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 10.0),
+                        padding: EdgeInsets.only(top: 20.0),
                       ),
                       Text(
-                        "CARDI Coconut Support Centre",
+                        "Coconuts Support Centre",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
@@ -72,22 +72,22 @@ class _SigninPageState extends State<SigninPage> {
 
           //Row for login button
           new Container(
-            padding: new EdgeInsets.only(top: 250.0),
-            margin: new EdgeInsets.all(20.0),
+            padding: new EdgeInsets.only(top: 600.0),
+            margin: new EdgeInsets.all(30.0),
             child: new Row(
               children: <Widget>[
                 new MaterialButton(
                   height: 40.0,
-                  minWidth: 320.0,
+                  minWidth: 350.0,
                   color: Colors.white,
                   textColor: Colors.black,
-                  child: new Text("Google Sign-in",
+                  splashColor: Colors.green,
+                  child: new Text("Login/Register",
                     style: TextStyle(
                       fontSize: 18.0,
                     ),
                   ),
                   onPressed: ()=>_googleSignin(),
-                  splashColor: Colors.green,
                 ),
               ],
             ),
@@ -107,7 +107,7 @@ class _SigninPageState extends State<SigninPage> {
         accessToken: googleSignInAuthentication.accessToken);
     databaseReference = database.reference().child("users");
 
-//an alternative option is to use push() which autogenerates a id in firebase and put google uid as a field in that nested list
+//an alternative option is to use push() which autogenerates an ID in Firebase and put google uid as a field in that nested list
     databaseReference.child(user.uid);
     databaseReference.child(user.uid).child("displayName").set(user.displayName);
     databaseReference.child(user.uid).child("email").set(user.email);
