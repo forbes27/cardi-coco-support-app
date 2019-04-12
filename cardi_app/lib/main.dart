@@ -5,7 +5,6 @@ import './ui/homepage.dart';
 import 'root_page.dart';
 import './ui/search.dart';
 import './ui/pests.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 

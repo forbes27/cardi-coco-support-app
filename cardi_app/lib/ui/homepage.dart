@@ -192,19 +192,14 @@ class _HomePageState extends State<HomePage>  {
 
                                             )),
 
-                                      ],
-
-                                  //color: Colors.green,
-
-                                ),
+                                        ],
+                                      ),
                                    );
-                        }
-
-
-              ),
+                                }
+                            ),
                           ),
-        ]
-      ),currentUser: widget.currentUser,
+                    ]
+              ),currentUser: widget.currentUser,
       );
   }//end build method
 

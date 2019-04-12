@@ -8,6 +8,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 
 class DiseaseDetail extends StatelessWidget{
+
   final Disease disease;
   final User currentUser;
   FlutterTts fluttertts = new FlutterTts();
@@ -21,7 +22,6 @@ class DiseaseDetail extends StatelessWidget{
       currentUser: currentUser,
       body: new ListView(
         children: <Widget>[
-          //We can add more widgets below
           //design part for the picture of the diseases
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
@@ -43,21 +43,23 @@ class DiseaseDetail extends StatelessWidget{
                     "Description:", style: new TextStyle(
                     color:Colors.grey[800],
                     fontSize: 25.0,
-                fontWeight: FontWeight.bold)
-                ), RaisedButton(
+                    fontWeight: FontWeight.bold)
+                  ),
+
+                  RaisedButton(
                         padding: const EdgeInsets.all(10.0),
                         textColor: Colors.black,
                         splashColor: Colors.green,
                         onPressed: (){_speak("${disease.description}");},
-                        child: new Text('Click Here'),
-                 ),
+                        child: Icon(Icons.audiotrack),
+                  ),
+
                   new Text(disease.description,
                     textAlign: TextAlign.start,
                     style: new TextStyle(
                         color:Colors.grey[800],
                         fontSize: 20.0)
-                ),
-
+                   ),
                 ]
             ),
           ),
@@ -73,19 +75,20 @@ class DiseaseDetail extends StatelessWidget{
                     color:Colors.grey[800],
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold)
-                ), RaisedButton(
+                  ),
+
+                  RaisedButton(
                         padding: const EdgeInsets.all(10.0),
                         textColor: Colors.black,
                         splashColor: Colors.green,
                         onPressed: (){_speak("${disease.symptom}");},
-                        child: new Text('Click Here'),
-                 ), new Text(disease.symptom,
-                    textAlign: TextAlign.start,
-                    style: new TextStyle(
-                        color:Colors.grey[800],
-                        fontSize: 20.0)
-                ),
+                        child: Icon(Icons.audiotrack),
+                  ),
 
+                  new Text(disease.symptom,
+                    textAlign: TextAlign.start,
+                    style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
+                 ),
                 ]
             ),
           ),
@@ -100,21 +103,21 @@ class DiseaseDetail extends StatelessWidget{
                     color:Colors.grey[800],
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold)
-                ), RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_speak("${disease.mitigation}");},
-                        child: new Text('Click Here'),
+                  ),
+
+                  RaisedButton(
+                    padding: const EdgeInsets.all(10.0),
+                    textColor: Colors.black,
+                    splashColor: Colors.green,
+                    onPressed: (){_speak("${disease.mitigation}");},
+                    child: Icon(Icons.audiotrack),
                  ),
+
                   new Text(disease.mitigation,
                     textAlign: TextAlign.start,
-                    style: new TextStyle(
-                        color:Colors.grey[800],
-                        fontSize: 20.0,
+                    style: new TextStyle(color:Colors.grey[800], fontSize: 20.0,
                     )
-                ),
-
+                  ),
                 ]
             ),
           ),
@@ -144,7 +147,6 @@ class _DiseasesPageState extends State<DiseasesPage> {
 
   void initState() {
     super.initState();
-    //diseases = Disease("", "");
     databaseReference = database.reference().child("diseases");
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
@@ -238,20 +240,5 @@ class _DiseasesPageState extends State<DiseasesPage> {
 }
 
 
-//Not working yet
-//class DiseaseDetail extends StatefulWidget {
-//  var value;
-//  DiseaseDetail({Key key, this.value}) : super(key: key);
-//  @override
-//  _DiseaseDetailState createState() => new _DiseaseDetailState();
-//}
-//class _DiseaseDetailState extends State<DiseaseDetail> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return new RootScaffold(
-//      title: "${widget.value.key}",
-//      body: new Text("${widget.value.key}"),
-//    );
-//  }
-//}
+
 

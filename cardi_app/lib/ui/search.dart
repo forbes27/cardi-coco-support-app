@@ -10,10 +10,13 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  Widget appBarTitle = new Text(
+
+  Widget appBarTitle =
+  new Text(
     "Search",
     style: new TextStyle(color: Colors.white),
   );
+
   Icon icon = new Icon(
     Icons.search,
     color: Colors.white,
@@ -167,7 +170,7 @@ class _SearchState extends State<Search> {
   }
 
 
-//this method is used to determine the performance of the search operation which continously changes
+//this method is used to determine the performance of the search operation which continuously changes
 //whenever the text changes, which enables the search result to be seen instantly
   void searchOperation(String searchForText) {
     searchRes.clear();

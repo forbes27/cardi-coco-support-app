@@ -15,6 +15,7 @@ class SigninPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SigninPage> {
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _gSignIn = new GoogleSignIn();
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -34,6 +35,7 @@ class _SigninPageState extends State<SigninPage> {
                   image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill,),
             ),
           ),
+
           new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -51,9 +53,11 @@ class _SigninPageState extends State<SigninPage> {
                           'images/cardilogo.png',
                         ),
                       ),
+
                       Padding(
                         padding: EdgeInsets.only(top: 20.0),
                       ),
+
                       Text(
                         "Coconuts Support Centre",
                         textAlign: TextAlign.center,
@@ -87,7 +91,9 @@ class _SigninPageState extends State<SigninPage> {
                       fontSize: 18.0,
                     ),
                   ),
+
                   onPressed: ()=>_googleSignin(),
+
                 ),
               ],
             ),
@@ -98,6 +104,7 @@ class _SigninPageState extends State<SigninPage> {
   }
 
   Future<Null> _googleSignin() async {
+
     GoogleSignInAccount googleSignInAccount = await _gSignIn.signIn();
     GoogleSignInAuthentication googleSignInAuthentication =
     await googleSignInAccount.authentication;
@@ -105,7 +112,7 @@ class _SigninPageState extends State<SigninPage> {
     FirebaseUser user = await _auth.signInWithGoogle(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
-    databaseReference = database.reference().child("users");
+        databaseReference = database.reference().child("users");
 
 //an alternative option is to use push() which autogenerates an ID in Firebase and put google uid as a field in that nested list
     databaseReference.child(user.uid);
@@ -127,12 +134,6 @@ class _SigninPageState extends State<SigninPage> {
                 )),
       );
   }
-
-//  _logout() {
-//    setState(() {
-//      _gSignIn.signOut();
-//    });
-//  }
 
   Future<String> currentUser() async{ //Asynchronously gets current user or null if there is none //https://www.youtube.com/watch?v=aaKef60iuy8
     FirebaseUser user = await FirebaseAuth.instance.currentUser();//returns user if they have successfully signed in or registered

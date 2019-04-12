@@ -1,5 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
+
 class Article{
+
   String id;
   String title;
   String url;
@@ -11,5 +13,5 @@ class Article{
         id = snapshot.key,
         title = snapshot.value["title"],
         url = snapshot.value["url"],
-       thumbnail = snapshot.value["thumbnail"];
+        thumbnail = snapshot.value["thumbnail"];
 }

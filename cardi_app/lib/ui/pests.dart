@@ -10,6 +10,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 
 class PestDetail extends StatelessWidget{
+
   final Pest pest;
   final User currentUser;
   FlutterTts fluttertts = new FlutterTts();
@@ -23,7 +24,6 @@ class PestDetail extends StatelessWidget{
       currentUser: currentUser,
       body: new ListView(
         children: <Widget>[
-          //We can add more widgets below
           //design part for the picture of the pests
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
@@ -42,25 +42,25 @@ class PestDetail extends StatelessWidget{
             child: Column(
               children: <Widget>[
                 new Text(
-                "Description", style: new TextStyle(
+                  "Description", style: new TextStyle(
                   color:Colors.grey[800],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)
-              ),RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_speak("${pest.description}");},
-                        child: new Text('Click Here'),
-                 )
-                , new Text(pest.description,
-                  textAlign: TextAlign.start,
-                  style: new TextStyle(
-                      color:Colors.grey[800],
-                      fontSize: 20.0)
-              ),
+                ),
 
-    ]
+                RaisedButton(
+                  padding: const EdgeInsets.all(10.0),
+                  textColor: Colors.black,
+                  splashColor: Colors.green,
+                  onPressed: (){_speak("${pest.description}");},
+                  child: Icon(Icons.audiotrack),
+                 ),
+
+                 new Text(pest.description,
+                    textAlign: TextAlign.start,
+                    style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
+                  ),
+              ],
             ),
           ),
 
@@ -75,21 +75,21 @@ class PestDetail extends StatelessWidget{
                     color:Colors.grey[800],
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold)
-                ),RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_speak("${pest.symptom}");},
-                        child: new Text('Click Here'),
-                 ),
+                  ),
+
+                  RaisedButton(
+                    padding: const EdgeInsets.all(10.0),
+                    textColor: Colors.black,
+                    splashColor: Colors.green,
+                    onPressed: (){_speak("${pest.symptom}");},
+                    child: Icon(Icons.audiotrack),
+                  ),
+
                   new Text(pest.symptom,
                     textAlign: TextAlign.start,
-                    style: new TextStyle(
-                        color:Colors.grey[800],
-                        fontSize: 20.0)
-                ),
-
-                ]
+                      style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
+                  ),
+                ],
             ),
           ),
 
@@ -104,23 +104,23 @@ class PestDetail extends StatelessWidget{
                   color:Colors.grey[800],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)
-              ),RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_speak("${pest.mitigation}");},
-                        child: new Text('Click Here'),
+                ),
+
+                RaisedButton(
+                  padding: const EdgeInsets.all(10.0),
+                  textColor: Colors.black,
+                  splashColor: Colors.green,
+                  onPressed: (){_speak("${pest.mitigation}");},
+                  child: Icon(Icons.audiotrack),
                  ),
+
                 new Text(pest.mitigation,
                   textAlign: TextAlign.start,
-                  style: new TextStyle(
-                      color:Colors.grey[800],
-                      fontSize: 20.0)
+                    style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
+                ),
+                ],
               ),
-
-    ]
             ),
-          ),
            ],
          ),
       );
@@ -132,6 +132,7 @@ class PestDetail extends StatelessWidget{
 }
 
 class PestsPage extends StatefulWidget {
+
   final User currentUser;
   PestsPage({Key key, this.currentUser}): super(key: key);
 
@@ -141,6 +142,7 @@ class PestsPage extends StatefulWidget {
 }
 
 class _PestsPageState extends State<PestsPage> {
+
   Pest pests;
   List<Pest> pestList = List();
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -148,7 +150,6 @@ class _PestsPageState extends State<PestsPage> {
 
   void initState() {
     super.initState();
-    //pests = Pest("", "");
     database.setPersistenceEnabled(true);
     database.setPersistenceCacheSizeBytes(10000000); //allocating 10MB of storage in cache for pest Data
     databaseReference = database.reference().child("pests");

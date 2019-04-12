@@ -167,9 +167,9 @@ class _ChatScreenState extends State<ChatScreen> {
                  decoration: new BoxDecoration(
                      border: new Border.all(width: 2, color: Colors.green),
                    borderRadius: BorderRadius.all(Radius.circular(25.0))
-    ),
-    child: Row(
-                   children: <Widget>[
+               ),
+                    child: Row(
+                      children: <Widget>[
                      new Container(
                        margin: new EdgeInsets.symmetric(horizontal: 4.0),
                        child: new IconButton(

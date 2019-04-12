@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 
 class Board {
+
   String key;
   String subject;
   String body;
