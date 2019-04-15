@@ -28,6 +28,11 @@ dependencies:
   url_launcher: ^3.0.2
   flutter_launcher_icons: "^0.7.0"
   flutter_tts: "^0.2.4"
+  firebase_storage:
+  image_picker: ^0.4.12
+  random_string: ^0.0.2
+  http: ^0.12.0
+
 
 flutter_icons:
   android: "launcher_icon"

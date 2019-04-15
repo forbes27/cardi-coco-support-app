@@ -14,4 +14,7 @@ class Article{
         title = snapshot.value["title"],
         url = snapshot.value["url"],
         thumbnail = snapshot.value["thumbnail"];
+
+  Article.ver2(this.title, this.url, this.thumbnail);
+
 }

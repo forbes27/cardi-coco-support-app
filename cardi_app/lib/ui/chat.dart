@@ -7,6 +7,10 @@ import 'package:cardi_app/models/message.dart';
 import 'package:url_launcher/url_launcher.dart';
 import './homepage.dart';
 import 'dart:convert';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:random_string/random_string.dart';
 
 class Chat extends StatefulWidget {
 
@@ -99,13 +103,17 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final TextEditingController _textController = new TextEditingController();
+  final TextEditingController _textController = new TextEditingController(); //for storing user text to send in messages
   Message message;
   List<Message> messageList = List();
   final FirebaseDatabase database = FirebaseDatabase.instance;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DatabaseReference databaseReference;
   String hash;
+  File _image; //stores an image from the user gallery
+  final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('user_uploads');
+  // points to a folder called user_uploads in firebase storage
+
 
   void initState() {
     super.initState();
@@ -120,6 +128,15 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    Widget imageBuild(String str) { //returns an image container widget
+      return new Container(
+          child: new Image.network("${str}"),
+        width: 180.0,
+        height: 430.0,
+      );
+    }
+
     return new RootScaffold(
       title: "${widget.target.displayName}",
         currentUser: widget.currentUser,
@@ -131,34 +148,53 @@ class _ChatScreenState extends State<ChatScreen> {
                        itemBuilder: (_, DataSnapshot snapshot,
                            Animation<double> animation, int index) {
                          if (messageList[index].sender ==
-                             widget.currentUser.id) {
-                           return Padding(
-                             padding: EdgeInsets.fromLTRB(5.0, 4.0, 40.0, 0.0),
-                             child: new Card(
-                               child: ListTile(
-                                 leading: CircleAvatar(
-                                     backgroundImage: new NetworkImage(
-                                         "${widget.currentUser.photoUrl}")
+                             widget.currentUser.id)
+                         {
+                           if(messageList[index].message.contains('https://firebasestorage.googleapis.com/v0/b/cardi-coco-support-app.appspot.com/')==false) {
+                             return Padding(  //the message contains only text
+                               padding: EdgeInsets.fromLTRB(
+                                   5.0, 4.0, 40.0, 0.0),
+                               child: new Card(
+                                 child: ListTile(
+                                   leading: CircleAvatar(
+                                       backgroundImage: new NetworkImage(
+                                           "${widget.currentUser.photoUrl}")
+                                   ),
+                                   title: Text(messageList[index].message),
                                  ),
-                                 title: Text(messageList[index].message),
+                                 color: Colors.lightGreen,
                                ),
-                               color: Colors.lightGreen,
-                             ),
-                           );
+                             );
+                           } else {
+                             return Padding( //the message is an image
+                               padding: EdgeInsets.fromLTRB(
+                                   1.0, 4.0, 60.0, 0.0),
+                               child: imageBuild(messageList[index].message)
+                             );
+                           }
                          } else {
-                           return Padding(
-                             padding: EdgeInsets.fromLTRB(66.0, 4.0, 16.0, 0.0),
-                             child: new Card(
-                               child: ListTile(
-                                 leading: CircleAvatar(
-                                     backgroundImage: new NetworkImage(
-                                         "${widget.target.photoUrl}")
+                           if(messageList[index].message.contains('https://firebasestorage.googleapis.com/v0/b/cardi-coco-support-app.appspot.com/')==false) {
+                             return Padding(
+                               padding: EdgeInsets.fromLTRB(
+                                   66.0, 4.0, 16.0, 0.0),
+                               child: new Card(
+                                 child: ListTile(
+                                   leading: CircleAvatar(
+                                       backgroundImage: new NetworkImage(
+                                           "${widget.target.photoUrl}")
+                                   ),
+                                   title: Text(messageList[index].message),
                                  ),
-                                 title: Text(messageList[index].message),
+                                 color: Colors.greenAccent,
                                ),
-                               color: Colors.greenAccent,
-                             ),
-                           );
+                             );
+                           } else {
+                             return Padding(
+                                 padding: EdgeInsets.fromLTRB(
+                                 66.0, 4.0, 16.0, 0.0),
+                         child: imageBuild(messageList[index].message)
+                             );
+                           }
                          }
                        }
                    )
@@ -174,7 +210,8 @@ class _ChatScreenState extends State<ChatScreen> {
                        margin: new EdgeInsets.symmetric(horizontal: 4.0),
                        child: new IconButton(
                            icon: new Icon(Icons.camera_enhance),
-                           onPressed: () => _handleSubmitted(_textController.text)),
+                           onPressed: getImage,
+                     ),
                      ),
                      new Flexible(
                        child: new TextField(
@@ -215,9 +252,11 @@ class _ChatScreenState extends State<ChatScreen> {
 //             ),
 
 
+
              ]
         )
     );
+
   }
   void _handleSubmitted(String text) {
     message.message=_textController.text;
@@ -243,6 +282,23 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery); //selecting an image to upload from the gallery
+
+    setState(() async{
+      _image = image;
+      String str = randomAlphaNumeric(10);
+     StorageUploadTask task = firebaseStorageRef.child("${str}.jpg").putFile(_image);
+      //a random alphanumeric string is generated for the filename to upload to firebase storage
+
+      var dowurl = await (await task.onComplete).ref.getDownloadURL();
+      print(dowurl.toString());
+      message.message=dowurl;
+      databaseReference.push().set(
+          message.toJson());
+    });
+
+  }
 //    void handleSubmit() {
 //    final FormState form = formKey
 //        .currentState; //saves the current state of the form

@@ -5,7 +5,6 @@ import './diseases.dart';
 import './chat.dart';
 import './contact-us.dart';
 import './search.dart';
-import 'package:cardi_app/models/pest.dart';
 import 'package:url_launcher/url_launcher.dart';
 import './signin.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -13,16 +12,15 @@ import 'package:cardi_app/models/user.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cardi_app/models/article.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-
+import 'dart:convert';
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   final User currentUser;
-
   HomePage({Key key, this.currentUser}): super(key: key);
-
   @override
   _HomePageState createState() => new _HomePageState();
-
 }
 
 class _HomePageState extends State<HomePage>  {
@@ -33,12 +31,28 @@ class _HomePageState extends State<HomePage>  {
 
   void initState() {
     super.initState();
-    article = Article("", "","","");
+    article = Article("","","","");
     databaseReference = database.reference().child("articles");
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
   }
 
+
+  Future<List<Article>> _getArticles() async{
+    var data = await http.get("https://cardi-coco-support-app.firebaseio.com/articles.json");
+    var jsonData = json.decode(data.body);
+    print(jsonData);
+    List<Article> articles = [];
+
+    for (var u in jsonData){
+      Article a = Article.ver2(u["title"], u["url"], u["thumbnail"]);
+      articles.add(a);
+      print(a.title);
+    }
+    print(articles.length);
+    print(articles);
+    return articles;
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -69,7 +83,6 @@ class _HomePageState extends State<HomePage>  {
                             fontSize: 30.0)
                     ),
                   ),
-
                   new Container(
                       padding: const EdgeInsets.only(bottom: 15.0),
                         child:  new Text("An application to help small-holder farmers and stakeholders to have access to any information concerning the different types of Coconut pests and diseases risk mitigation control methods used in the Coconut Industry.",
@@ -79,7 +92,6 @@ class _HomePageState extends State<HomePage>  {
                             fontSize: 20.0)
                             ),
                   ),
-
 //                  new ListTile(
 //                      title: Text ('Updating Regional Coconut Water Safety Standards'),
 //                    ),
@@ -106,7 +118,6 @@ class _HomePageState extends State<HomePage>  {
                 ],
               ),
           ),
-
         ]
       ),
     );
@@ -125,7 +136,7 @@ class _HomePageState extends State<HomePage>  {
 //          ),
 //          //We can add more widgets below
 //          titleSection,
-      body: Flex(direction: Axis.vertical,
+      body: ListView(
       children: <Widget>[
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
@@ -146,7 +157,7 @@ class _HomePageState extends State<HomePage>  {
             ),
           ),
           new Container(
-            padding: const EdgeInsets.only(bottom: 7.0),
+            padding: const EdgeInsets.only(bottom: 30.0),
             child:  new Text("An application to help farmers have access to information concerning the different types of coconut pests and diseases, and control methods used in the Coconut Industry.",
                 textAlign: TextAlign.center,
                 style: new TextStyle(
@@ -154,56 +165,31 @@ class _HomePageState extends State<HomePage>  {
                     fontSize: 18.0)
             ),
           ),
-          new Text("Latest Articles...",textAlign: TextAlign.center,
-              style: new TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color:Colors.grey[800],
-                  fontSize: 20.0)),
-        //titleSection,
-                           new Flexible(
-                child: FirebaseAnimatedList(
-                      query: database.reference().child("articles"),
-                      itemBuilder: (_, DataSnapshot snapshot,
-                            Animation<double> animation, int index) {
-//                            return  new Container(
-//                                decoration: new BoxDecoration(
-//                                gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
-//                        begin: FractionalOffset.topLeft,
-//                        end: FractionalOffset.bottomRight,
-//                        stops: [0.3,1.1],
-//                        tileMode: TileMode.clamp
-//                        ),
-//
-//                                ),
-                                   return GestureDetector(
-                                     onTap: (){_launchURL("${articleList[index].url}");},
-                                     child: Row(
 
-                                      children: <Widget>[
-                                        new Image.network(articleList[index].thumbnail,
-                                            height: 100.0, width: 100.0, fit: BoxFit.fitHeight),
-                                        Expanded(
-                                            child: Container(
-                                              height: 80.0,
-                                              margin: EdgeInsets.symmetric(horizontal:18.0),
+        new MaterialButton(
+                  height: 40.0,
+                  minWidth: 300.0,
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  splashColor: Colors.green,
+                  child: new Text("Latest Articles...",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
 
-                                              child: Text(articleList[index].title, style: TextStyle( fontSize: 19.0)),
+                  onPressed: (){
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ArticlePage(currentUser: widget.currentUser)));
+                    },
 
-
-                                            )),
-
-                                        ],
-                                      ),
-                                   );
-                                }
-                            ),
-                          ),
+                ),
                     ]
               ),currentUser: widget.currentUser,
+
       );
   }//end build method
-
-
   _launchURL(url) async {
   //String url;
   if (await canLaunch(url)) {
@@ -213,12 +199,12 @@ class _HomePageState extends State<HomePage>  {
   }
 }
 
+
 void _onEntryAdded(Event event) {
     setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
       articleList.add(Article.fromSnapshot(event.snapshot));
     });
   }
-
 
   void _onEntryChanged(Event event) {
     var oldEntry = articleList.singleWhere((entry) { //get old key (firebase key for a post)
@@ -234,7 +220,6 @@ void _onEntryAdded(Event event) {
 }
 
 String mainProfilePicture = "url";
-
 
 class RootDrawer extends StatelessWidget {
   final GoogleSignIn _gSignIn = new GoogleSignIn();
@@ -385,3 +370,74 @@ class RootScaffold extends StatelessWidget{
     );
   }
 }
+
+class ArticlePage extends StatefulWidget {
+  final User currentUser;
+  ArticlePage({Key key, this.currentUser}): super(key: key);
+  @override
+  _ArticlePageState createState() => new _ArticlePageState();
+}
+
+class _ArticlePageState extends State<ArticlePage>{
+  void initState() {
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return RootScaffold(
+      title: "Articles",
+      currentUser: widget.currentUser,
+      body: new FutureBuilder(
+          future: _getArticles(),
+          builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+            if (!snapshot.hasData)
+              return new Container();
+            List<Article> content = snapshot.data;
+            return new ListView.builder(
+                scrollDirection: Axis.vertical,
+                padding: new EdgeInsets.all(2.0),
+                itemCount: content.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return new Container(
+                    height: 120.0,
+                    width: 120.0,
+                    alignment: FractionalOffset.center,
+                    color: Colors.white10,
+                    child: ListTile(
+                      title:  Text('${content[index].title}',
+                        style: TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      leading: Container(
+                        height: 100.0,
+                        width: 100.0,
+                        child: Image.network('${content[index].thumbnail}'),
+                      ),
+                      )
+
+                  );
+                }
+            );
+          }),
+    );
+  }
+  Future<List<Article>> _getArticles() async{
+    var data = await http.get("https://cardi-coco-support-app.firebaseio.com/articles.json");
+    var jsonData = json.decode(data.body);
+    print(jsonData);
+    List<Article> articles = [];
+
+    for (var u in jsonData){
+      Article a = Article.ver2(u["title"], u["url"], u["thumbnail"]);
+      articles.add(a);
+      print(a.title);
+    }
+    print(articles.length);
+    print(articles);
+    return articles;
+  }
+}
+
+
