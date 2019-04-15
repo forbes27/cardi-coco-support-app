@@ -72,7 +72,6 @@ class _ChatState extends State<Chat> {
   }
 
 
-
   void _onEntryAdded(Event event) {
     setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
       users.add(User.fromSnapshot(event.snapshot));
@@ -103,6 +102,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+
   final TextEditingController _textController = new TextEditingController(); //for storing user text to send in messages
   Message message;
   List<Message> messageList = List();
@@ -116,6 +116,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
 
   void initState() {
+
     super.initState();
     message = Message(widget.currentUser.id,widget.target.id,"");
     databaseReference = database.reference().child("messages");
@@ -131,9 +132,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
     Widget imageBuild(String str) { //returns an image container widget
       return new Container(
+        padding: const EdgeInsets.all(5.0),
           child: new Image.network("${str}"),
-        width: 180.0,
-        height: 430.0,
+        width: 300.0,
+        height: 200.0,
       );
     }
 

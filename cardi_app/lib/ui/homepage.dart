@@ -16,7 +16,9 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
+
 class HomePage extends StatefulWidget {
+
   final User currentUser;
   HomePage({Key key, this.currentUser}): super(key: key);
   @override
@@ -24,12 +26,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>  {
+
   Article article;
   List<Article> articleList = List();
   final FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference databaseReference;
 
   void initState() {
+
     super.initState();
     article = Article("","","","");
     databaseReference = database.reference().child("articles");
@@ -39,6 +43,7 @@ class _HomePageState extends State<HomePage>  {
 
 
   Future<List<Article>> _getArticles() async{
+
     var data = await http.get("https://cardi-coco-support-app.firebaseio.com/articles.json");
     var jsonData = json.decode(data.body);
     print(jsonData);
@@ -53,9 +58,10 @@ class _HomePageState extends State<HomePage>  {
     print(articles);
     return articles;
   }
+
+
   @override
   Widget build(BuildContext context) {
-
     //place more multiple widgets into a parent called Container
     Widget titleSection = new Container(
       decoration: new BoxDecoration(
@@ -92,29 +98,6 @@ class _HomePageState extends State<HomePage>  {
                             fontSize: 20.0)
                             ),
                   ),
-//                  new ListTile(
-//                      title: Text ('Updating Regional Coconut Water Safety Standards'),
-//                    ),
-//                  FloatingActionButton(
-//                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/07/09/updating-regional-coconut-water-safety-standards/");},
-//                        child: Icon(Icons.info_outline,),
-//                 ),
-//
-//                  new ListTile(
-//                    title: Text ('Challenges in the Coconut Industry and Strategies to Overcome Them'),
-//                  ),
-//                  FloatingActionButton(
-//                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/08/02/challenges-in-the-coconut-industry-and-strategies-to-overcome-them/");},
-//                        child: Icon(Icons.info_outline,),
-//                 ),
-//
-//                  new ListTile(
-//                    title: Text ('CARDI and Teleios Code Jam 2018'),
-//                  ),
-//                  FloatingActionButton(
-//                        onPressed: (){_launchURL("http://www.coconuts.cardi.org/2018/11/29/cardi-and-the-teleios-code-jam-2018");},
-//                        child: Icon(Icons.info_outline,),
-//                 ),
                 ],
               ),
           ),
@@ -124,18 +107,7 @@ class _HomePageState extends State<HomePage>  {
 
     return new RootScaffold(
       title: "Home",
-//      body: new ListView(
-//        children: <Widget>[
-//          ClipRRect(
-//            borderRadius: new BorderRadius.circular(10.0),
-//            child: new Image.asset('images/coconuts2.jpg',
-//              height: 300,
-//              width: 100,
-//              fit: BoxFit.fill,
-//            ),
-//          ),
-//          //We can add more widgets below
-//          titleSection,
+      //We can add more widgets below
       body: ListView(
       children: <Widget>[
           ClipRRect(
@@ -166,30 +138,31 @@ class _HomePageState extends State<HomePage>  {
             ),
           ),
 
-        new MaterialButton(
-                  height: 40.0,
-                  minWidth: 300.0,
-                  color: Colors.white,
-                  textColor: Colors.black,
-                  splashColor: Colors.green,
-                  child: new Text("Latest Articles...",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                    ),
-                  ),
+          new MaterialButton(
+            padding: const EdgeInsets.all(10.0),
+            height: 40.0,
+            minWidth: 300.0,
+            color: Colors.white,
+            textColor: Colors.black,
+            splashColor: Colors.green,
+            child: new Text("Latest Articles...",
+              style: TextStyle(
+                fontSize: 18.0,
+              ),
+            ),
 
-                  onPressed: (){
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ArticlePage(currentUser: widget.currentUser)));
-                    },
-
-                ),
-                    ]
-              ),currentUser: widget.currentUser,
-
+            onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ArticlePage(currentUser: widget.currentUser)));
+              },
+          ),
+      ]
+      ),currentUser: widget.currentUser,
       );
   }//end build method
+
+
   _launchURL(url) async {
   //String url;
   if (await canLaunch(url)) {
@@ -367,6 +340,7 @@ class RootScaffold extends StatelessWidget{
       ),
       drawer: new RootDrawer(currentUser: currentUser),
       body: body,
+
     );
   }
 }
@@ -416,13 +390,14 @@ class _ArticlePageState extends State<ArticlePage>{
                         child: Image.network('${content[index].thumbnail}'),
                       ),
                       )
-
                   );
                 }
             );
           }),
     );
   }
+
+
   Future<List<Article>> _getArticles() async{
     var data = await http.get("https://cardi-coco-support-app.firebaseio.com/articles.json");
     var jsonData = json.decode(data.body);

@@ -76,8 +76,8 @@ class _SigninPageState extends State<SigninPage> {
 
           //Row for login button
           new Container(
-            padding: new EdgeInsets.only(top: 300.0),
-            margin: new EdgeInsets.all(30.0),
+            padding: new EdgeInsets.only(top: 600.0),
+            margin: new EdgeInsets.all(50.0),
             child: new Row(
               children: <Widget>[
                 new MaterialButton(
