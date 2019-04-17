@@ -41,19 +41,23 @@ class PestDetail extends StatelessWidget{
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
               children: <Widget>[
-                new Text(
-                  "Description", style: new TextStyle(
-                  color:Colors.grey[800],
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: new Text(
+                    "Description", style: new TextStyle(
+                    color:Colors.grey[800],
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold)
+                  ),
                 ),
 
                 RaisedButton(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(0.0),
+                  color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
                   onPressed: (){_speak("${pest.description}");},
-                  child: Icon(Icons.audiotrack),
+                  child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                  ),
 
                  new Text(pest.description,
@@ -70,19 +74,23 @@ class PestDetail extends StatelessWidget{
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
                 children: <Widget>[
-                  new Text(
-                    "Symptoms", style: new TextStyle(
-                    color:Colors.grey[800],
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: new Text(
+                      "Symptoms", style: new TextStyle(
+                      color:Colors.grey[800],
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold)
+                    ),
                   ),
 
                   RaisedButton(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(0.0),
+                    color: Colors.white,
                     textColor: Colors.black,
                     splashColor: Colors.green,
                     onPressed: (){_speak("${pest.symptom}");},
-                    child: Icon(Icons.audiotrack),
+                    child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                   ),
 
                   new Text(pest.symptom,
@@ -99,19 +107,23 @@ class PestDetail extends StatelessWidget{
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
               children: <Widget>[
-                new Text(
-                "How to deal with this Pest", style: new TextStyle(
-                  color:Colors.grey[800],
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: new Text(
+                  "How to deal with this Pest", style: new TextStyle(
+                    color:Colors.grey[800],
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold)
+                  ),
                 ),
 
                 RaisedButton(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(0.0),
+                  color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
                   onPressed: (){_speak("${pest.mitigation}");},
-                  child: Icon(Icons.audiotrack),
+                  child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                  ),
 
                 new Text(pest.mitigation,

@@ -48,21 +48,26 @@ class _ChatState extends State<Chat> {
                   child: FirebaseAnimatedList(
                       query: databaseReference,
                       itemBuilder: (_, DataSnapshot snapshot,
-                          Animation<double> animation, int index) {
-                        return new Card(
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: new NetworkImage("${users[index].photoUrl}")
-                            ),
-                            title: Text(users[index].displayName),
-                            subtitle: Text(users[index].email),
-                            onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChatScreen(target: users[index], currentUser: widget.currentUser)));
-                               },
-                          ),
-                        );
+                          Animation<double> animation, int index)
+    {
+      if (users[index].id != widget.currentUser.id){
+        return new Card(
+          child: ListTile(
+            leading: CircleAvatar(
+                backgroundImage: new NetworkImage("${users[index].photoUrl}")
+            ),
+            title: Text(users[index].displayName),
+            subtitle: Text(users[index].email),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>
+                      ChatScreen(target: users[index],
+                          currentUser: widget.currentUser)));
+            },
+          ),
+        );
+    }
                       }
                   )
               ),

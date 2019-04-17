@@ -108,56 +108,66 @@ class _HomePageState extends State<HomePage>  {
     return new RootScaffold(
       title: "Home",
       //We can add more widgets below
-      body: ListView(
-      children: <Widget>[
-          ClipRRect(
-            borderRadius: new BorderRadius.circular(10.0),
-            child: new Image.network('http://namfruit.com/wp-content/uploads/2015/10/2.jpg',
-              height: 300,
-              width: 500,
-              fit: BoxFit.cover,
-            )
-          ),
-          new Container(
-            padding: const EdgeInsets.only(bottom: 5.0),
-            child:  new Text("Coconuts Support Centre",
-                textAlign: TextAlign.center,
-                style: new TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color:Colors.grey[800],
-                    fontSize: 30.0)
+      body: Container(
+        decoration: new BoxDecoration(
+        gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
+    begin: FractionalOffset.topLeft,
+    end: FractionalOffset.bottomRight,
+    stops: [0.3,1.1],
+    tileMode: TileMode.clamp
+    ),
+        ),
+        child: ListView(
+        children: <Widget>[
+            ClipRRect(
+              borderRadius: new BorderRadius.circular(10.0),
+              child: new Image.network('http://namfruit.com/wp-content/uploads/2015/10/2.jpg',
+                height: 300,
+                width: 500,
+                fit: BoxFit.cover,
+              )
             ),
-          ),
-          new Container(
-            padding: const EdgeInsets.only(bottom: 30.0),
-            child:  new Text("An application to help farmers have access to information concerning the different types of coconut pests and diseases, and control methods used in the Coconut Industry.",
-                textAlign: TextAlign.center,
-                style: new TextStyle(
-                    color:Colors.grey[750],
-                    fontSize: 18.0)
+            new Container(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child:  new Text("Coconuts Support Centre",
+                  textAlign: TextAlign.center,
+                  style: new TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color:Colors.grey[800],
+                      fontSize: 30.0)
+              ),
             ),
-          ),
-
-          new MaterialButton(
-            padding: const EdgeInsets.all(10.0),
-            height: 40.0,
-            minWidth: 300.0,
-            color: Colors.white,
-            textColor: Colors.black,
-            splashColor: Colors.green,
-            child: new Text("Latest Articles...",
-              style: TextStyle(
-                fontSize: 18.0,
+            new Container(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child:  new Text("An application to help farmers have access to information concerning the different types of coconut pests and diseases, and control methods used in the Coconut Industry.",
+                  textAlign: TextAlign.center,
+                  style: new TextStyle(
+                      color:Colors.grey[750],
+                      fontSize: 18.0)
               ),
             ),
 
-            onPressed: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ArticlePage(currentUser: widget.currentUser)));
-              },
-          ),
-      ]
+            new MaterialButton(
+              padding: const EdgeInsets.all(10.0),
+              height: 40.0,
+              minWidth: 300.0,
+              color: Colors.white,
+              textColor: Colors.black,
+              splashColor: Colors.green,
+              child: new Text("Latest Articles...",
+                style: TextStyle(
+                  fontSize: 18.0,
+                ),
+              ),
+
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ArticlePage(currentUser: widget.currentUser)));
+                },
+            ),
+        ]
+        ),
       ),currentUser: widget.currentUser,
       );
   }//end build method
@@ -372,24 +382,27 @@ class _ArticlePageState extends State<ArticlePage>{
                 padding: new EdgeInsets.all(2.0),
                 itemCount: content.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return new Container(
-                    height: 120.0,
-                    width: 120.0,
-                    alignment: FractionalOffset.center,
-                    color: Colors.white10,
-                    child: ListTile(
-                      title:  Text('${content[index].title}',
-                        style: TextStyle(
-                            fontSize: 14.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      leading: Container(
-                        height: 100.0,
-                        width: 100.0,
-                        child: Image.network('${content[index].thumbnail}'),
-                      ),
-                      )
+                  return GestureDetector(
+                    child: new Container(
+                      height: 120.0,
+                      width: 120.0,
+                      alignment: FractionalOffset.center,
+                      color: Colors.white10,
+                      child: ListTile(
+                        title:  Text('${content[index].title}',
+                          style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        leading: Container(
+                          height: 100.0,
+                          width: 100.0,
+                          child: Image.network('${content[index].thumbnail}'),
+                        ),
+                        )
+                    ),
+                      onTap: (){_launchURL("${content[index].url}");}
                   );
                 }
             );
@@ -412,6 +425,15 @@ class _ArticlePageState extends State<ArticlePage>{
     print(articles.length);
     print(articles);
     return articles;
+  }
+
+  _launchURL(url) async {
+    //String url;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
 
