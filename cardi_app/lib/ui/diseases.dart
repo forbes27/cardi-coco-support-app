@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import './homepage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cardi_app/models/disease.dart';
 import 'homepage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+//import 'package:cardi_app/model/board.dart';
 import 'package:cardi_app/models/user.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -22,7 +24,7 @@ class DiseaseDetail extends StatelessWidget{
       currentUser: currentUser,
       body: new ListView(
         children: <Widget>[
-          //design part for the picture of the diseases
+          //design part for the picture of the pests
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
             child: new Image.network(
@@ -33,104 +35,116 @@ class DiseaseDetail extends StatelessWidget{
             ),
           ),
 
-          //design part for the description of the diseases
+          //design part for the description of the pests
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[
-                  new Text(
-                    "Description:", style: new TextStyle(
-                    color:Colors.grey[800],
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold)
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: new Text(
+                      "Description", style: new TextStyle(
+                      color:Colors.grey[800],
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold)
                   ),
+                ),
 
-                  RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_speak("${disease.description}");},
-                        child: Icon(Icons.audiotrack),
-                  ),
+                RaisedButton(
+                  padding: const EdgeInsets.all(0.0),
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  splashColor: Colors.green,
+                  onPressed: (){_speak("${disease.description}");},
+                  child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
+                ),
 
-                  new Text(disease.description,
-                    textAlign: TextAlign.start,
-                    style: new TextStyle(
-                        color:Colors.grey[800],
-                        fontSize: 20.0)
-                   ),
-                ]
-            ),
-          ),
-
-          //design part for the mitigation controls of the diseases
-          new Container(
-            margin: const EdgeInsets.all(5.0),
-            padding: const EdgeInsets.all(10.0),//top, bottom, left, right
-            child: Column(
-                children: <Widget>[
-                  new Text(
-                    "Symptoms:", style: new TextStyle(
-                    color:Colors.grey[800],
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold)
-                  ),
-
-                  RaisedButton(
-                        padding: const EdgeInsets.all(10.0),
-                        textColor: Colors.black,
-                        splashColor: Colors.green,
-                        onPressed: (){_speak("${disease.symptom}");},
-                        child: Icon(Icons.audiotrack),
-                  ),
-
-                  new Text(disease.symptom,
+                new Text(disease.description,
                     textAlign: TextAlign.start,
                     style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
-                 ),
-                ]
+                ),
+              ],
             ),
           ),
 
+          //design part for the symptoms of the pests
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
             child: Column(
-                children: <Widget>[
-                  new Text(
-                    "How to deal with this Disease:", style: new TextStyle(
-                    color:Colors.grey[800],
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold)
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: new Text(
+                      "Symptoms", style: new TextStyle(
+                      color:Colors.grey[800],
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold)
                   ),
+                ),
 
-                  RaisedButton(
-                    padding: const EdgeInsets.all(10.0),
-                    textColor: Colors.black,
-                    splashColor: Colors.green,
-                    onPressed: (){_speak("${disease.mitigation}");},
-                    child: Icon(Icons.audiotrack),
-                 ),
+                RaisedButton(
+                  padding: const EdgeInsets.all(0.0),
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  splashColor: Colors.green,
+                  onPressed: (){_speak("${disease.symptom}");},
+                  child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
+                ),
 
-                  new Text(disease.mitigation,
+                new Text(disease.symptom,
                     textAlign: TextAlign.start,
-                    style: new TextStyle(color:Colors.grey[800], fontSize: 20.0,
-                    )
+                    style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
+                ),
+              ],
+            ),
+          ),
+
+          //design part for the mitigation controls of the pests
+          new Container(
+            margin: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),//top, bottom, left, right
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: new Text(
+                      "How to deal with this Disease", style: new TextStyle(
+                      color:Colors.grey[800],
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold)
                   ),
-                ]
+                ),
+
+                RaisedButton(
+                  padding: const EdgeInsets.all(0.0),
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  splashColor: Colors.green,
+                  onPressed: (){_speak("${disease.mitigation}");},
+                  child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
+                ),
+
+                new Text(disease.mitigation,
+                    textAlign: TextAlign.start,
+                    style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
+
   Future _speak(str) async{
     var result = await fluttertts.speak("${str}");
   }
 }
 
 class DiseasesPage extends StatefulWidget {
+
   final User currentUser;
   DiseasesPage({Key key, this.currentUser}): super(key: key);
 
@@ -140,13 +154,16 @@ class DiseasesPage extends StatefulWidget {
 }
 
 class _DiseasesPageState extends State<DiseasesPage> {
-  Disease diseases;
+
+ Disease pests;
   List<Disease> diseaseList = List();
   final FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference databaseReference;
 
   void initState() {
     super.initState();
+    database.setPersistenceEnabled(true);
+    database.setPersistenceCacheSizeBytes(10000000); //allocating 10MB of storage in cache for pest Data
     databaseReference = database.reference().child("diseases");
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
@@ -183,6 +200,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
                               MaterialPageRoute(builder: (context) => DiseaseDetail(disease: diseaseList[index], currentUser: widget.currentUser)),
                             );
                           },
+
                           child: Card(
                             clipBehavior: Clip.antiAlias,
                             child: Column(
@@ -194,6 +212,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
                                     diseaseList[index].pic, fit: BoxFit.fill,
                                   ),
                                 ),
+
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                                   child: Column(
@@ -238,7 +257,3 @@ class _DiseasesPageState extends State<DiseasesPage> {
     });
   }
 }
-
-
-
-

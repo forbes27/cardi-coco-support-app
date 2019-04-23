@@ -82,7 +82,7 @@ class _SigninPageState extends State<SigninPage> {
               children: <Widget>[
                 new MaterialButton(
                   height: 40.0,
-                  minWidth: 300.0,
+                  minWidth: 250.0,
                   color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,

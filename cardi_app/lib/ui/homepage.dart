@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage>  {
             ),
             new Container(
               padding: const EdgeInsets.only(bottom: 5.0),
-              child:  new Text("Coconuts Support Centre",
+              child:  new Text("\nCoconuts Support Centre",
                   textAlign: TextAlign.center,
                   style: new TextStyle(
                       fontWeight: FontWeight.bold,
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage>  {
             ),
             new Container(
               padding: const EdgeInsets.only(bottom: 30.0),
-              child:  new Text("An application to help farmers have access to information concerning the different types of coconut pests and diseases, and control methods used in the Coconut Industry.",
+              child:  new Text("\nAn application to help farmers have access to information concerning the different types of coconut pests and diseases, and control methods used in the Coconut Industry.\n",
                   textAlign: TextAlign.center,
                   style: new TextStyle(
                       color:Colors.grey[750],
@@ -384,20 +384,27 @@ class _ArticlePageState extends State<ArticlePage>{
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     child: new Container(
-                      height: 120.0,
-                      width: 120.0,
+                      decoration: const BoxDecoration(
+                      border: Border(
+                      top: BorderSide(width: 1.0, color: Color(0xFFFFFFFFFF)),
+                  left: BorderSide(width: 1.0, color: Color(0xFFFFFFFFFF)),
+                  right: BorderSide(width: 1.0, color: Color(0xFFFF000000)),
+                  bottom: BorderSide(width: 1.0, color: Color(0xFFFF000000)),
+                  ),),
+                      height: 130.0,
+                      width: 130.0,
                       alignment: FractionalOffset.center,
-                      color: Colors.white10,
+                      //color: Colors.white10,
                       child: ListTile(
                         title:  Text('${content[index].title}',
                           style: TextStyle(
-                              fontSize: 14.0,
+                              fontSize: 18.0,
                               color: Colors.black,
                               fontWeight: FontWeight.bold),
                         ),
                         leading: Container(
-                          height: 100.0,
-                          width: 100.0,
+                          height: 180.0,
+                          width: 180.0,
                           child: Image.network('${content[index].thumbnail}'),
                         ),
                         )

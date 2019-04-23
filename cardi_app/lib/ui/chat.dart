@@ -50,7 +50,7 @@ class _ChatState extends State<Chat> {
                       itemBuilder: (_, DataSnapshot snapshot,
                           Animation<double> animation, int index)
     {
-      if (users[index].id != widget.currentUser.id){
+     // if (users[index].id != widget.currentUser.id){
         return new Card(
           child: ListTile(
             leading: CircleAvatar(
@@ -67,7 +67,7 @@ class _ChatState extends State<Chat> {
             },
           ),
         );
-    }
+   // }
                       }
                   )
               ),
@@ -137,10 +137,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
     Widget imageBuild(String str) { //returns an image container widget
       return new Container(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(2.0),
           child: new Image.network("${str}"),
         width: 300.0,
-        height: 200.0,
+        height: 300.0,
       );
     }
 
@@ -175,7 +175,7 @@ class _ChatScreenState extends State<ChatScreen> {
                            } else {
                              return Padding( //the message is an image
                                padding: EdgeInsets.fromLTRB(
-                                   1.0, 4.0, 60.0, 0.0),
+                                   1.0, 4.0, 180.0, 0.0),
                                child: imageBuild(messageList[index].message)
                              );
                            }
@@ -198,7 +198,7 @@ class _ChatScreenState extends State<ChatScreen> {
                            } else {
                              return Padding(
                                  padding: EdgeInsets.fromLTRB(
-                                 66.0, 4.0, 16.0, 0.0),
+                                 90.0, 4.0, 0.0, 0.0),
                          child: imageBuild(messageList[index].message)
                              );
                            }
