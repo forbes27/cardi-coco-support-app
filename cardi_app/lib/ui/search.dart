@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 void main() => runApp(new MaterialApp(
   home: new Search(),
@@ -145,14 +144,12 @@ class _SearchState extends State<Search> {
     ]);
   }
 
-
 //this method is used to start a search in the textfield provided
   void _handleSearchStart() {
     setState(() {
       _searchFor = true;
     });
   }
-
 
 //this method is used to design the search button icon onto the appbar
   void _handleSearchEnd() {
@@ -169,7 +166,6 @@ class _SearchState extends State<Search> {
       _controller.clear();
     });
   }
-
 
 //this method is used to determine the performance of the search operation which continuously changes
 //whenever the text changes, which enables the search result to be seen instantly

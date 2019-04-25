@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import './homepage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
 import 'package:cardi_app/models/user.dart';
 
 class ContactUs extends StatefulWidget {
   final User currentUser;
   ContactUs({Key key, this.currentUser}): super(key: key);
-
   @override
    State<ContactUs> createState() => _ContactUsState();
 
@@ -15,15 +13,12 @@ class ContactUs extends StatefulWidget {
 
 class _ContactUsState extends State<ContactUs> {
   // This widget is the root of your application.
-
   GoogleMapController myController;
 
-    static final CameraPosition _cardiLocation = CameraPosition(
-    target: LatLng(10.6435963, -61.4044734),
+    static final CameraPosition _cardiLocation = CameraPosition( //Google Map positioning
+    target: LatLng(10.6435963, -61.4044734), //cardi physical coordinates
     zoom: 14.4746,
   );
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +51,6 @@ class _ContactUsState extends State<ContactUs> {
                     ),
                   )
                 ),
-
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 20.0, 140.0, 0.0),
                   child: new Text(
@@ -68,13 +62,11 @@ class _ContactUsState extends State<ContactUs> {
                       "Fax: (868) 645-1208",
                       textAlign: TextAlign.left, style: TextStyle(fontSize: 18.0)),
                 ),
-
                 Padding(
                   padding: EdgeInsets.fromLTRB(20.0, 0.0, 120.0, 8.0),
                   child: new Text(
                       "Email: jpeterson@cardi.org", textAlign: TextAlign.left, style: TextStyle(color: Colors.blue, fontSize: 18.0, decoration: TextDecoration.underline )),
                 ),
-
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 20.0, 110.0, 0.0),
                   child: new Text(
@@ -85,7 +77,6 @@ class _ContactUsState extends State<ContactUs> {
                       "Phone: (868) 660-2237 \n"
                       "Fax: (868) 660-2237", textAlign: TextAlign.left, style: TextStyle(fontSize: 18.0)),
                 ),
-
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 0.0, 110.0, 8.0),
                   child: new Text("Email: carditgo@gmail.com ", textAlign: TextAlign.left, style: TextStyle(color: Colors.blue, fontSize: 18.0, decoration: TextDecoration.underline)),
@@ -94,7 +85,4 @@ class _ContactUsState extends State<ContactUs> {
       ),
     );
   }
-
 }
-
-

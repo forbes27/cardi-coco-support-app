@@ -7,10 +7,9 @@ class Pest {
   String pic;
   String symptom;
 
+  Pest(this.description, this.mitigation, this.pic, this.symptom); //pest constructor
 
-  Pest(this.description, this.mitigation, this.pic, this.symptom);
-
-  Pest.fromSnapshot(DataSnapshot snapshot) :
+  Pest.fromSnapshot(DataSnapshot snapshot) : //creates a pest object from a data snapshot of the pests in firebase
         key = snapshot.key,
         description = snapshot.value["description"],
         pic = snapshot.value["pic"],

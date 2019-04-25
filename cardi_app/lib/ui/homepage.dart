@@ -11,7 +11,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cardi_app/models/user.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cardi_app/models/article.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -40,7 +39,6 @@ class _HomePageState extends State<HomePage>  {
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
   }
-
 
   Future<List<Article>> _getArticles() async{
 
@@ -107,7 +105,6 @@ class _HomePageState extends State<HomePage>  {
 
     return new RootScaffold(
       title: "Home",
-      //We can add more widgets below
       body: Container(
         decoration: new BoxDecoration(
         gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
@@ -146,7 +143,6 @@ class _HomePageState extends State<HomePage>  {
                       fontSize: 18.0)
               ),
             ),
-
             new MaterialButton(
               padding: const EdgeInsets.all(10.0),
               height: 40.0,
@@ -154,7 +150,7 @@ class _HomePageState extends State<HomePage>  {
               color: Colors.white,
               textColor: Colors.black,
               splashColor: Colors.green,
-              child: new Text("Latest Articles...",
+              child: new Text("Latest Articles...", //button to navigate to articles page
                 style: TextStyle(
                   fontSize: 18.0,
                 ),
@@ -319,8 +315,7 @@ class RootDrawer extends StatelessWidget {
   }
 }
 
-
-class RootScaffold extends StatelessWidget{
+class RootScaffold extends StatelessWidget{ //Scaffold that is used in every page; scaffold consists of the menu, page title, and page body
 
   final Widget body;
   final String title;
@@ -416,7 +411,6 @@ class _ArticlePageState extends State<ArticlePage>{
           }),
     );
   }
-
 
   Future<List<Article>> _getArticles() async{
     var data = await http.get("https://cardi-coco-support-app.firebaseio.com/articles.json");

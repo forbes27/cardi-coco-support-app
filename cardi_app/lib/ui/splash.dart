@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
 import './signin.dart';
 
 class SplashPage extends StatefulWidget {
@@ -7,19 +6,17 @@ class SplashPage extends StatefulWidget {
   State<StatefulWidget> createState() {
     return new _SplashPageState();
   }
-
 }
 
 class _SplashPageState extends State<SplashPage>{
   @override
-
   void initState(){
     super.initState();
     new Future.delayed(
-      const Duration(seconds: 4),
+      const Duration(seconds: 4), //splash page displays for 4 seconds
     () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context)=>SigninPage()))
+        MaterialPageRoute(builder: (context)=>SigninPage())) //navigating to the sign-in page
     );
   }
 

@@ -4,25 +4,20 @@ import 'package:firebase_database/firebase_database.dart';
 import 'dart:async';
 import 'package:cardi_app/models/user.dart';
 import 'package:cardi_app/models/message.dart';
-import 'package:url_launcher/url_launcher.dart';
 import './homepage.dart';
-import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
 
 class Chat extends StatefulWidget {
-
   final User currentUser;
   Chat({Key key, this.currentUser}): super(key: key);
-
   @override
   _ChatState createState() => new _ChatState();
 }
 
 class _ChatState extends State<Chat> {
-
   List<User> users= List();
   User user;
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -75,8 +70,7 @@ class _ChatState extends State<Chat> {
         )
     );
   }
-
-
+  
   void _onEntryAdded(Event event) {
     setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
       users.add(User.fromSnapshot(event.snapshot));
@@ -87,7 +81,6 @@ class _ChatState extends State<Chat> {
     var oldEntry = users.singleWhere((entry) { //get old key (firebase key for a post)
       return entry.id == event.snapshot.key;
     });
-
     setState(() {
       users[users.indexOf(oldEntry)] =
          User.fromSnapshot(event.snapshot);
@@ -96,7 +89,6 @@ class _ChatState extends State<Chat> {
 }
 
 class ChatScreen extends StatefulWidget {
-
   final User target;
   final User currentUser;
 
@@ -119,22 +111,18 @@ class _ChatScreenState extends State<ChatScreen> {
   final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('user_uploads');
   // points to a folder called user_uploads in firebase storage
 
-
   void initState() {
-
     super.initState();
     message = Message(widget.currentUser.id,widget.target.id,"");
     databaseReference = database.reference().child("messages");
-    hash = (widget.currentUser.id.hashCode+widget.target.id.hashCode).toString();
-    databaseReference = databaseReference.child(hash);
+    hash = (widget.currentUser.id.hashCode+widget.target.id.hashCode).toString(); //a hash is created using the sender and receiver ids
+    databaseReference = databaseReference.child(hash); //messages are stored in firebase trees based on these hashes
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     Widget imageBuild(String str) { //returns an image container widget
       return new Container(
         padding: const EdgeInsets.all(2.0),
@@ -143,7 +131,6 @@ class _ChatScreenState extends State<ChatScreen> {
         height: 300.0,
       );
     }
-
     return new RootScaffold(
       title: "${widget.target.displayName}",
         currentUser: widget.currentUser,
@@ -151,10 +138,10 @@ class _ChatScreenState extends State<ChatScreen> {
              children: <Widget>[
                new Flexible(
                    child: FirebaseAnimatedList(
-                       query: database.reference().child("messages").child(hash),
+                       query: database.reference().child("messages").child(hash), //pulls messages from the tree containing the hash of the current user and correspondent
                        itemBuilder: (_, DataSnapshot snapshot,
                            Animation<double> animation, int index) {
-                         if (messageList[index].sender ==
+                         if (messageList[index].sender == //if messages belong to the current user they are shifted to the left of the screen
                              widget.currentUser.id)
                          {
                            if(messageList[index].message.contains('https://firebasestorage.googleapis.com/v0/b/cardi-coco-support-app.appspot.com/')==false) {
@@ -173,13 +160,13 @@ class _ChatScreenState extends State<ChatScreen> {
                                ),
                              );
                            } else {
-                             return Padding( //the message is an image
+                             return Padding( //the message contains a user uploaded image
                                padding: EdgeInsets.fromLTRB(
                                    1.0, 4.0, 180.0, 0.0),
                                child: imageBuild(messageList[index].message)
                              );
                            }
-                         } else {
+                         } else { //if messages belong to the correspondent they are shifted to the right of the screen
                            if(messageList[index].message.contains('https://firebasestorage.googleapis.com/v0/b/cardi-coco-support-app.appspot.com/')==false) {
                              return Padding(
                                padding: EdgeInsets.fromLTRB(
@@ -195,7 +182,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                  color: Colors.greenAccent,
                                ),
                              );
-                           } else {
+                           } else { //the message contains a user uploaded image
                              return Padding(
                                  padding: EdgeInsets.fromLTRB(
                                  90.0, 4.0, 0.0, 0.0),
@@ -237,43 +224,19 @@ class _ChatScreenState extends State<ChatScreen> {
                    ],
                  ),
                ),
-//              Form(
-//                  key: formKey,
-//                child: TextFormField(
-//                  onSaved: (val) => message.message = val,
-//                                    //onSaved determines what form.save() does
-//                                    validator: (val) => val == "" ? val : null,
-//                  ),
-//                ),
-
-//             new Container(
-//               child: new FlatButton(
-//                   //margin: new EdgeInsets.symmetric(horizontal: 4.0),
-//                   child: new IconButton(
-//                     icon: new Icon(Icons.send),
-//                   ),
-//                   onPressed: () {
-//                     _handleSubmitted(_textController.text);
-//                     }
-//                   ),
-//             ),
-
-
-
              ]
         )
     );
-
   }
-  void _handleSubmitted(String text) {
+  void _handleSubmitted(String text) { //pushes a message from the textbox to firebase
     message.message=_textController.text;
     databaseReference.push().set(
-        message.toJson()); //push creates unique key for entry in firebase
+        message.toJson()); //push creates unique key for message entry in firebase
     _textController.clear();
   }
 
   void _onEntryAdded(Event event) {
-    setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
+    setState(() { //anytime a message is added, it is added to the messageList of the chat. The UI is rebuilt in realtime to show the chat messages
       messageList.add(Message.fromSnapshot(event.snapshot));
     });
   }
@@ -282,7 +245,6 @@ class _ChatScreenState extends State<ChatScreen> {
     var oldEntry = messageList.singleWhere((entry) { //get old key (firebase key for a post)
       return entry.id == event.snapshot.key;
     });
-
     setState(() {
       messageList[messageList.indexOf(oldEntry)] =
           Message.fromSnapshot(event.snapshot);
@@ -291,7 +253,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery); //selecting an image to upload from the gallery
-
     setState(() async{
       _image = image;
       String str = randomAlphaNumeric(10);
@@ -306,56 +267,4 @@ class _ChatScreenState extends State<ChatScreen> {
     });
 
   }
-//    void handleSubmit() {
-//    final FormState form = formKey
-//        .currentState; //saves the current state of the form
-//    if (form.validate()) { //validation checks if form has data
-//      form.save();
-//      form.reset();
-//      //save form data to the database
-//      databaseReference.push().set(
-//          message.toJson()); //push creates unique key for entry in firebase
-//    }
-//  }
-
-//    Future<List<Message>> _getMessages() async{
-//      var data = await http.get("https://cardi-coco-support-app.firebaseio.com/messages.json");
-//      var jsonData = json.decode(data.body);
-//      print(jsonData);
-//      List<Message> messages = [];
-//
-//      for (var u in jsonData){
-//        Message msg = Message.ver2(u["id"], u["hash"], u["message"], u["receiver"], u["sender"]);
-//        messages.add(msg);
-//      }
-//      print(messages.length);
-//      return messages;
-//
-//    }
 }
-
-
-
-
-//
-//FutureBuilder(
-//                  future: _getMessages(),
-//                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-//                    if (snapshot.data == null) {
-//                      return Container(
-//                          child: Center(
-//                              child: Text("Loading...")
-//                          )
-//                      );
-//                    } else {
-//                      return ListView.builder(itemCount: snapshot.data.length,
-//                        itemBuilder: (BuildContext context, int index) {
-//                          return ListTile(
-//                            title: Text(snapshot.data[index].message),
-//                          );
-//                        },
-//                      );
-//                    }
-//                  }
-//
-//              ),

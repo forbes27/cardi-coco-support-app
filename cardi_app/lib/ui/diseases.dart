@@ -3,17 +3,14 @@ import './homepage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cardi_app/models/disease.dart';
 import 'homepage.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-//import 'package:cardi_app/model/board.dart';
 import 'package:cardi_app/models/user.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-
 
 class DiseaseDetail extends StatelessWidget{
 
   final Disease disease;
   final User currentUser;
-  FlutterTts fluttertts = new FlutterTts();
+  FlutterTts fluttertts = new FlutterTts(); //flutter text to speech
 
   DiseaseDetail({this.disease, this.currentUser});
 
@@ -24,7 +21,7 @@ class DiseaseDetail extends StatelessWidget{
       currentUser: currentUser,
       body: new ListView(
         children: <Widget>[
-          //design part for the picture of the pests
+          //design part for the picture of the diseases
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
             child: new Image.network(
@@ -35,7 +32,7 @@ class DiseaseDetail extends StatelessWidget{
             ),
           ),
 
-          //design part for the description of the pests
+          //design part for the description of the diseases
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
@@ -68,7 +65,7 @@ class DiseaseDetail extends StatelessWidget{
             ),
           ),
 
-          //design part for the symptoms of the pests
+          //design part for the symptoms of the diseases
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
@@ -101,7 +98,7 @@ class DiseaseDetail extends StatelessWidget{
             ),
           ),
 
-          //design part for the mitigation controls of the pests
+          //design part for the mitigation controls of the diseases
           new Container(
             margin: const EdgeInsets.all(5.0),
             padding: const EdgeInsets.all(10.0),//top, bottom, left, right
@@ -144,17 +141,13 @@ class DiseaseDetail extends StatelessWidget{
 }
 
 class DiseasesPage extends StatefulWidget {
-
   final User currentUser;
   DiseasesPage({Key key, this.currentUser}): super(key: key);
-
   @override
   _DiseasesPageState createState() => new _DiseasesPageState();
-
 }
 
 class _DiseasesPageState extends State<DiseasesPage> {
-
  Disease pests;
   List<Disease> diseaseList = List();
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -174,13 +167,12 @@ class _DiseasesPageState extends State<DiseasesPage> {
     return new RootScaffold(
         title: "Diseases",
         currentUser: widget.currentUser,
-
         body: StreamBuilder(
             stream: FirebaseDatabase.instance
                 .reference()
                 .child("diseases")
                 .onValue,
-            builder: (BuildContext context, AsyncSnapshot<Event> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<Event> snapshot) { //displays list of diseases in the firebase tree
               if (snapshot.hasData) {
                 Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
                 map.forEach((dynamic, v) => print(v["pic"]));
@@ -195,7 +187,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
                       children: <Widget>[
                         InkWell(
                           onTap: (){
-                            Navigator.push(
+                            Navigator.push( //navigating to a page displaying an individual disease
                               context,
                               MaterialPageRoute(builder: (context) => DiseaseDetail(disease: diseaseList[index], currentUser: widget.currentUser)),
                             );
@@ -240,17 +232,15 @@ class _DiseasesPageState extends State<DiseasesPage> {
   }
 
   void _onEntryAdded(Event event) {
-    setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
+    setState(() { //anytime a disease is added to firebase, it is added to the diseaseList and the UI is rebuilt to show the updated list
       diseaseList.add(Disease.fromSnapshot(event.snapshot));
     });
   }
-
-
+  
   void _onEntryChanged(Event event) {
-    var oldEntry = diseaseList.singleWhere((entry) { //get old key (firebase key for a post)
+    var oldEntry = diseaseList.singleWhere((entry) { //get old key (firebase key for a disease)
       return entry.key == event.snapshot.key;
     });
-
     setState(() {
       diseaseList[diseaseList.indexOf(oldEntry)] =
           Disease.fromSnapshot(event.snapshot);

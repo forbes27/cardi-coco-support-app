@@ -3,11 +3,8 @@ import './homepage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cardi_app/models/pest.dart';
 import 'homepage.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-//import 'package:cardi_app/model/board.dart';
 import 'package:cardi_app/models/user.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-
 
 class PestDetail extends StatelessWidget{
 
@@ -56,7 +53,7 @@ class PestDetail extends StatelessWidget{
                   color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
-                  onPressed: (){_speak("${pest.description}");},
+                  onPressed: (){_speak("${pest.description}");}, //performs text to speech on the description text
                   child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                  ),
 
@@ -89,7 +86,7 @@ class PestDetail extends StatelessWidget{
                     color: Colors.white,
                     textColor: Colors.black,
                     splashColor: Colors.green,
-                    onPressed: (){_speak("${pest.symptom}");},
+                    onPressed: (){_speak("${pest.symptom}");}, //performs text to speech on the symptom text
                     child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                   ),
 
@@ -122,7 +119,7 @@ class PestDetail extends StatelessWidget{
                   color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
-                  onPressed: (){_speak("${pest.mitigation}");},
+                  onPressed: (){_speak("${pest.mitigation}");}, //performs text to speech on the mitigation text
                   child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                  ),
 
@@ -144,17 +141,14 @@ class PestDetail extends StatelessWidget{
 }
 
 class PestsPage extends StatefulWidget {
-
   final User currentUser;
   PestsPage({Key key, this.currentUser}): super(key: key);
-
   @override
   _PestsPageState createState() => new _PestsPageState();
 
 }
 
 class _PestsPageState extends State<PestsPage> {
-
   Pest pests;
   List<Pest> pestList = List();
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -164,9 +158,9 @@ class _PestsPageState extends State<PestsPage> {
     super.initState();
     database.setPersistenceEnabled(true);
     database.setPersistenceCacheSizeBytes(10000000); //allocating 10MB of storage in cache for pest Data
-    databaseReference = database.reference().child("pests");
-    databaseReference.onChildAdded.listen(_onEntryAdded);
-    databaseReference.onChildChanged.listen(_onEntryChanged);
+    databaseReference = database.reference().child("pests"); //setting the realtime DB reference to point to the pests tree
+    databaseReference.onChildAdded.listen(_onEntryAdded); //listening for new pests added
+    databaseReference.onChildChanged.listen(_onEntryChanged); //listening for updates to the data stored within a pest entry
   }
 
   @override
@@ -195,7 +189,7 @@ class _PestsPageState extends State<PestsPage> {
               children: <Widget>[
                 InkWell(
                   onTap: (){
-                    Navigator.push(
+                    Navigator.push( //navigating to a page displaying an individual pest
                       context,
                       MaterialPageRoute(builder: (context) => PestDetail(pest: pestList[index], currentUser: widget.currentUser)),
                     );
@@ -212,7 +206,6 @@ class _PestsPageState extends State<PestsPage> {
                             pestList[index].pic, fit: BoxFit.fill,
                         ),
                       ),
-
                       Padding(
                         padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                         child: Column(
@@ -240,11 +233,10 @@ class _PestsPageState extends State<PestsPage> {
   }
 
   void _onEntryAdded(Event event) {
-    setState(() { //anytime an entry is added, it is added to community board and the UI is rebuilt to show the updated board/update state
+    setState(() { //anytime a pest is added to firebase, it is added to the pestList and the UI is rebuilt to show the updated list
       pestList.add(Pest.fromSnapshot(event.snapshot));
     });
   }
-
 
   void _onEntryChanged(Event event) {
     var oldEntry = pestList.singleWhere((entry) { //get old key (firebase key for a post)

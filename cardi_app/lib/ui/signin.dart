@@ -2,25 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import '../root_page.dart';
-import 'splash.dart';
 import 'homepage.dart';
-import 'dart:collection';
 import 'package:cardi_app/models/user.dart';
 
 class SigninPage extends StatefulWidget {
-  // This widget is the root of your application.
   @override
  _SigninPageState createState() => new _SigninPageState();
 }
 
 class _SigninPageState extends State<SigninPage> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _gSignIn = new GoogleSignIn();
   final FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference databaseReference;
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -35,7 +29,6 @@ class _SigninPageState extends State<SigninPage> {
                   image: AssetImage('images/coconuts.jpg'), fit: BoxFit.fill,),
             ),
           ),
-
           new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -53,11 +46,9 @@ class _SigninPageState extends State<SigninPage> {
                           'images/cardilogo.png',
                         ),
                       ),
-
                       Padding(
                         padding: EdgeInsets.only(top: 20.0),
                       ),
-
                       Text(
                         "Coconuts Support Centre",
                         textAlign: TextAlign.center,
@@ -73,7 +64,6 @@ class _SigninPageState extends State<SigninPage> {
               ),
             ],
           ),
-
           //Row for login button
           new Container(
             padding: new EdgeInsets.only(top: 300.0),
@@ -91,9 +81,7 @@ class _SigninPageState extends State<SigninPage> {
                       fontSize: 18.0,
                     ),
                   ),
-
                   onPressed: ()=>_googleSignin(),
-
                 ),
               ],
             ),
@@ -104,7 +92,6 @@ class _SigninPageState extends State<SigninPage> {
   }
 
   Future<Null> _googleSignin() async {
-
     GoogleSignInAccount googleSignInAccount = await _gSignIn.signIn();
     GoogleSignInAuthentication googleSignInAuthentication =
     await googleSignInAccount.authentication;
@@ -114,20 +101,14 @@ class _SigninPageState extends State<SigninPage> {
         accessToken: googleSignInAuthentication.accessToken);
         databaseReference = database.reference().child("users");
 
-//an alternative option is to use push() which autogenerates an ID in Firebase and put google uid as a field in that nested list
-    databaseReference.child(user.uid);
+    databaseReference.child(user.uid); //if the user's first login, then their data is stored in firebase
     databaseReference.child(user.uid).child("displayName").set(user.displayName);
     databaseReference.child(user.uid).child("email").set(user.email);
     databaseReference.child(user.uid).child("photoUrl").set(user.photoUrl);
 
-    User currentUser = User(user.uid, user.displayName, user.email, user.photoUrl);
+    User currentUser = User(user.uid, user.displayName, user.email, user.photoUrl); //creating a user object storing the current user details
 
-    print("User is ${user.uid}");
-    print("User is ${user.displayName}");
-    print("User is ${user.email}");
-    print("User is ${user.photoUrl}");
-
-    Navigator.push(
+    Navigator.push( //navigating to the homepage
         context,
         MaterialPageRoute(
             builder: (context) => HomePage(currentUser: currentUser,

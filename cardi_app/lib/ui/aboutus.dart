@@ -3,7 +3,6 @@ import './homepage.dart';
 import 'package:cardi_app/models/user.dart';
 
 class AboutUs extends StatelessWidget {
-
   final User currentUser;
   AboutUs({Key key, this.currentUser}): super(key: key);
 
@@ -34,7 +33,6 @@ class AboutUs extends StatelessWidget {
                         fontSize: 20),
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                     child: new Text(
