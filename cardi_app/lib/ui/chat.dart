@@ -126,7 +126,7 @@ class _ChatScreenState extends State<ChatScreen> {
     Widget imageBuild(String str) { //returns an image container widget
       return new Container(
         padding: const EdgeInsets.all(2.0),
-          child: new Image.network("${str}"),
+          child: new Image.network("$str}"),
         width: 300.0,
         height: 300.0,
       );

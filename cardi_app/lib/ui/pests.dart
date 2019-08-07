@@ -5,6 +5,7 @@ import 'package:cardi_app/models/pest.dart';
 import 'homepage.dart';
 import 'package:cardi_app/models/user.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'dart:async';
 
 class PestDetail extends StatelessWidget{
 

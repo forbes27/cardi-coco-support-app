@@ -62,6 +62,7 @@ class _HomePageState extends State<HomePage>  {
   Widget build(BuildContext context) {
     //place more multiple widgets into a parent called Container
     Widget titleSection = new Container(
+      /*
       decoration: new BoxDecoration(
         gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
             begin: FractionalOffset.topLeft,
@@ -70,6 +71,7 @@ class _HomePageState extends State<HomePage>  {
             tileMode: TileMode.clamp
         ),
       ),
+      */
       padding: const EdgeInsets.all(15.0),//top, bottom, left, right
       child: new Row(
         children: <Widget>[
@@ -108,17 +110,17 @@ class _HomePageState extends State<HomePage>  {
       body: Container(
         decoration: new BoxDecoration(
         gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
-    begin: FractionalOffset.topLeft,
-    end: FractionalOffset.bottomRight,
-    stops: [0.3,1.1],
-    tileMode: TileMode.clamp
-    ),
+            begin: FractionalOffset.topLeft,
+            end: FractionalOffset.bottomRight,
+            stops: [0.3,1.1],
+            tileMode: TileMode.clamp
+            ),
         ),
         child: ListView(
         children: <Widget>[
             ClipRRect(
               borderRadius: new BorderRadius.circular(10.0),
-              child: new Image.network('http://namfruit.com/wp-content/uploads/2015/10/2.jpg',
+              child: new Image.network('https://cocospure.com/wp-content/uploads/2014/11/Coconuts.jpg',
                 height: 300,
                 width: 500,
                 fit: BoxFit.cover,
@@ -382,9 +384,9 @@ class _ArticlePageState extends State<ArticlePage>{
                       decoration: const BoxDecoration(
                       border: Border(
                       top: BorderSide(width: 1.0, color: Color(0xFFFFFFFFFF)),
-                  left: BorderSide(width: 1.0, color: Color(0xFFFFFFFFFF)),
-                  right: BorderSide(width: 1.0, color: Color(0xFFFF000000)),
-                  bottom: BorderSide(width: 1.0, color: Color(0xFFFF000000)),
+                      left: BorderSide(width: 1.0, color: Color(0xFFFFFFFFFF)),
+                      right: BorderSide(width: 1.0, color: Color(0xFFFF000000)),
+                      bottom: BorderSide(width: 1.0, color: Color(0xFFFF000000)),
                   ),),
                       height: 130.0,
                       width: 130.0,

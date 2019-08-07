@@ -65,7 +65,6 @@ class _SearchState extends State<Search> {
     _list.add("Mealy Bug");
     _list.add("Bud Rot");
     _list.add("Leafspots(Drechslera)");
-    _list.add("Leafspots(Drechslera)");
     _list.add("Army Worm");
     _list.add("Coconut Caterpillar");
     _list.add("Leafspots(Anthracnose)");
@@ -175,9 +174,37 @@ class _SearchState extends State<Search> {
       for (int i = 0; i < _list.length; i++) {
         String data = _list[i];
         if (data.toLowerCase().contains(searchForText.toLowerCase())) {
-          searchRes.add(data);
+            searchRes.add(data);
         }
       }
+      //return _searchResDisplay();
     }
   }
+
+  /*
+  void _searchResDisplay() {
+    setState(() {
+      return new MaterialButton(
+        onPressed: () async {
+          if(selected != null && selected != _searchForText){
+            setState((){
+              searchForText = selected;
+            });
+          }
+
+          /*
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => PestsPage()),
+            );
+            */
+          },
+          );
+        }
+      );
+    }
+    */
+
 }
+
+
