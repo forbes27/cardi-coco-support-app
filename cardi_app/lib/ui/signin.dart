@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'homepage.dart';
 import 'package:cardi_app/models/user.dart';
+import 'dart:async';
 
 class SigninPage extends StatefulWidget {
   @override
@@ -11,10 +12,12 @@ class SigninPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SigninPage> {
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _gSignIn = new GoogleSignIn();
   final FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference databaseReference;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -92,9 +95,11 @@ class _SigninPageState extends State<SigninPage> {
   }
 
   Future<Null> _googleSignin() async {
+
     GoogleSignInAccount googleSignInAccount = await _gSignIn.signIn();
+
     GoogleSignInAuthentication googleSignInAuthentication =
-    await googleSignInAccount.authentication;
+      await googleSignInAccount.authentication;
 
     FirebaseUser user = await _auth.signInWithGoogle(
         idToken: googleSignInAuthentication.idToken,

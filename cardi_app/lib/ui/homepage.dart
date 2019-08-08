@@ -62,16 +62,6 @@ class _HomePageState extends State<HomePage>  {
   Widget build(BuildContext context) {
     //place more multiple widgets into a parent called Container
     Widget titleSection = new Container(
-      /*
-      decoration: new BoxDecoration(
-        gradient: new LinearGradient(colors: [const Color(0xFFE8F5E9), const Color(0xFF43A047) ],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-            stops: [0.3,1.1],
-            tileMode: TileMode.clamp
-        ),
-      ),
-      */
       padding: const EdgeInsets.all(15.0),//top, bottom, left, right
       child: new Row(
         children: <Widget>[
@@ -91,7 +81,7 @@ class _HomePageState extends State<HomePage>  {
                   ),
                   new Container(
                       padding: const EdgeInsets.only(bottom: 15.0),
-                        child:  new Text("An application to help small-holder farmers and stakeholders to have access to any information concerning the different types of Coconut pests and diseases risk mitigation control methods used in the Coconut Industry.",
+                        child:  new Text("\n An application to help small-holder farmers and stakeholders to have access to any information concerning the different types of Coconut pests and diseases risk mitigation control methods used in the Coconut Industry. \n",
                             textAlign: TextAlign.center,
                             style: new TextStyle(
                             color:Colors.grey[750],
@@ -305,8 +295,9 @@ class RootDrawer extends StatelessWidget {
                   title: Text('Sign out', textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,),
                   onTap: (){
-                    _gSignIn.signOut();
-                    Navigator.of(context).pop();
+                    _gSignIn.signOut();//helps the user completely log out the application
+                    //_gSignIn.signOut();
+                    //Navigator.of(context).pop();
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (BuildContext context) => SigninPage()),

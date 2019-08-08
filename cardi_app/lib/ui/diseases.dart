@@ -5,12 +5,13 @@ import 'package:cardi_app/models/disease.dart';
 import 'homepage.dart';
 import 'package:cardi_app/models/user.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'dart:async';
 
 class DiseaseDetail extends StatelessWidget{
 
   final Disease disease;
   final User currentUser;
-  FlutterTts fluttertts = new FlutterTts(); //flutter text to speech
+  FlutterTts flutterTts = new FlutterTts(); //flutter text to speech
 
   DiseaseDetail({this.disease, this.currentUser});
 
@@ -136,7 +137,7 @@ class DiseaseDetail extends StatelessWidget{
   }
 
   Future _speak(str) async{
-    var result = await fluttertts.speak("${str}");
+    var result = await flutterTts.speak("${str}");
   }
 }
 
@@ -172,7 +173,7 @@ class _DiseasesPageState extends State<DiseasesPage> {
                 .reference()
                 .child("diseases")
                 .onValue,
-            builder: (BuildContext context, AsyncSnapshot<Event> snapshot) { //displays list of diseases in the firebase tree
+            builder: (BuildContext context, AsyncSnapshot<Event> snapshot) { //displays list of diseases in the Firebase tree
               if (snapshot.hasData) {
                 Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
                 map.forEach((dynamic, v) => print(v["pic"]));

@@ -16,9 +16,9 @@ class _ContactUsState extends State<ContactUs> {
   GoogleMapController myController;
 
     static final CameraPosition _cardiLocation = CameraPosition( //Google Map positioning
-    target: LatLng(10.6435963, -61.4044734), //cardi physical coordinates
-    zoom: 14.4746,
-  );
+      target: LatLng(10.643634, -61.402275), //CARDI's physical coordinates
+      zoom: 14.4746,
+    );
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _ContactUsState extends State<ContactUs> {
                         myController = controller;
                         myController.addMarker(
                           MarkerOptions(
-                            position: LatLng(10.6435963, -61.4044734),
+                            position: LatLng(10.643634, -61.402275),
                           ),
                         );
                       });
@@ -45,7 +45,7 @@ class _ContactUsState extends State<ContactUs> {
                     options: GoogleMapOptions(
                       compassEnabled: true,
                       cameraPosition: CameraPosition(
-                        target: LatLng(10.6435963, -61.4044734),
+                        target: LatLng(10.643634, -61.402275),
                         zoom: 15.0,
                       ),
                     ),

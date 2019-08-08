@@ -11,7 +11,7 @@ class PestDetail extends StatelessWidget{
 
   final Pest pest;
   final User currentUser;
-  FlutterTts fluttertts = new FlutterTts();
+  FlutterTts flutterTts = new FlutterTts();
 
   PestDetail({this.pest, this.currentUser});
 
@@ -137,7 +137,7 @@ class PestDetail extends StatelessWidget{
   }
 
   Future _speak(str) async{
-    var result = await fluttertts.speak("${str}");
+    var result = await flutterTts.speak("${str}");
   }
 }
 
@@ -168,7 +168,7 @@ class _PestsPageState extends State<PestsPage> {
   Widget build(BuildContext context) {
     return new RootScaffold(
         title: "Pests",
-    currentUser: widget.currentUser,
+        currentUser: widget.currentUser,
 
     body: StreamBuilder(
     stream: FirebaseDatabase.instance
