@@ -45,7 +45,7 @@ class _ChatState extends State<Chat> {
                       itemBuilder: (_, DataSnapshot snapshot,
                           Animation<double> animation, int index)
     {
-     // if (users[index].id != widget.currentUser.id){
+
         return new Card(
           child: ListTile(
             leading: CircleAvatar(
@@ -62,7 +62,6 @@ class _ChatState extends State<Chat> {
             },
           ),
         );
-   // }
                       }
                   )
               ),
@@ -126,7 +125,7 @@ class _ChatScreenState extends State<ChatScreen> {
     Widget imageBuild(String str) { //returns an image container widget
       return new Container(
         padding: const EdgeInsets.all(2.0),
-          child: new Image.network("$str}"),
+          child: new Image.network("$str"),
         width: 300.0,
         height: 300.0,
       );
@@ -256,7 +255,7 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() async{
       _image = image;
       String str = randomAlphaNumeric(10);
-     StorageUploadTask task = firebaseStorageRef.child("${str}.jpg").putFile(_image);
+     StorageUploadTask task = firebaseStorageRef.child("$str.jpg").putFile(_image);
       //a random alphanumeric string is generated for the filename to upload to firebase storage
 
       var dowurl = await (await task.onComplete).ref.getDownloadURL();

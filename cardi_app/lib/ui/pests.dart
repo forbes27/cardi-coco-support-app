@@ -7,26 +7,33 @@ import 'package:cardi_app/models/user.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
 
-class PestDetail extends StatelessWidget{
+class PestDetail extends StatefulWidget{
 
   final Pest pest;
   final User currentUser;
-  FlutterTts flutterTts = new FlutterTts();
 
   PestDetail({this.pest, this.currentUser});
 
   @override
+  _PestDetailState createState() => _PestDetailState();
+}
+
+class _PestDetailState extends State<PestDetail> {
+
+  FlutterTts flutterTts = new FlutterTts();
+
+  @override
   Widget build(BuildContext context) {
     return new RootScaffold(
-      title: pest.key,
-      currentUser: currentUser,
+      title: widget.pest.key,
+      currentUser: widget.currentUser,
       body: new ListView(
         children: <Widget>[
           //design part for the picture of the pests
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
             child: new Image.network(
-              pest.pic,
+              widget.pest.pic,
               height: 300,
               width: 100,
               fit: BoxFit.fill,
@@ -54,11 +61,11 @@ class PestDetail extends StatelessWidget{
                   color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
-                  onPressed: (){_speak("${pest.description}");}, //performs text to speech on the description text
+                  onPressed: (){_speak("${widget.pest.description}");}, //performs text to speech on the description text
                   child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
-                 ),
+                ),
 
-                 new Text(pest.description,
+                new Text(widget.pest.description,
                     textAlign: TextAlign.start,
                     style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
                   ),
@@ -87,11 +94,11 @@ class PestDetail extends StatelessWidget{
                     color: Colors.white,
                     textColor: Colors.black,
                     splashColor: Colors.green,
-                    onPressed: (){_speak("${pest.symptom}");}, //performs text to speech on the symptom text
+                    onPressed: (){_speak("${widget.pest.symptom}");}, //performs text to speech on the symptom text
                     child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                   ),
 
-                  new Text(pest.symptom,
+                  new Text(widget.pest.symptom,
                     textAlign: TextAlign.start,
                       style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
                   ),
@@ -120,11 +127,11 @@ class PestDetail extends StatelessWidget{
                   color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
-                  onPressed: (){_speak("${pest.mitigation}");}, //performs text to speech on the mitigation text
+                  onPressed: (){_speak("${widget.pest.mitigation}");}, //performs text to speech on the mitigation text
                   child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                  ),
 
-                new Text(pest.mitigation,
+                new Text(widget.pest.mitigation,
                   textAlign: TextAlign.start,
                     style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
                 ),
@@ -136,10 +143,13 @@ class PestDetail extends StatelessWidget{
       );
   }
 
+
   Future _speak(str) async{
-    var result = await flutterTts.speak("${str}");
+    await flutterTts.speak("$str");
+    await flutterTts.setSpeechRate(1.0);
   }
 }
+
 
 class PestsPage extends StatefulWidget {
   final User currentUser;

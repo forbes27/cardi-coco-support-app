@@ -26,7 +26,7 @@ class _SearchState extends State<Search> {
   final TextEditingController _controller = new TextEditingController();
   List<dynamic> _list;
   bool _searchFor;
-  String _searchForText = "";
+  //String _searchForText = "";
   List searchRes = new List();
 
   _SearchState() {
@@ -34,12 +34,12 @@ class _SearchState extends State<Search> {
       if (_controller.text.isEmpty) {
         setState(() {
           _searchFor = false;
-          _searchForText = "";
+          //_searchForText = "";
         });
       } else {
         setState(() {
           _searchFor = true;
-          _searchForText = _controller.text;
+          //_searchForText = _controller.text;
         });
       }
     });

@@ -7,26 +7,31 @@ import 'package:cardi_app/models/user.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
 
-class DiseaseDetail extends StatelessWidget{
+class DiseaseDetail extends StatefulWidget{
 
   final Disease disease;
   final User currentUser;
-  FlutterTts flutterTts = new FlutterTts(); //flutter text to speech
 
   DiseaseDetail({this.disease, this.currentUser});
 
   @override
+  _DiseaseDetailState createState() => _DiseaseDetailState();
+}
+
+class _DiseaseDetailState extends State<DiseaseDetail> {
+  FlutterTts flutterTts = new FlutterTts();
+  @override
   Widget build(BuildContext context) {
     return new RootScaffold(
-      title: disease.key,
-      currentUser: currentUser,
+      title: widget.disease.key,
+      currentUser: widget.currentUser,
       body: new ListView(
         children: <Widget>[
           //design part for the picture of the diseases
           ClipRRect(
             borderRadius: new BorderRadius.circular(10.0),
             child: new Image.network(
-              disease.pic,
+              widget.disease.pic,
               height: 300,
               width: 100,
               fit: BoxFit.fill,
@@ -54,11 +59,11 @@ class DiseaseDetail extends StatelessWidget{
                   color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
-                  onPressed: (){_speak("${disease.description}");},
+                  onPressed: (){_speak("${widget.disease.description}");},
                   child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                 ),
 
-                new Text(disease.description,
+                new Text(widget.disease.description,
                     textAlign: TextAlign.start,
                     style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
                 ),
@@ -87,11 +92,11 @@ class DiseaseDetail extends StatelessWidget{
                   color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
-                  onPressed: (){_speak("${disease.symptom}");},
+                  onPressed: (){_speak("${widget.disease.symptom}");},
                   child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                 ),
 
-                new Text(disease.symptom,
+                new Text(widget.disease.symptom,
                     textAlign: TextAlign.start,
                     style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
                 ),
@@ -120,11 +125,11 @@ class DiseaseDetail extends StatelessWidget{
                   color: Colors.white,
                   textColor: Colors.black,
                   splashColor: Colors.green,
-                  onPressed: (){_speak("${disease.mitigation}");},
+                  onPressed: (){_speak("${widget.disease.mitigation}");},
                   child: Image.asset("images/speaker_icon.jpg", height: 35.0,),
                 ),
 
-                new Text(disease.mitigation,
+                new Text(widget.disease.mitigation,
                     textAlign: TextAlign.start,
                     style: new TextStyle(color:Colors.grey[800], fontSize: 20.0)
                 ),
@@ -137,7 +142,7 @@ class DiseaseDetail extends StatelessWidget{
   }
 
   Future _speak(str) async{
-    var result = await flutterTts.speak("${str}");
+    await flutterTts.speak("$str");
   }
 }
 

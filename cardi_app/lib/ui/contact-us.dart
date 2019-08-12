@@ -13,12 +13,21 @@ class ContactUs extends StatefulWidget {
 
 class _ContactUsState extends State<ContactUs> {
   // This widget is the root of your application.
-  GoogleMapController myController;
+  GoogleMapController mapController;
 
-    static final CameraPosition _cardiLocation = CameraPosition( //Google Map positioning
-      target: LatLng(10.643634, -61.402275), //CARDI's physical coordinates
-      zoom: 14.4746,
+  void _onMapCreated(GoogleMapController controller){
+    mapController = controller;
+    mapController.addMarker(
+      MarkerOptions(
+        position: LatLng(10.643634, -61.402275),
+        infoWindowText: InfoWindowText(
+          'Caribbean Agricultural Research & Development Insititute.',
+          'University of the West Indies, St. Augustine Campus'
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      ),
     );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +41,8 @@ class _ContactUsState extends State<ContactUs> {
                   height: 200.0,
                   width: double.infinity,
                   child: GoogleMap(
-                    onMapCreated: (controller){
-                      setState((){
-                        myController = controller;
-                        myController.addMarker(
-                          MarkerOptions(
-                            position: LatLng(10.643634, -61.402275),
-                          ),
-                        );
-                      });
-                    },
+                    onMapCreated: _onMapCreated,
+
                     options: GoogleMapOptions(
                       compassEnabled: true,
                       cameraPosition: CameraPosition(
@@ -49,8 +50,10 @@ class _ContactUsState extends State<ContactUs> {
                         zoom: 15.0,
                       ),
                     ),
-                  )
+                  ),
                 ),
+
+
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 20.0, 140.0, 0.0),
                   child: new Text(

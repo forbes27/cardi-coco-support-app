@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage>  {
   @override
   Widget build(BuildContext context) {
     //place more multiple widgets into a parent called Container
-    Widget titleSection = new Container(
+    new Container(
       padding: const EdgeInsets.all(15.0),//top, bottom, left, right
       child: new Row(
         children: <Widget>[
@@ -162,7 +162,6 @@ class _HomePageState extends State<HomePage>  {
 
 
   _launchURL(url) async {
-  //String url;
   if (await canLaunch(url)) {
     await launch(url);
   } else {

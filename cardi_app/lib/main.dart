@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Coconuts Support Center',
         debugShowCheckedModeBanner: false,
+        //resizeToAvoidBottomPadding: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),

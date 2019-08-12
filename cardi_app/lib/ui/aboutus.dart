@@ -12,7 +12,7 @@ class AboutUs extends StatelessWidget {
         title: "About Us",
         currentUser: currentUser,
         body: new Center(
-      child: new SingleChildScrollView(child: new Column(
+        child: new SingleChildScrollView(child: new Column(
               children: <Widget>[
                 ClipRRect(
                   borderRadius: new BorderRadius.circular(10.0),
@@ -36,7 +36,7 @@ class AboutUs extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                     child: new Text(
-                      "Objectives", textAlign: TextAlign.center, style: TextStyle(color: Colors.grey[800], fontSize: 20.0, fontWeight: FontWeight.bold),
+                      "\nObjectives\n", textAlign: TextAlign.center, style: TextStyle(color: Colors.grey[800], fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                 new Text(
